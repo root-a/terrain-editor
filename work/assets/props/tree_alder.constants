@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Nebula3 version="4">
+    <Model name="props/tree_alder" bboxcenter="-1.935349,12.366244,-2.366789,1.000000" bboxextents="19.436674,14.517245,18.162470,0.000000">
+        <ShapeNodes>
+            <ShapeNode name="canopy" type="static" path="root/canopy" useLOD="false" primitive="0" position="0.000000,1.988238,0.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:props/tree_alder.nvx2" bboxcenter="-1.935349,13.798093,-2.366789,1.000000" bboxextents="19.436674,13.085397,18.162470,0.000000" />
+            <ShapeNode name="trunk" type="static" path="root/trunk" useLOD="false" primitive="1" position="0.000000,1.988238,0.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:props/tree_alder.nvx2" bboxcenter="-0.191339,8.954315,-1.516145,1.000000" bboxextents="11.735188,11.105316,11.500974,0.000000" />
+        </ShapeNodes>
+    </Model>
+</Nebula3>

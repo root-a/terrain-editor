@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Nebula3 version="1">
+    <Options exportFlags="5" exportMode="0" scale="1.000000" />
+    <States>
+        <ModelNode name="root/antenne" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/auspuff" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/back" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/base" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/gun" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/gun1" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/hacke" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/halter" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/hammer" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/kanone" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/kette1" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/kette2" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/lichter" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/luke" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/luke1" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/luke2" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/rad_dick_1" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/rad_dick_2" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/rad_dick_3" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/rad_dick_4" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/rad_dick_5" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/rad_dick_6" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/rad_dick_7" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/rad_dick_8" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/rad_duenn_1" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/rad_duenn_2" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/rad_duenn_3" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/rad_duenn_4" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/rad_duenn_5" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/rad_duenn_6" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/rad_duenn_7" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/rad_duenn_8" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/rad_zahn_1" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/rad_zahn_2" material="sur:examples/tiger">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/placeholder" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/rad_zahn_3" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/rad_zahn_4" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/schaufel" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/seile" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/top1" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/verschluesse" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/verschluesse1" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/verschluesse2" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/verschluesse3" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+    </States>
+    <Takes>
+        <Take name="Take 001" />
+    </Takes>
+</Nebula3>

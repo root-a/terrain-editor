@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<NebulaT>
+    <Surface template="Static">
+        <Param name="DiffuseMap" value="tex:examples/tiger.dds" />
+        <Param name="NormalMap" value="tex:examples/tiger_bump.dds" />
+        <Param name="EnvironmentMap" value="tex:system/sky.dds" />
+        <Param name="SpecularMap" value="tex:system/white.dds" />
+        <Param name="EnvironmentStrength" value="0.470000" />
+    </Surface>
+</NebulaT>

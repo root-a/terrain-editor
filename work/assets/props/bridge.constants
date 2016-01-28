@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Nebula3 version="4">
+    <Model name="props/bridge" bboxcenter="0.000000,-1.110633,1.350387,1.000000" bboxextents="2.253785,2.967243,6.816771,0.000000">
+        <ShapeNodes>
+            <ShapeNode name="bridge1" type="static" path="root/bridge1" useLOD="false" primitive="1" position="0.000000,0.000000,0.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:props/bridge.nvx2" bboxcenter="0.000000,-1.110633,1.350387,1.000000" bboxextents="2.253785,2.967243,6.816771,0.000000" />
+            <ShapeNode name="ropeMesh" type="static" path="root/ropeMesh" useLOD="false" primitive="0" position="0.000000,0.000000,0.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:props/bridge.nvx2" bboxcenter="0.000000,-0.323718,0.519422,1.000000" bboxextents="2.217444,1.137085,5.855626,0.000000" />
+        </ShapeNodes>
+    </Model>
+</Nebula3>

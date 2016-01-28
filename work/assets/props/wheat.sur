@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<NebulaT>
+    <Surface template="Foliage">
+        <Param name="DiffuseMap" value="tex:props/wheatTest.dds" />
+        <Param name="NormalMap" value="tex:system/nobump.dds" />
+        <Param name="AlphaSensitivity" value="0.500000" />
+        <Param name="WindWaveSize" value="8.400000" />
+        <Param name="WindAlphaPower" value="1.000000" />
+        <Param name="WindAlphaWaveSize" value="1.500000" />
+        <Param name="WindDirection" value="0.300000,0.000000,0.300000,0.000000" />
+        <Param name="WindForce" value="0.720000" />
+        <Param name="WindSpeed" value="0.720000" />
+        <Param name="WindInverseStrength" value="0.460000" />
+    </Surface>
+</NebulaT>

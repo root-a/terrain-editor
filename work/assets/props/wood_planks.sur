@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<NebulaT>
+    <Surface template="StaticTessellated">
+        <Param name="DiffuseMap" value="tex:props/wallTiled_dif.dds" />
+        <Param name="NormalMap" value="tex:props/wallTiledNrm.dds" />
+        <Param name="DisplacementMap" value="tex:props/woodPlank_disp.dds" />
+        <Param name="NumXTiles" value="1" />
+        <Param name="NumYTiles" value="1" />
+    </Surface>
+</NebulaT>

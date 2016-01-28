@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Nebula3 version="4">
+    <Model name="props/house_mock_I" bboxcenter="-2.715062,2.765921,2.656886,1.000000" bboxextents="6.219024,3.924423,2.987763,0.000000">
+        <ShapeNodes>
+            <ShapeNode name="island_geo:polySurface88" type="static" path="root/island_geo:polySurface88" useLOD="false" primitive="0" position="0.000000,0.000000,0.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:props/house_mock_I.nvx2" bboxcenter="-2.715062,2.765921,2.656886,1.000000" bboxextents="6.219024,3.924423,2.987763,0.000000" />
+        </ShapeNodes>
+    </Model>
+</Nebula3>

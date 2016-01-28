@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<NebulaT>
+    <Surface template="Foliage">
+        <Param name="DiffuseMap" value="tex:props/bushMedium.dds" />
+        <Param name="NormalMap" value="tex:system/nobump.dds" />
+        <Param name="WindDirection" value="0.500000,0.000000,0.200000,0.000000" />
+        <Param name="AlphaSensitivity" value="0.500000" />
+        <Param name="WindSpeed" value="0.200000" />
+        <Param name="WindForce" value="0.920000" />
+        <Param name="WindAlphaWaveSize" value="1.000000" />
+        <Param name="WindAlphaPower" value="1.000000" />
+        <Param name="WindWaveSize" value="1.000000" />
+    </Surface>
+</NebulaT>

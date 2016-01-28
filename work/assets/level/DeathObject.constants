@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Nebula3 version="4">
+    <Model name="level/DeathObject" bboxcenter="8.455863,2.298351,-0.033310,1.000000" bboxextents="9.026449,2.298351,1.340652,0.000000">
+        <CharacterNodes>
+            <CharacterNode name="DeathObject_ch" animation="ani:level/DeathObject.nax3">
+                <Skinlist name="DeathObject">
+                    <Skin name="Death_Object_graphics" />
+                </Skinlist>
+                <Joint name="deathobject" index="0" parent="-1" position="-0.099240,0.004074,-0.103687,0.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" />
+            </CharacterNode>
+        </CharacterNodes>
+        <PhysicsNodes>
+            <PhysicsNode name="deathobject" path="root/deathobject" mesh="phymsh:level/DeathObject_ph.nvx2" primitive="0" position="0.004966,-0.025777,0.005477,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" />
+        </PhysicsNodes>
+        <Skins>
+            <Skin name="Death_Object_graphics" type="skeletal" path="Death_Object_graphics" bboxcenter="8.455863,2.298351,-0.033310,1.000000" bboxextents="9.026449,2.298351,1.340652,0.000000" position="0.000000,0.000000,0.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:level/DeathObject.nvx2">
+                <Fragment name="Death_Object_graphics_0" path="Death_Object_graphics/Death_Object_graphics_0" primitive="0">
+                    <Joints>0</Joints>
+                </Fragment>
+            </Skin>
+        </Skins>
+    </Model>
+</Nebula3>

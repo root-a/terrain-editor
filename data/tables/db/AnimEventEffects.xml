@@ -1,0 +1,4 @@
+<AnimEventEffects IsVirtualCategory="true">
+ <Attributes AnimEventName="string" Resource="string" Joint="string" Duration="float" KeepLocalPosition="bool" Rotation="string"/>
+  
+</AnimEventEffects>

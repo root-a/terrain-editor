@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Nebula3 version="4">
+    <Model name="level/oceanPlane" bboxcenter="0.000000,-13.907013,0.000000,1.000000" bboxextents="2500.000000,0.000000,2500.000000,0.000000">
+        <ShapeNodes>
+            <ShapeNode name="water_geo" type="static" path="root/water_geo" useLOD="false" primitive="0" position="0.000000,0.000000,0.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:level/oceanPlane.nvx2" bboxcenter="0.000000,-13.907013,0.000000,1.000000" bboxextents="2500.000000,0.000000,2500.000000,0.000000" />
+        </ShapeNodes>
+    </Model>
+</Nebula3>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Nebula3 version="4">
+    <Model name="props/cliff_01" bboxcenter="-0.000008,0.000008,0.000000,1.000000" bboxextents="16.911812,14.424721,8.744858,0.000000">
+        <ShapeNodes>
+            <ShapeNode name="cliff_01_LP7" type="static" path="root/cliff_01_LP7" useLOD="false" primitive="0" position="0.000000,0.000000,0.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:props/cliff_01.nvx2" bboxcenter="-0.000008,0.000008,0.000000,1.000000" bboxextents="16.911812,14.424721,8.744858,0.000000" />
+        </ShapeNodes>
+    </Model>
+</Nebula3>

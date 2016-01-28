@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Nebula3 version="4">
+    <Model name="examples/skydome" bboxcenter="58306.347656,26388.609375,-12408.394531,1.000000" bboxextents="82844.773438,48744.531250,48458.933594,0.000000">
+        <ShapeNodes>
+            <ShapeNode name="earth" type="static" path="root/earth" useLOD="false" primitive="0" position="0.000000,0.000000,0.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:examples/skydome.nvx2" bboxcenter="127918.695313,45685.605469,-32755.402344,1.000000" bboxextents="13232.429688,29447.535156,28111.925781,0.000000" />
+            <ShapeNode name="model_skydome_bg" type="static" path="root/model_skydome_bg" useLOD="false" primitive="2" position="0.000000,0.000000,0.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:examples/skydome.nvx2" bboxcenter="-1994.396484,319.949219,13374.675781,1.000000" bboxextents="22544.029297,22675.871094,22675.863281,0.000000" />
+            <ShapeNode name="skydome_inner" type="static" path="root/skydome_inner" useLOD="false" primitive="1" position="0.000000,0.000000,0.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:examples/skydome.nvx2" bboxcenter="6.046875,33.436523,20.614258,1.000000" bboxextents="805.902344,713.543945,702.983398,0.000000" />
+        </ShapeNodes>
+    </Model>
+</Nebula3>

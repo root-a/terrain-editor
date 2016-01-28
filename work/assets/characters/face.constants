@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Nebula3 version="4">
+    <Model name="characters/face" bboxcenter="0.192049,6.501022,-2.931773,1.000000" bboxextents="7.928000,7.364817,4.802370,0.000000">
+        <CharacterNodes>
+            <CharacterNode name="face_ch" animation="ani:characters/face.nax3">
+                <Skinlist name="face">
+                    <Skin name="polySurface1" />
+                </Skinlist>
+                <Joint name="joint1" index="0" parent="-1" position="-0.011379,0.000000,0.078863,0.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" />
+            </CharacterNode>
+        </CharacterNodes>
+        <Skins>
+            <Skin name="polySurface1" type="skeletal" path="polySurface1" bboxcenter="0.192049,6.501022,-2.931773,1.000000" bboxextents="7.928000,7.364817,4.802370,0.000000" position="0.000000,0.000000,0.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:characters/face.nvx2">
+                <Fragment name="polySurface1_0" path="polySurface1/polySurface1_0" primitive="0">
+                    <Joints>0</Joints>
+                </Fragment>
+            </Skin>
+        </Skins>
+    </Model>
+</Nebula3>

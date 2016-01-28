@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Nebula3 version="4">
+    <Model name="props/murBig" bboxcenter="17.117500,-1.972600,41.101479,1.000000" bboxextents="0.962948,2.392304,4.757736,0.000000">
+        <ShapeNodes>
+            <ShapeNode name="mur1Big_lop6:mur1Big_lop" type="static" path="root/mur1Big_lop6:mur1Big_lop" useLOD="false" primitive="0" position="0.000000,0.000000,0.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:props/murBig.nvx2" bboxcenter="17.117500,-1.972600,41.101479,1.000000" bboxextents="0.962948,2.392304,4.757736,0.000000" />
+        </ShapeNodes>
+    </Model>
+</Nebula3>

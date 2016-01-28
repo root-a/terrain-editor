@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Nebula3 version="4">
+    <Model name="level/Artefact" bboxcenter="-3.000000,0.000000,-3.000000,1.000000" bboxextents="3.611110,3.611109,3.611110,0.000000">
+        <CharacterNodes>
+            <CharacterNode name="Artefact_ch" animation="ani:level/Artefact.nax3">
+                <Skinlist name="Artefact">
+                    <Skin name="Artefact_graphics" />
+                </Skinlist>
+                <Joint name="artefact" index="0" parent="-1" position="-0.099240,0.000000,-0.103687,0.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" />
+            </CharacterNode>
+        </CharacterNodes>
+        <Skins>
+            <Skin name="Artefact_graphics" type="skeletal" path="Artefact_graphics" bboxcenter="-3.000000,0.000000,-3.000000,1.000000" bboxextents="3.611110,3.611109,3.611110,0.000000" position="3.000000,0.000000,3.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:level/Artefact.nvx2">
+                <Fragment name="Artefact_graphics_0" path="Artefact_graphics/Artefact_graphics_0" primitive="0">
+                    <Joints>0</Joints>
+                </Fragment>
+            </Skin>
+        </Skins>
+    </Model>
+</Nebula3>

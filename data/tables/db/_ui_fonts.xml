@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<_Ui_Fonts IsVirtualCategory="true">
+    <Item Id="gui:demo/Delicious-Bold.otf" UIFontFamily="" UIFontStyle="0" UIFontWeight="0" AutoLoad="true" />
+    <Item Id="gui:demo/Delicious-BoldItalic.otf" UIFontFamily="" UIFontStyle="0" UIFontWeight="0" AutoLoad="true" />
+    <Item Id="gui:demo/Delicious-Italic.otf" UIFontFamily="" UIFontStyle="0" UIFontWeight="0" AutoLoad="true" />
+    <Item Id="gui:demo/Delicious-Roman.otf" UIFontFamily="" UIFontStyle="0" UIFontWeight="0" AutoLoad="true" />
+</_Ui_Fonts>

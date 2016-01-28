@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<NebulaT>
+    <Surface template="Static">
+        <Param name="AlbedoMap" value="tex:materials/checker" />
+        <Param name="SpecularMap" value="tex:system/specmap" />
+        <Param name="NormalMap" value="tex:materials/checker_bump" />
+        <Param name="RoughnessMap" value="tex:materials/checker_bump" />
+        <Param name="CavityMap" value="tex:materials/checker" />
+        <Param name="MatAlbedoIntensity" value="1.000000,1.000000,1.000000,1.000000" />
+        <Param name="MatSpecularIntensity" value="0.000000,0.000000,0.000000,0.000000" />
+        <Param name="MatRoughnessIntensity" value="0.000000" />
+    </Surface>
+</NebulaT>

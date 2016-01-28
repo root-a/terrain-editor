@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.05.00">
+    <object class="AudioFile" id="{47562ab9-f44a-484d-99dd-4b06115b553c}">
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>4.5</value>
+        </property>
+        <property name="lastModifiedDate">
+            <value>0</value>
+        </property>
+        <property name="audioFilePath">
+            <value>$(AUDIO_BIN_DIR)/splosion {a5bedb87-765a-4153-a6b8-1d841b7eecd4}.wav</value>
+        </property>
+        <relationship name="container">
+            <destination>{565f677d-cdb1-4b9f-a76f-d55e03d5e542}</destination>
+        </relationship>
+    </object>
+</objects>

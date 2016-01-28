@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Nebula3 version="4">
+    <Model name="props/tower_top_geo" bboxcenter="-76.999985,100.001770,169.999969,1.000000" bboxextents="9.663151,9.186474,9.663185,0.000000">
+        <ShapeNodes>
+            <ShapeNode name="tower_top_geo" type="static" path="root/tower_top_geo" useLOD="false" primitive="0" position="77.000000,-48.598965,-170.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:props/tower_top_geo.nvx2" bboxcenter="-76.999985,100.001770,169.999969,1.000000" bboxextents="9.663151,9.186474,9.663185,0.000000" />
+        </ShapeNodes>
+    </Model>
+</Nebula3>

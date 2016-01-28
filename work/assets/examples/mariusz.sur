@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<NebulaT>
+    <Surface template="MyStatic">
+        <Param name="MatDiffuse" value="0.350000,0.660000,1.000000,1.000000" />
+        <Param name="HeightMap" value="tex:examples/heighMap" />
+        <Param name="MatAnotherColor" value="0.000000,0.000000,0.000000,1.000000" />
+        <Param name="HeightMultiplier" value="10.000000" />
+    </Surface>
+</NebulaT>

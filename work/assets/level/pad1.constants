@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Nebula3 version="4">
+    <Model name="level/pad1" bboxcenter="0.235517,0.158367,0.300440,1.000000" bboxextents="1.284387,0.158367,6.476807,0.000000">
+        <CharacterNodes>
+            <CharacterNode name="pad1_ch" animation="ani:level/pad1.nax3">
+                <Skinlist name="pad1">
+                    <Skin name="pad1_graphics" />
+                </Skinlist>
+                <Joint name="pad1" index="0" parent="-1" position="0.000000,0.000000,0.000000,0.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="0.979000,0.979000,0.979000,0.000000" />
+            </CharacterNode>
+        </CharacterNodes>
+        <Skins>
+            <Skin name="pad1_graphics" type="skeletal" path="pad1_graphics" bboxcenter="0.235517,0.158367,0.300440,1.000000" bboxextents="1.284387,0.158367,6.476807,0.000000" position="0.000000,0.000000,0.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:level/pad1.nvx2">
+                <Fragment name="pad1_graphics_0" path="pad1_graphics/pad1_graphics_0" primitive="0">
+                    <Joints>0</Joints>
+                </Fragment>
+            </Skin>
+        </Skins>
+    </Model>
+</Nebula3>

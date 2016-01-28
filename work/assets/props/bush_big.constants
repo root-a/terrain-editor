@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Nebula3 version="4">
+    <Model name="props/bush_big" bboxcenter="-0.038511,2.361947,0.389978,1.000000" bboxextents="4.611366,3.974811,5.294647,0.000000">
+        <ShapeNodes>
+            <ShapeNode name="polySurface21" type="static" path="root/polySurface21" useLOD="false" primitive="0" position="0.000000,0.000000,0.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:props/bush_big.nvx2" bboxcenter="-0.038511,2.361947,0.389978,1.000000" bboxextents="4.611366,3.974811,5.294647,0.000000" />
+        </ShapeNodes>
+    </Model>
+</Nebula3>

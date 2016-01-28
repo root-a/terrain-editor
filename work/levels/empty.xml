@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Level>
+    <NebulaLevel Version="1" name="empty" id="empty" startlevel="0">
+        <Entities />
+        <Global WorldCenter="0.000000,0.000000,0.000000,1.000000" WorldExtents="20.000000,20.000000,20.000000,0.000000">
+            <Object type="PostEffect">
+                <Attributes>
+                    <GlobalLightTransform>1.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.707107, -0.707107, 0.000000, 0.000000, 0.707107, 0.707107, 0.000000, 0.000000, 0.000000, 0.000000, 1.000000</GlobalLightTransform>
+                    <GlobalLightAmbient>0.100000,0.100000,0.100000,1.000000</GlobalLightAmbient>
+                    <GlobalLightDiffuse>1.000000,1.000000,1.000000,1.000000</GlobalLightDiffuse>
+                    <GlobalLightOpposite>0.100000,0.100000,0.200000,1.000000</GlobalLightOpposite>
+                    <GlobalLightCastShadows>true</GlobalLightCastShadows>
+                    <GlobalLightShadowIntensity>0.200000</GlobalLightShadowIntensity>
+                    <Saturation>1.000000</Saturation>
+                    <Balance>1.000000,1.000000,1.000000,1.000000</Balance>
+                    <Luminance>0.299000,0.114000,0.587000,0.000000</Luminance>
+                    <FocusDistance>1.000000</FocusDistance>
+                    <FocusLength>100.000000</FocusLength>
+                    <FocusRadius>0.000000</FocusRadius>
+                    <FogColor>0.500000,0.500000,0.500000,1.000000</FogColor>
+                    <FogNearDist>0.000000</FogNearDist>
+                    <FogFarDist>5000.000000</FogFarDist>
+                    <BloomColor>1.000000,1.000000,1.000000,1.000000</BloomColor>
+                    <BloomThreshold>1.000000</BloomThreshold>
+                    <BloomScale>1.000000</BloomScale>
+                    <SkyTexture>tex:system/sky</SkyTexture>
+                    <SkyContrast>1.000000</SkyContrast>
+                    <SkyBrightness>0.000000</SkyBrightness>
+                    <SkyModel>mdl:system/skybox.n3</SkyModel>
+                </Attributes>
+            </Object>
+        </Global>
+    </NebulaLevel>
+</Level>

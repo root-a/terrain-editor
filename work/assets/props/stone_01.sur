@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<NebulaT>
+    <Surface template="Static">
+        <Param name="NormalMap" value="tex:props/stone_01_norm.dds" />
+        <Param name="DiffuseMap" value="tex:props/stone_01_ao.dds" />
+    </Surface>
+</NebulaT>

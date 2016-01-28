@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Nebula3 version="1">
+    <Options exportFlags="4" exportMode="0" scale="1.000000" />
+    <States>
+        <ModelNode name="root/grass" material="sur:props/grass">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/placeholder" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/polySurface1" material="Foliage">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:props/grass2" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+            <Variables>
+                <Variable name="WindDirection" type="6" value="0.100000,0.000000,0.000000,0.000000" />
+                <Variable name="AlphaSensitivity" type="3" value="0.600000" min="0.000000" max="1.000000" />
+            </Variables>
+        </ModelNode>
+        <ModelNode name="root/polySurface3" material="Foliage">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:props/grass2" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+            <Variables>
+                <Variable name="WindDirection" type="6" value="0.300000,0.000000,0.200000,0.000000" />
+                <Variable name="AlphaSensitivity" type="3" value="0.700000" min="0.000000" max="1.000000" />
+                <Variable name="WindWaveSize" type="3" value="1.000000" min="0.000000" max="1.000000" />
+                <Variable name="WindSpeed" type="3" value="0.460000" min="0.000000" max="1.000000" />
+                <Variable name="WindAlphaWaveSize" type="3" value="1.000000" min="0.000000" max="1.000000" />
+                <Variable name="WindAlphaPower" type="3" value="1.100000" min="0.000000" max="1.000000" />
+                <Variable name="WindForce" type="3" value="0.100000" min="0.000000" max="1.000000" />
+            </Variables>
+        </ModelNode>
+    </States>
+</Nebula3>

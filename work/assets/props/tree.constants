@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Nebula3 version="4">
+    <Model name="props/tree" bboxcenter="-0.385390,4.550920,0.306953,1.000000" bboxextents="6.025625,4.553064,6.440234,0.000000">
+        <ShapeNodes>
+            <ShapeNode name="tree_canopy_mesh" type="static|vertexcolors" path="root/tree_canopy_mesh" useLOD="false" primitive="1" position="0.000000,0.000000,0.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:props/tree.nvx2" bboxcenter="-0.385390,4.924936,0.306953,1.000000" bboxextents="6.025625,4.179048,6.440234,0.000000" />
+            <ShapeNode name="tree_wood_mesh" type="static|vertexcolors" path="root/tree_wood_mesh" useLOD="false" primitive="0" position="0.000000,0.000000,0.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:props/tree.nvx2" bboxcenter="-0.423184,4.186819,0.341992,1.000000" bboxextents="5.165996,4.188962,5.663008,0.000000" />
+        </ShapeNodes>
+    </Model>
+</Nebula3>

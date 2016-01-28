@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<AnimatedPhysics>
+    <Item Name="" Id="triggerbox" Placeholder="examples/dummyground" Graphics="level/triggerbox" Instanced="false" Static="false" AnimEvents="false" CastShadows="true" LoadSynced="false" JointNameLinking="true" CollisionDepthThreshold="0.001000" CollisionFeedback="false" EntityScript="" />
+    <Item Name="" Id="triggerbox2" Placeholder="examples/dummyground" Graphics="level/triggerbox" Instanced="false" Static="false" AnimEvents="false" CastShadows="true" LoadSynced="false" JointNameLinking="true" CollisionDepthThreshold="0.001000" CollisionFeedback="false" EntityScript="" />
+    <Item Name="" Id="door" Placeholder="placeholder/box" Graphics="level/door" Instanced="false" Static="false" AnimEvents="false" CastShadows="true" LoadSynced="false" JointNameLinking="true" CollisionDepthThreshold="0.001000" CollisionFeedback="false" EntityScript="" />
+</AnimatedPhysics>

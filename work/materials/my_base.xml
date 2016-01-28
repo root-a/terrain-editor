@@ -1,0 +1,62 @@
+<!DOCTYPE materials>
+
+<!-- 
+	Feature strings:
+	
+	Static						0
+	Skinned						1
+	Spot (light)				2	NOTE: used by Nebula internally
+	Point (light)				3	NOTE: used by Nebula internally
+	Global (light)  			4	NOTE: used by Nebula internally
+	Alpha						5
+	Tessellated					6
+	Environment					7
+	AlphaTest					8
+	Colored						9
+	Unlit						10
+	Lightmapped					11
+	Instanced					12
+	
+	These four feature strings are used for materials which have no intuitive way of mapping their names to the previously declared strings
+	Alt0						13
+	Alt1						14
+	Alt2						15
+	Alt3						16
+	
+	Empty						17
+	
+	MAX IS 32
+	
+-->
+<Nebula3>
+ <Materials>
+   
+  <!--
+  
+					STATIC MATERIALS
+  
+  -->
+  <Material name="MyStatic" type="static" desc="Blah">
+   <Pass batch="Unlit" shader="my_simple" variation="MyStatic|Alt1"/>
+   <Pass batch="Picking" shader="picking" variation="Static"/>
+ 
+   <Param name="HeightMap" type="string" defaultValue="tex:system/black"/>
+   
+   <!--<Pass batch="Unlit" shader="my_simple" variation="MyStatic|Alt1"/> -->
+   <Param name="MatDiffuse" type="float4" defaultValue="0,0,0,1" edit="color"/>
+   <Param name="MatAnotherColor" type="float4" defaultValue="0,0,0,1" edit="color"/>
+   <Param name="HeightMultiplier" type="float" defaultValue="10.0f" min="0.0f" max="100.0f" desc="Height multiplier"/>
+   
+  </Material>
+  <!--
+  <Material name="StaticMy" type="static" desc="Blah">
+   <Pass batch="SpotLightShadow" shader="shadow" variation="Static|Spot"/>
+   <Pass batch="PointLightShadow" shader="shadow" variation="Static|Point"/>
+   <Pass batch="GlobalShadow" shader="shadow" variation="Static|Global"/>
+   <Pass batch="FlatGeometryLit" shader="static" variation="Static|Environment"/>
+   <Pass batch="Unlit" shader="my_simple" variation="MyStatic|Alt1"/>
+  </Material>
+  -->
+  
+ </Materials>
+</Nebula3>

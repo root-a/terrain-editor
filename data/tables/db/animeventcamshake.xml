@@ -1,0 +1,12 @@
+<AnimEventCamShake IsVirtualCategory="true">
+ <Attributes AnimEventName="string" IntensityX="float" IntensityY="float" IntensityZ="float" RotationX="float" RotationY="float" RotationZ="float" Duration="float" Range="float"/>
+  <Item AnimEventName="code_emitted_player_hit_light" IntensityX="0.2" IntensityY="0.2" IntensityZ="0" RotationX="0" RotationY="0" RotationZ="0" Duration="0.1" Range="30"/>
+  <Item AnimEventName="code_emitted_player_hit_heavy" IntensityX="0" IntensityY="0" IntensityZ="0" RotationX="0" RotationY="0" RotationZ="0" Duration="0" Range="0"/>
+  <Item AnimEventName="code_emitted_player_attack" IntensityX="0" IntensityY="0" IntensityZ="0" RotationX="0" RotationY="0" RotationZ="0" Duration="0" Range="0"/>
+  <Item AnimEventName="code_emitted_player_death" IntensityX="0" IntensityY="0" IntensityZ="0" RotationX="0" RotationY="0" RotationZ="0" Duration="0" Range="0"/>
+  <Item AnimEventName="code_emitted_enemy_hit_light" IntensityX="0" IntensityY="0" IntensityZ="0" RotationX="0" RotationY="0" RotationZ="0" Duration="0.1" Range="30"/>
+  <Item AnimEventName="code_emitted_enemy_hit_heavy" IntensityX="0" IntensityY="0" IntensityZ="0" RotationX="0" RotationY="0" RotationZ="0" Duration="0" Range="0"/>
+  <Item AnimEventName="code_emitted_enemy_attack" IntensityX="0" IntensityY="0" IntensityZ="0" RotationX="0" RotationY="0" RotationZ="0" Duration="0" Range="0"/>
+  <Item AnimEventName="code_emitted_enemy_death" IntensityX="0" IntensityY="0" IntensityZ="0" RotationX="0" RotationY="0" RotationZ="0" Duration="0" Range="0"/>
+  <Item AnimEventName="jump_attack" IntensityX="0" IntensityY="0.5" IntensityZ="0" RotationX="0" RotationY="0" RotationZ="0" Duration="0.4" Range="30"/>
+</AnimEventCamShake>

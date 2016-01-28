@@ -1,0 +1,7 @@
+<Simple IsVirtualCategory="false">
+ <Item Placeholder="examples/tiger" Id="tiger" Name="A Tiger" Graphics="examples/tiger" Physics="examples/tiger"/>
+ <Item Placeholder="examples/box" Id="box" Name="" Graphics="examples/box" Physics="examples/box"/>
+ <Item Placeholder="examples/sphere" Id="sphere" Name="" Graphics="examples/sphere" Physics="examples/sphere"/>
+ <Item Placeholder="examples/cylinder" Id="cylinder" Name="" Graphics="examples/cylinder" Physics="examples/cylinder"/> 
+ <Item Placeholder="examples/dummyground" Id="ground" Name="" Graphics="examples/dummyground" Physics="examples/dummyground"/>
+</Simple>

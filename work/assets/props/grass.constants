@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Nebula3 version="4">
+    <Model name="props/grass" bboxcenter="-0.018963,0.266797,0.067249,1.000000" bboxextents="0.668226,0.308173,0.740332,0.000000">
+        <ShapeNodes>
+            <ShapeNode name="grass" type="static" path="root/grass" useLOD="false" primitive="0" position="0.000000,0.000000,0.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:props/grass.nvx2" bboxcenter="-0.018963,0.266797,0.067249,1.000000" bboxextents="0.668226,0.308173,0.740332,0.000000" />
+        </ShapeNodes>
+    </Model>
+</Nebula3>

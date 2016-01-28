@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Level>
+    <NebulaLevel Version="2" name="nav" id="nav">
+        <Layers>
+            <Layer name="Default" autoload="true" visible="true" locked="false" />
+        </Layers>
+        <Entities>
+            <Object category="_Environment">
+                <Attributes>
+                    <_ID>nav|environment|envvironmentLevel_0</_ID>
+                    <Id>envvironmentLevel</Id>
+                    <_Level>nav</_Level>
+                    <_Layers>Default</_Layers>
+                    <Guid>9b7fa162-9464-4f8c-a260-ee1d098b3fcf</Guid>
+                    <ParentGuid>00000000-0000-0000-0000-000000000000</ParentGuid>
+                    <Transform>1.000000, 0.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 0.000000, 1.000000</Transform>
+                    <CastShadows>true</CastShadows>
+                    <PhysicMaterial>EmptyWood</PhysicMaterial>
+                    <Graphics>level/envvironmentLevel</Graphics>
+                    <LoadSynced>false</LoadSynced>
+                    <CollisionEnabled>true</CollisionEnabled>
+                    <DynamicObject>false</DynamicObject>
+                    <VelocityVector>0.000000,0.000000,0.000000,0.000000</VelocityVector>
+                    <Instanced>false</Instanced>
+                </Attributes>
+            </Object>
+            <Object category="_Environment">
+                <Attributes>
+                    <_ID>nav|environment|ak74_0</_ID>
+                    <Id>ak74</Id>
+                    <_Level>nav</_Level>
+                    <_Layers>Default</_Layers>
+                    <Guid>e9bb5e9c-c018-477a-8202-955f0a49082a</Guid>
+                    <ParentGuid>00000000-0000-0000-0000-000000000000</ParentGuid>
+                    <Transform>1.000000, 0.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, -20.013237, 49.969818, -335.201355, 1.000000</Transform>
+                    <CastShadows>true</CastShadows>
+                    <PhysicMaterial>EmptyWood</PhysicMaterial>
+                    <Graphics>examples/ak74</Graphics>
+                    <LoadSynced>false</LoadSynced>
+                    <CollisionEnabled>true</CollisionEnabled>
+                    <DynamicObject>true</DynamicObject>
+                    <VelocityVector>0.000000,0.000000,0.000000,0.000000</VelocityVector>
+                    <Instanced>false</Instanced>
+                </Attributes>
+            </Object>
+            <Object category="fasdf">
+                <Attributes>
+                    <_ID>nav|object|fasdf|asdf_0</_ID>
+                    <Id>asdf</Id>
+                    <_Level>nav</_Level>
+                    <_Layers>Default</_Layers>
+                    <Guid>1856fbe6-4c65-4881-aa8f-d3ea1e4707cd</Guid>
+                    <ParentGuid>00000000-0000-0000-0000-000000000000</ParentGuid>
+                    <Transform>1.000000, 0.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 8.481584, 0.000000, 1.000000</Transform>
+                    <Name>fdas</Name>
+                    <Time>0.000000</Time>
+                </Attributes>
+            </Object>
+            <Object category="fasdf2">
+                <Attributes>
+                    <_ID>nav|object|fasdf2|f_0</_ID>
+                    <Id>f</Id>
+                    <_Level>nav</_Level>
+                    <_Layers>Default</_Layers>
+                    <Guid>2a465c69-a050-4394-b3e3-5158eeb11392</Guid>
+                    <ParentGuid>00000000-0000-0000-0000-000000000000</ParentGuid>
+                    <Transform>1.000000, 0.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 0.000000, 1.000000</Transform>
+                    <Name>f</Name>
+                    <Time>0.000000</Time>
+                </Attributes>
+            </Object>
+            <Object category="ffffff">
+                <Attributes>
+                    <_ID>nav|object|ffffff|a_0</_ID>
+                    <Id>a</Id>
+                    <_Level>nav</_Level>
+                    <_Layers>Default</_Layers>
+                    <Guid>358c5faf-bdca-4dbf-96cc-a674cdb2c859</Guid>
+                    <ParentGuid>00000000-0000-0000-0000-000000000000</ParentGuid>
+                    <Transform>1.000000, 0.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 0.000000, 1.000000</Transform>
+                    <Name>f</Name>
+                    <Time>0.000000</Time>
+                </Attributes>
+            </Object>
+            <Object category="ClickPlayer">
+                <Attributes>
+                    <_ID>nav|object|ClickPlayer|dummy_0</_ID>
+                    <Id>dummy</Id>
+                    <_Level>nav</_Level>
+                    <_Layers>Default</_Layers>
+                    <Guid>83ff3cd5-42eb-4721-b8c9-db2918a0bb02</Guid>
+                    <ParentGuid>00000000-0000-0000-0000-000000000000</ParentGuid>
+                    <Transform>1.000000, 0.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 2.257026, -39.057133, 1.000000</Transform>
+                    <Name>dummy</Name>
+                    <Placeholder>placeholder/box</Placeholder>
+                    <UseAnim>use</UseAnim>
+                    <StrafeLeftAnim>strafeLeft</StrafeLeftAnim>
+                    <UseReversedAnim>false</UseReversedAnim>
+                    <CameraOffset>0.000000,1.500000,0.000000,0.000000</CameraOffset>
+                    <CameraDistance>5.000000</CameraDistance>
+                    <CameraMinDistance>1.000000</CameraMinDistance>
+                    <LoopStartAnimation>true</LoopStartAnimation>
+                    <Graphics>placeholder/dummyCharacter</Graphics>
+                    <UseFallbackAnim>false</UseFallbackAnim>
+                    <StartAnimation>standing</StartAnimation>
+                    <CameraFocus>true</CameraFocus>
+                    <Instanced>false</Instanced>
+                    <JumpAnim>jump</JumpAnim>
+                    <StrafeRightAnim>strafeRight</StrafeRightAnim>
+                    <InputMouseGrab>false</InputMouseGrab>
+                    <InputFocus>true</InputFocus>
+                    <IdleAnim>standing</IdleAnim>
+                    <DeathAnim>death</DeathAnim>
+                    <CameraAngularGain>-50.000000</CameraAngularGain>
+                    <CameraHighStop>45.000000</CameraHighStop>
+                    <Static>false</Static>
+                    <CameraLinearGain>-30.000000</CameraLinearGain>
+                    <CameraDefaultTheta>-0.350000</CameraDefaultTheta>
+                    <CameraDistanceStep>1.000000</CameraDistanceStep>
+                    <CameraMaxDistance>125.000000</CameraMaxDistance>
+                    <AnimEvents>false</AnimEvents>
+                    <CameraAngularVelocity>1.000000</CameraAngularVelocity>
+                    <WalkAnim>runForward</WalkAnim>
+                    <CastShadows>true</CastShadows>
+                    <BackAnim>runBackward</BackAnim>
+                    <CharacterSet>dummychar</CharacterSet>
+                    <AnimSet>dummychar</AnimSet>
+                    <CameraDefaultRho>0.175000</CameraDefaultRho>
+                    <LoadSynced>false</LoadSynced>
+                    <CameraLowStop>-45.000000</CameraLowStop>
+                    <UseStrafeAnim>true</UseStrafeAnim>
+                    <AngularSmoothing>false</AngularSmoothing>
+                    <CapsuleHover>0.000000</CapsuleHover>
+                    <AirVelocityGain>0.050000</AirVelocityGain>
+                    <TargetEntityId>0</TargetEntityId>
+                    <CollisionDepthThreshold>0.001000</CollisionDepthThreshold>
+                    <JumpSpeed>10.000000</JumpSpeed>
+                    <CapsuleHeight>2.000000</CapsuleHeight>
+                    <CrouchingCapsuleHeight>1.500000</CrouchingCapsuleHeight>
+                    <VelocityGain>0.950000</VelocityGain>
+                    <Physics></Physics>
+                    <Moving>false</Moving>
+                    <RelVelocity>0.200000</RelVelocity>
+                    <JumpHeight>20.000000</JumpHeight>
+                    <CharacterShape>capsule</CharacterShape>
+                    <VelocityVector>0.000000,0.000000,0.000000,0.000000</VelocityVector>
+                    <CapsuleRadius>0.500000</CapsuleRadius>
+                    <Following>false</Following>
+                    <MaxVelocity>0.700000</MaxVelocity>
+                    <CollisionFeedback>false</CollisionFeedback>
+                    <EntityScript></EntityScript>
+                </Attributes>
+            </Object>
+            <Object category="follow">
+                <Attributes>
+                    <_ID>nav|object|follow|dummychar_0</_ID>
+                    <Id>dummychar</Id>
+                    <_Level>nav</_Level>
+                    <_Layers>Default</_Layers>
+                    <Guid>cb0322d2-2a23-4dab-a796-d7193c41509f</Guid>
+                    <ParentGuid>00000000-0000-0000-0000-000000000000</ParentGuid>
+                    <Transform>1.000000, 0.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 2.564993, 19.882359, 1.000000</Transform>
+                    <Name>Dummy Character</Name>
+                    <Placeholder>placeholder/box</Placeholder>
+                    <UseAnim>use</UseAnim>
+                    <StrafeLeftAnim>strafeLeft</StrafeLeftAnim>
+                    <UseReversedAnim>false</UseReversedAnim>
+                    <CameraDistance>5.000000</CameraDistance>
+                    <LoopStartAnimation>true</LoopStartAnimation>
+                    <Graphics>placeholder/dummyCharacter</Graphics>
+                    <UseFallbackAnim>false</UseFallbackAnim>
+                    <StartAnimation>standing</StartAnimation>
+                    <CameraFocus>true</CameraFocus>
+                    <Instanced>false</Instanced>
+                    <JumpAnim>jump</JumpAnim>
+                    <StrafeRightAnim>strafeRight</StrafeRightAnim>
+                    <InputFocus>true</InputFocus>
+                    <IdleAnim>standing</IdleAnim>
+                    <DeathAnim>death</DeathAnim>
+                    <Static>false</Static>
+                    <AnimEvents>false</AnimEvents>
+                    <CameraAngularVelocity>1.000000</CameraAngularVelocity>
+                    <WalkAnim>runForward</WalkAnim>
+                    <CastShadows>true</CastShadows>
+                    <BackAnim>runBackward</BackAnim>
+                    <CharacterSet>dummychar</CharacterSet>
+                    <AnimSet>dummychar</AnimSet>
+                    <LoadSynced>false</LoadSynced>
+                    <UseStrafeAnim>true</UseStrafeAnim>
+                    <AngularSmoothing>false</AngularSmoothing>
+                    <CapsuleHover>0.000000</CapsuleHover>
+                    <AirVelocityGain>0.050000</AirVelocityGain>
+                    <TargetEntityId>0</TargetEntityId>
+                    <CollisionDepthThreshold>0.001000</CollisionDepthThreshold>
+                    <JumpSpeed>10.000000</JumpSpeed>
+                    <CapsuleHeight>2.000000</CapsuleHeight>
+                    <CrouchingCapsuleHeight>1.500000</CrouchingCapsuleHeight>
+                    <VelocityGain>0.950000</VelocityGain>
+                    <Physics></Physics>
+                    <Moving>false</Moving>
+                    <RelVelocity>0.200000</RelVelocity>
+                    <JumpHeight>20.000000</JumpHeight>
+                    <CharacterShape>capsule</CharacterShape>
+                    <VelocityVector>0.000000,0.000000,0.000000,0.000000</VelocityVector>
+                    <CapsuleRadius>0.500000</CapsuleRadius>
+                    <Following>false</Following>
+                    <MaxVelocity>0.700000</MaxVelocity>
+                    <CollisionFeedback>false</CollisionFeedback>
+                    <EntityScript>follow</EntityScript>
+                </Attributes>
+            </Object>
+            <Object category="NavMeshData">
+                <Attributes>
+                    <_ID>nav|NavMeshData|NavMesh_0</_ID>
+                    <Id>NavMesh</Id>
+                    <Guid>a759c60b-139b-4357-8bb1-fbeae78d3999</Guid>
+                    <_Level>nav</_Level>
+                    <ParentGuid>00000000-0000-0000-0000-000000000000</ParentGuid>
+                    <MaxEdgeLength>12</MaxEdgeLength>
+                    <RegionMinSize>8</RegionMinSize>
+                    <RegionMergeSize>20</RegionMergeSize>
+                    <AgentRadius>0.500000</AgentRadius>
+                    <AgentHeight>2.000000</AgentHeight>
+                    <AgentMaxClimb>0.200000</AgentMaxClimb>
+                    <MaxEdgeError>1.300000</MaxEdgeError>
+                    <DetailSampleDist>6.000000</DetailSampleDist>
+                    <DetailSampleMaxError>1.000000</DetailSampleMaxError>
+                    <MaxSlope>45.000000</MaxSlope>
+                    <CellHeight>0.200000</CellHeight>
+                    <CellSize>0.300000</CellSize>
+                    <NavMeshData>nav:f8507cac-948c-4610-bc13-37b8dc31fcfc</NavMeshData>
+                    <EntityReferences>874140ad-22e6-40b3-9a6b-c91ae3a95669;</EntityReferences>
+                    <AreaEntityReferences></AreaEntityReferences>
+                    <NavMeshCenter>-5.342445,23.053936,-189.188492,1.000000</NavMeshCenter>
+                    <NavMeshExtends>84.862328,31.598320,224.859299,0.000000</NavMeshExtends>
+                    <NavMeshMeshString>&quot;phymsh:level/envvironmentLevel_ph.nvx2&quot;=&quot;1.000000, 0.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, -2.593625, 0.000000, 1.000000&quot;</NavMeshMeshString>
+                </Attributes>
+            </Object>
+        </Entities>
+        <Global WorldCenter="-5.342445,22.187359,-189.188492,1.000000" WorldExtents="169.724655,64.374718,449.718597,0.000000" PostEffectPreset="Default" _Layers="Default" GlobalLightTransform="0.999807, -0.004698, 0.019068, 0.000000, 0.019639, 0.239192, -0.970774, 0.000000, 0.000000, 0.970961, 0.239238, 0.000000, 0.000000, 1.699780, 0.000000, 1.000000" />
+    </NebulaLevel>
+</Level>

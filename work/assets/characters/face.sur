@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<NebulaT>
+    <Surface template="Skin">
+        <Param name="AlbedoMap" value="tex:characters/facediff" />
+        <Param name="SpecularMap" value="tex:system/specmap" />
+        <Param name="NormalMap" value="tex:characters/facenormal" />
+        <Param name="RoughnessMap" value="tex:system/gray" />
+        <Param name="CavityMap" value="tex:system/gray" />
+        <Param name="MatAlbedoIntensity" value="1.000000,1.000000,1.000000,1.000000" />
+        <Param name="MatSpecularIntensity" value="0.040000,0.040000,0.040000,0.000000" />
+        <Param name="MatRoughnessIntensity" value="0.670000" />
+        <Param name="AbsorptionMap" value="tex:system/white" />
+        <Param name="ScatterMap" value="tex:system/white" />
+        <Param name="SubsurfaceStrength" value="0.000000" />
+        <Param name="SubsurfaceWidth" value="0.000000" />
+        <Param name="SubsurfaceCorrection" value="0.510000" />
+    </Surface>
+</NebulaT>

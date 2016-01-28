@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Globals>
+    <Attribute name="_DefaultLevel" type="string" value="demo_full" />
+    <Attribute name="TestFloat4Attr" type="float4" value="1.000000,2.000000,3.000000,4.000000" />
+    <Attribute name="TestStringAttr" type="string" value="testing" />
+</Globals>

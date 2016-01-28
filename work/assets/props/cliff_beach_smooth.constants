@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Nebula3 version="4">
+    <Model name="props/cliff_beach_smooth" bboxcenter="0.249813,-0.412561,-0.757664,1.000000" bboxextents="3.488590,2.458292,4.686970,0.000000">
+        <ShapeNodes>
+            <ShapeNode name="rockBeach_LoP:rockBeach_LoP" type="static" path="root/rockBeach_LoP:rockBeach_LoP" useLOD="false" primitive="0" position="0.000000,0.000000,0.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:props/cliff_beach_smooth.nvx2" bboxcenter="0.249813,-0.412561,-0.757664,1.000000" bboxextents="3.488590,2.458292,4.686970,0.000000" />
+        </ShapeNodes>
+    </Model>
+</Nebula3>

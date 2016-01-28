@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<_Ui_Scripts IsVirtualCategory="true">
+    <Item Id="gui:demo/demo.lua" AutoLoad="true" />
+</_Ui_Scripts>

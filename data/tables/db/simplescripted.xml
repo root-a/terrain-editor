@@ -1,0 +1,5 @@
+<SimpleScripted IsVirtualCategory="false">
+ <Item Placeholder="examples/tiger" Id="tiger" Name="A Tiger" Graphics="examples/tiger" Physics="examples/tiger"/>
+ <Item Placeholder="examples/box" Id="box" Name="" Graphics="examples/box" Physics="examples/box"/>
+ <Item Placeholder="examples/sphere" Id="sphere" Name="" Graphics="examples/sphere" Physics="examples/sphere"/> 
+</SimpleScripted>

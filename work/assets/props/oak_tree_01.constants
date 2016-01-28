@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Nebula3 version="4">
+    <Model name="props/oak_tree_01" bboxcenter="-0.934627,9.341373,-0.834921,1.000000" bboxextents="10.845440,9.558750,14.559259,0.000000">
+        <ShapeNodes>
+            <ShapeNode name="island_geo:canopy" type="static" path="root/island_geo:canopy" useLOD="false" primitive="0" position="0.000000,0.000000,0.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:props/oak_tree_01.nvx2" bboxcenter="-0.934627,9.947661,-0.834921,1.000000" bboxextents="10.845440,8.952462,14.559259,0.000000" />
+            <ShapeNode name="island_geo:oak_geo" type="static" path="root/island_geo:oak_geo" useLOD="false" primitive="1" position="0.000000,0.000000,0.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:props/oak_tree_01.nvx2" bboxcenter="-0.217390,6.507293,0.087755,1.000000" bboxextents="6.920094,6.724670,9.375246,0.000000" />
+        </ShapeNodes>
+    </Model>
+</Nebula3>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Nebula3 version="4">
+    <Model name="props/windMill" bboxcenter="-4.257614,34.341812,0.000000,1.000000" bboxextents="20.046053,36.129761,28.471573,0.000000">
+        <ShapeNodes>
+            <ShapeNode name="bodyMesh" type="static" path="root/bodyMesh" useLOD="false" primitive="4" position="0.000000,0.000000,0.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:props/windMill.nvx2" bboxcenter="-0.000002,19.778532,-0.000002,1.000000" bboxextents="12.608570,20.036247,12.608573,0.000000" />
+            <ShapeNode name="detailMesh" type="static" path="root/detailMesh" useLOD="false" primitive="0" position="0.000000,0.000000,0.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:props/windMill.nvx2" bboxcenter="-4.257614,23.604650,-0.000003,1.000000" bboxextents="20.046053,25.392599,15.788443,0.000000" />
+            <ShapeNode name="fanMesh" type="static" path="root/fanMesh" useLOD="false" primitive="1" position="0.000000,0.000000,0.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:props/windMill.nvx2" bboxcenter="11.848067,42.000000,0.000000,1.000000" bboxextents="1.284909,28.471573,28.471573,0.000000" />
+            <ShapeNode name="polySurface321" type="static" path="root/polySurface321" useLOD="false" primitive="2" position="0.000000,0.000000,0.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:props/windMill.nvx2" bboxcenter="0.000001,43.647484,-0.000002,1.000000" bboxextents="9.320807,5.020563,9.800475,0.000000" />
+            <ShapeNode name="ropeMesh" type="static" path="root/ropeMesh" useLOD="false" primitive="3" position="0.000000,0.000000,0.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:props/windMill.nvx2" bboxcenter="-14.571289,19.388933,0.004502,1.000000" bboxextents="3.811014,16.297997,0.098838,0.000000" />
+            <ShapeNode name="woodenMesh" type="static" path="root/woodenMesh" useLOD="false" primitive="5" position="0.000000,0.000000,0.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:props/windMill.nvx2" bboxcenter="0.000000,42.820988,0.000000,1.000000" bboxextents="9.613655,4.621075,10.031308,0.000000" />
+        </ShapeNodes>
+    </Model>
+</Nebula3>

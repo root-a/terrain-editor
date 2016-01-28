@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<NebulaT>
+    <Surface template="Foliage">
+        <Param name="AlbedoMap" value="tex:props/prop_tree_oak_bark_diffuse" />
+        <Param name="SpecularMap" value="tex:system/white" />
+        <Param name="NormalMap" value="tex:props/prop_tree_oak_bark_normal" />
+        <Param name="RoughnessMap" value="tex:system/white" />
+        <Param name="CavityMap" value="tex:system/white" />
+        <Param name="MatAlbedoIntensity" value="1.000000,1.000000,1.000000,1.000000" />
+        <Param name="MatSpecularIntensity" value="0.000000,0.000000,0.000000,0.000000" />
+        <Param name="WindDirection" value="0.010000,0.000000,0.000000,0.000000" />
+        <Param name="AlphaSensitivity" value="0.030000" />
+        <Param name="MatRoughnessIntensity" value="0.000000" />
+        <Param name="WindWaveSize" value="1.000000" />
+        <Param name="WindSpeed" value="0.120000" />
+        <Param name="WindForce" value="0.250000" />
+    </Surface>
+</NebulaT>

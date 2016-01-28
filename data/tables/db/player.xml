@@ -1,0 +1,3 @@
+<Player>
+ <Item CharacterSet="dummychar" RelVelocity="0.2" MaxVelocity="0.7" CameraFocus="true" StartAnimation="standing" IdleAnim="standing" WalkAnim="runForward" BackAnim="runBackward" UseAnim="use" DeathAnim="death" JumpAnim="jump" StrafeRightAnim="strafeRight" StrafeLeftAnim="strafeLeft" UseStrafeAnim="true" UseFallbackAnim="false" UseReversedAnim="false" Placeholder="placeholder/box" InputFocus="true" CameraDistance="5" CameraAngularVelocity="1" Id="dummychar" AnimSet="dummychar" Name="Dummy Character" LoopStartAnimation="true" Graphics="placeholder/dummyCharacter" CapsuleRadius="0.5" CapsuleHeight="2.0" Physics=""/>
+ </Player>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Nebula3 version="1">
+    <Options exportFlags="4" exportMode="1" scale="3.000000" />
+    <States>
+        <ModelNode name="Pad2_graphics" material="sur:level/pad2">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/placeholder" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="pad2_ch/Pad2_graphics" material="Skinned">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+        <ModelNode name="root/Pad2_graphics" material="Static">
+            <Textures>
+                <Texture name="DiffuseMap" value="tex:system/white" />
+                <Texture name="NormalMap" value="tex:system/nobump" />
+            </Textures>
+        </ModelNode>
+    </States>
+    <Takes>
+        <Take name="Take 001">
+            <Clip name="pad2down" start="0" stop="10" post="0" pre="0" />
+            <Clip name="pad2up" start="10" stop="20" post="0" pre="0" />
+        </Take>
+    </Takes>
+</Nebula3>

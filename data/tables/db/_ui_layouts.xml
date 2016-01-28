@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<_Ui_Layouts IsVirtualCategory="true">
+    <Item Id="gui:demo/cursor.rml" Name="cursor" AutoLoad="true" />
+    <Item Id="gui:demo/demo.rml" Name="demo" AutoLoad="true" />
+    <Item Id="gui:demo/window.rml" Name="window" AutoLoad="true" />
+</_Ui_Layouts>
