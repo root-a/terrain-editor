@@ -16,19 +16,7 @@
 #include "graphics/billboardentity.h"
 #include "dynui/imguiaddon.h"
 
-#include "rendermodules/rt/rtplugin.h"
-#include "coregraphics/vertexbuffer.h"
-#include "coregraphics/indexbuffer.h"
-#include "coregraphics/shaderinstance.h"
-#include "coregraphics/texture.h"
-#include "resources/managedtexture.h"
-
-#include "coregraphics/shaderserver.h"
-#include "coregraphics/transformdevice.h"
-#include "coregraphics/displaydevice.h"
-#include "resources/resourcemanager.h"
-
-#include "coregraphics/renderdevice.h"
+#include "terrainaddon/terrainaddon.h"
 
 //------------------------------------------------------------------------------
 namespace Tools
@@ -56,9 +44,7 @@ private:
 	/// append a test model
     virtual void AppendTestModel();
 
-	Ptr<Dynui::ImguiAddon> ui;
     Ptr<Graphics::ModelEntity> ground;
-	Ptr<Graphics::BillboardEntity> billboard;
     Util::Array<Ptr<Graphics::ModelEntity> > models;
     Ptr<Graphics::GlobalLightEntity> globalLight;
     Util::Array<Ptr<Graphics::PointLightEntity> > pointLights;
@@ -74,33 +60,9 @@ private:
 	bool fullscreen;
     float rotX;
     bool capturing;
-	//create memory texture
-	//use the size of that texture to generate the terrain plane
-	void GenerateTerrainBasedOnResolution(int width, int height);
 
-	int* indices;
-	Math::vector* vertices;
-	Ptr<CoreGraphics::RenderDevice> device;
-	Ptr<CoreGraphics::TransformDevice> trans;
+	Ptr<Terrain::TerrainAddon> terrain;
 
-	void SetUpVBO(Math::vector* terrainMesh, Math::vector* indices, int width, int height);
-	void LoadShader();
-	void EnableShader();
-	void EnableTerrain();
-	void DrawTerrain();
-
-	void Unload();
-	// mesh
-	CoreGraphics::PrimitiveGroup primitive;
-	Ptr<CoreGraphics::VertexBuffer> vbo;
-	Ptr<CoreGraphics::IndexBuffer> ibo;
-	Ptr<CoreGraphics::VertexLayout> vertexLayout;
-	Ptr<Resources::ManagedTexture> tex;
-
-	// shader
-	Ptr<CoreGraphics::Shader> shader;
-	Ptr<CoreGraphics::ShaderVariable> gridSizeVar;
-	Ptr<CoreGraphics::ShaderVariable> gridTexVar;
 };
 
 } // namespace Test
