@@ -117,7 +117,13 @@ TerrainViewerApplication::Open()
         Ptr<FrameCaptureRenderModule> module = FrameCaptureRenderModule::Create();
         module->Setup();
 
+		device = RenderDevice::Instance();
+		trans = TransformDevice::Instance();
+
 		GenerateTerrainBasedOnResolution(2, 2);
+
+		
+
         return true;
     }
     return false;
@@ -771,6 +777,35 @@ void TerrainViewerApplication::GenerateTerrainBasedOnResolution(int width, int h
 			indices[index + 5] = indices[index];
 		}
 	}
+}
+
+void TerrainViewerApplication::EnableShader()
+{
+	// start pass
+	this->shader->Apply();
+
+	// set variables
+	this->shader->BeginUpdate();
+	//this->gridSizeVar->SetFloat(this->gridSize);
+	this->gridTexVar->SetTexture(this->tex->GetTexture());
+	this->shader->EndUpdate();
+	this->shader->Commit();
+}
+
+void TerrainViewerApplication::EnableTerrain()
+{
+	device->SetStreamSource(0, this->vbo, 0);
+	device->SetVertexLayout(this->vertexLayout);
+	device->SetIndexBuffer(this->ibo);
+	device->SetPrimitiveGroup(this->primitive);
+	
+}
+
+void TerrainViewerApplication::DrawTerrain()
+{
+	EnableShader();
+	EnableTerrain();
+	device->Draw();
 }
 
 } // namespace Tools

@@ -16,6 +16,19 @@
 #include "graphics/billboardentity.h"
 #include "dynui/imguiaddon.h"
 
+#include "rendermodules/rt/rtplugin.h"
+#include "coregraphics/vertexbuffer.h"
+#include "coregraphics/indexbuffer.h"
+#include "coregraphics/shaderinstance.h"
+#include "coregraphics/texture.h"
+#include "resources/managedtexture.h"
+
+#include "coregraphics/shaderserver.h"
+#include "coregraphics/transformdevice.h"
+#include "coregraphics/displaydevice.h"
+#include "resources/resourcemanager.h"
+
+#include "coregraphics/renderdevice.h"
 
 //------------------------------------------------------------------------------
 namespace Tools
@@ -67,9 +80,14 @@ private:
 
 	int* indices;
 	Math::vector* vertices;
+	Ptr<CoreGraphics::RenderDevice> device;
+	Ptr<CoreGraphics::TransformDevice> trans;
 
 	void SetUpVBO(Math::vector* terrainMesh, Math::vector* indices, int width, int height);
 	void LoadShader();
+	void EnableShader();
+	void EnableTerrain();
+	void DrawTerrain();
 
 	void Unload();
 	// mesh

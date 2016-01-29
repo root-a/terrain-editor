@@ -1,10 +1,10 @@
 #-------------------------------------------------------------------------------
-# Demos
+# TerrainTools
 #-------------------------------------------------------------------------------
 
-OPTION(N_BUILD_N3DEMOS "Build N3 demos" ON)
+OPTION(N_BUILD_N3TERRAIN "Build N3 TerrainTools" ON)
 
-if(N_BUILD_N3DEMOS)
+if(N_BUILD_N3TERRAIN)
 
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
 

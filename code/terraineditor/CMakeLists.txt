@@ -16,7 +16,7 @@ SOURCE_GROUP("Precompiled" FILES ${PCH_files})
 LIST(APPEND ALLSRCS ${SRCS} ${PCH_files})
 
 ADD_EXECUTABLE(terraineditor ${ALLSRCS})
-SET_TARGET_PROPERTIES(terraineditor PROPERTIES FOLDER "Demos")
+SET_TARGET_PROPERTIES(terraineditor PROPERTIES FOLDER "DTerrainTools")
 
 # link to render, will pull in dependencies and includes
 TARGET_LINK_LIBRARIES(terraineditor render imgui dynui framecapture)
