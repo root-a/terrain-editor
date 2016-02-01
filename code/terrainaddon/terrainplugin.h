@@ -17,12 +17,27 @@ The TerrainRTPlugin injects itself into the main frameshader and renders the ter
 #include "coregraphics/renderdevice.h"
 #include "coregraphics/transformdevice.h"
 
+
+
 namespace Terrain
 {
+	struct VertexData
+	{
+		Math::point pos;
+		Math::float2 uv;
+		VertexData(){}
+		VertexData(float x, float y, float z, float u, float v)
+		{
+			pos.set(x, y, z);
+			uv.set(u, v);
+		}
+	};
+
 	class TerrainRTPlugin : public RenderModules::RTPlugin
 	{
 		__DeclareClass(TerrainRTPlugin);
 	public:
+
 		/// constructor
 		TerrainRTPlugin();
 		/// destructor
@@ -40,16 +55,16 @@ namespace Terrain
 		void SetVisible(bool b);
 		/// set grid tile size
 		void SetGridSize(float size);
-
-		int* indices;
-		Math::vector* vertices;
+		
+		Util::Array<int> indices;
+		Util::Array<VertexData> vertexData;
 		Ptr<CoreGraphics::RenderDevice> device;
 		Ptr<CoreGraphics::TransformDevice> trans;
 
 		void TerrainInit();
 		void LoadShader();
 		void GenerateTerrainBasedOnResolution(int width, int height);
-		void SetUpVBO(Math::vector* terrainMesh, int* indices, int width, int height);
+		void SetUpVBO(Util::Array<VertexData>& terrainMesh, Util::Array<int>& indices);
 		
 		void DrawTerrain();
 		void EnableShader();

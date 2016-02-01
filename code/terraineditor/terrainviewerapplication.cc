@@ -95,8 +95,8 @@ TerrainViewerApplication::Open()
         // setup models        
 		this->ground = ModelEntity::Create();
 		this->ground->SetResourceId(ResourceId("mdl:examples/dummyground.n3"));
-		transform = matrix44::translation(0,-10,0);
-		this->ground->SetTransform(matrix44::multiply(transform, matrix44::translation(0, n_deg2rad(90), 0)));
+		transform = matrix44::translation(0,-15,0);
+		this->ground->SetTransform(transform);// matrix44::multiply(transform, matrix44::translation(0, n_deg2rad(90), 0)));
 		this->stage->AttachEntity(ground.cast<GraphicsEntity>());
 
 

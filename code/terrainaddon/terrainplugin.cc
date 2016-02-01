@@ -81,9 +81,9 @@ namespace Terrain
 
 		LoadShader();
 
-		GenerateTerrainBasedOnResolution(1024, 1024);
+		GenerateTerrainBasedOnResolution(2048, 2048);
 
-		SetUpVBO(this->vertices, this->indices, 1024, 1024);
+		SetUpVBO(this->vertexData, this->indices);
 	}
 
 	void TerrainRTPlugin::LoadShader()
@@ -94,18 +94,18 @@ namespace Terrain
 		this->gridTexVar = this->shader->GetVariableByName("HeightMap");
 
 		// load texture
-		this->tex = ResourceManager::Instance()->CreateManagedResource(Texture::RTTI, "tex:system/grid.dds").downcast<ManagedTexture>();
+		this->tex = ResourceManager::Instance()->CreateManagedResource(Texture::RTTI, "tex:examples/heighMap.dds").downcast<ManagedTexture>();
 	}
 
 	void TerrainRTPlugin::GenerateTerrainBasedOnResolution(int width, int height)
 	{
 		int vertexCount = width * height;
-		int squares = vertexCount / 4;
+		int squares = (width - 1) * (height -1);
 		int triangles = squares * 2;
 		int indicesCount = triangles * 3;
 		// Create the structure to hold the mesh data.
-		vertices = new Math::vector[vertexCount]; //3 floats per vertex
-		indices = new int[indicesCount];
+		vertexData.Reserve(vertexCount);// = new Math::point[vertexCount]; //3 floats per vertex
+		indices.Reserve(indicesCount);// = new int[indicesCount];
 
 		// Generate indices for specified resolution
 		//we store columns in the array
@@ -146,8 +146,8 @@ namespace Terrain
 				//since i store the points column wise the next column starts at index = current column * height
 				int currentColumn = height * col;
 				index = (currentColumn)+row; //
-				vertices[index].set((float)row, 0.f, (float)col);
-
+				vertexData.Append(VertexData((float)row, 0.f, (float)col, (float)col / height, (float)row / width));
+	
 				//we never do the last row nor last column, we don't do that with borders since they are already a part border faces that were build in previous loop
 				if (col == width - 1 || row == height - 1) continue; //this might be more expensive than writing another for loop set just for indices
 
@@ -156,42 +156,42 @@ namespace Terrain
 				//vertex 1 is current column and current row + 1
 				//vertex 2 is current column + 1 and current row + 1
 				int nextColumn = height * (col + 1); //or currentColumn + height //will use that later
-				indices[index + 0] = currentColumn + row;
-				indices[index + 1] = currentColumn + row + 1;
-				indices[index + 2] = nextColumn + row + 1; //we need to calculate the next column here
+				indices.Append(currentColumn + row);
+				indices.Append(currentColumn + row + 1);
+				indices.Append(nextColumn + row + 1); //we need to calculate the next column here
 				//face 2
 				//vertex 0 is current column + 1 and current row + 1 i.e. same as face 1 vertex 2
 				//vertex 1 is current column + 1 and current row
 				//vertex 2 is current column and current row i.e. same as face 1 vertex 1
-				indices[index + 3] = indices[index + 2];
-				indices[index + 4] = nextColumn + row;
-				indices[index + 5] = indices[index];
+				indices.Append(nextColumn + row + 1);
+				indices.Append(nextColumn + row);
+				indices.Append(currentColumn + row);
 			}
 		}
+
+		
 	}
 
-	void TerrainRTPlugin::SetUpVBO(Math::vector* terrainMesh, int* indices, int width, int height)
+	void TerrainRTPlugin::SetUpVBO(Util::Array<VertexData>& terrainMesh, Util::Array<int>& indices)
 	{
 		// setup VBO
 		Util::Array<VertexComponent> components;
 		components.Append(VertexComponent(VertexComponent::Position, 0, VertexComponent::Float4, 0));
+		components.Append(VertexComponent(VertexComponent::TexCoord1, 0, VertexComponent::Float2, 0));
 		Ptr<MemoryVertexBufferLoader> vboLoader = MemoryVertexBufferLoader::Create();
-		int vertCount = width*height;
-		vboLoader->Setup(components, vertCount, terrainMesh, vertCount*sizeof(Math::vector), VertexBuffer::UsageImmutable, VertexBuffer::AccessNone);
+		int vertCount = terrainMesh.Size();
+		vboLoader->Setup(components, vertCount, terrainMesh.Begin(), vertCount*sizeof(VertexData), VertexBuffer::UsageImmutable, VertexBuffer::AccessNone);
 
 		this->vbo = VertexBuffer::Create();
-		this->vbo->SetLoader(vboLoader.upcast<ResourceLoader>());
+ 		this->vbo->SetLoader(vboLoader.upcast<ResourceLoader>());
 		this->vbo->SetAsyncEnabled(false);
 		this->vbo->Load();
 		n_assert(this->vbo->IsLoaded());
 		this->vbo->SetLoader(NULL);
 
 		Ptr<MemoryIndexBufferLoader> iboLoader = MemoryIndexBufferLoader::Create();
-		//4 vertices per square
-		int squares = vertCount / 4;
-		int triangles = squares * 2;
-		int indicesCount = triangles * 3;
-		iboLoader->Setup(IndexType::Index32, indicesCount, indices, indicesCount*sizeof(int));
+		int indicesCount = indices.Size();
+		iboLoader->Setup(IndexType::Index32, indicesCount, indices.Begin(), indicesCount*sizeof(int));
 
 		this->ibo = IndexBuffer::Create();
 		this->ibo->SetLoader(iboLoader.upcast<ResourceLoader>());
@@ -218,7 +218,6 @@ namespace Terrain
 
 		// set variables
 		this->shader->BeginUpdate();
-		//this->gridSizeVar->SetFloat(this->gridSize);
 		this->gridTexVar->SetTexture(this->tex->GetTexture());
 		this->shader->EndUpdate();
 		this->shader->Commit();
