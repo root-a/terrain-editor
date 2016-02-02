@@ -21,16 +21,15 @@ The TerrainRTPlugin injects itself into the main frameshader and renders the ter
 
 namespace Terrain
 {
+	#pragma pack(1)
 	struct VertexData
 	{
-		Math::point pos;
-		Math::float2 uv;
+		float x, y, z, w;
+		float nx, ny, nz;
+		float u, v;
 		VertexData(){}
-		VertexData(float x, float y, float z, float u, float v)
-		{
-			pos.set(x, y, z);
-			uv.set(u, v);
-		}
+		VertexData(float x1, float z1, float u1, float v1) : x(x1), y(0), z(z1), w(1), nx(0), ny(1), nz(0), u(u1), v(v1) 
+		{}
 	};
 
 	class TerrainRTPlugin : public RenderModules::RTPlugin
@@ -57,14 +56,16 @@ namespace Terrain
 		void SetGridSize(float size);
 		
 		Util::Array<int> indices;
+		//Util::Array<VertexData> vertexData;
 		Util::Array<VertexData> vertexData;
+
 		Ptr<CoreGraphics::RenderDevice> device;
 		Ptr<CoreGraphics::TransformDevice> trans;
 
 		void TerrainInit();
 		void LoadShader();
 		void GenerateTerrainBasedOnResolution(int width, int height);
-		void SetUpVBO(Util::Array<VertexData>& terrainMesh, Util::Array<int>& indices);
+		void SetUpVBO();
 		
 		void DrawTerrain();
 		void EnableShader();
@@ -83,7 +84,7 @@ namespace Terrain
 
 		// shader
 		Ptr<CoreGraphics::Shader> shader;
-		Ptr<CoreGraphics::ShaderVariable> gridSizeVar;
+		Ptr<CoreGraphics::ShaderVariable> HeightMultiplier;
 		Ptr<CoreGraphics::ShaderVariable> gridTexVar;
 	};
 
