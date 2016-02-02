@@ -6,7 +6,7 @@
 #include "terrainentity.h"
 #include "resources/resourcemanager.h"
 #include "coregraphics/shaderserver.h"
-#include "billboards/billboardnodeinstance.h"
+#include "terrainnodeinstance.h"
 #include "models/nodes/statenodeinstance.h"
 #include "models/visresolver.h"
 
@@ -18,11 +18,11 @@ using namespace Models;
 using namespace Graphics;
 using namespace Messaging;
 using namespace Math;
-using namespace Billboards;
+using namespace Terrain;
 
 namespace Graphics
 {
-	__ImplementClass(Graphics::TerrainEntity, 'BLEN', Graphics::GraphicsEntity);
+	__ImplementClass(Graphics::TerrainEntity, 'TREN', Graphics::GraphicsEntity);
 
 	Ptr<Models::Model> TerrainEntity::terrainModel = 0;
 	Ptr<Terrain::TerrainNode> TerrainEntity::terrainNode = 0;
@@ -84,7 +84,7 @@ namespace Graphics
 		this->modelInstance->SetPickingId(this->pickingId);
 
 		// get node instance and set the view space aligned flag
-		Ptr<BillboardNodeInstance> nodeInstance = this->modelInstance->GetRootNodeInstance().downcast<BillboardNodeInstance>();
+		Ptr<TerrainNodeInstance> nodeInstance = this->modelInstance->GetRootNodeInstance().downcast<TerrainNodeInstance>();
 
 		// setup material
 		const Ptr<SurfaceInstance>& surface = nodeInstance->GetSurfaceInstance();
@@ -133,32 +133,6 @@ namespace Graphics
 
 		// up to parent class
 		GraphicsEntity::OnDeactivate();
-	}
-
-	//------------------------------------------------------------------------------
-	/**
-	*/
-	void
-		TerrainEntity::OnHide()
-	{
-		if (this->modelInstance.isvalid())
-		{
-			this->modelInstance->OnHide(this->entityTime);
-		}
-		GraphicsEntity::OnHide();
-	}
-
-	//------------------------------------------------------------------------------
-	/**
-	*/
-	void
-		TerrainEntity::OnShow()
-	{
-		if (this->modelInstance.isvalid())
-		{
-			this->modelInstance->OnShow(this->entityTime);
-		}
-		GraphicsEntity::OnShow();
 	}
 
 	//------------------------------------------------------------------------------
@@ -239,14 +213,6 @@ namespace Graphics
 		}
 	}
 
-	//------------------------------------------------------------------------------
-	/**
-	Handle a message, override this method accordingly in subclasses!
-	*/
-	void
-		TerrainEntity::HandleMessage(const Ptr<Message>& msg)
-	{
-		__Dispatch(TerrainEntity, this, msg);
-	}
+
 
 } // namespace Graphics

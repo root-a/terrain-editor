@@ -16,6 +16,7 @@
 #include "graphics/billboardentity.h"
 #include "dynui/imguiaddon.h"
 
+#include "terrain/terrainentity.h"
 #include "terrainaddon/terrainaddon.h"
 
 //------------------------------------------------------------------------------
@@ -62,7 +63,7 @@ private:
     bool capturing;
 
 	Ptr<Terrain::TerrainAddon> terrain;
-
+	Ptr<Graphics::TerrainEntity> terrainentity;
 };
 
 } // namespace Test

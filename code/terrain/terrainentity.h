@@ -33,11 +33,6 @@ namespace Graphics
 		/// deactivate entity
 		void OnDeactivate();
 
-		/// hide billboard
-		void OnHide();
-		/// show billboard
-		void OnShow();
-
 		/// sets billboard to be view aligned
 		void SetViewAligned(bool b);
 		/// gets billboard flag
@@ -57,8 +52,6 @@ namespace Graphics
 		/// gets billboard color
 		const Math::float4& GetColor() const;
 
-		/// handle a message
-		virtual void HandleMessage(const Ptr<Messaging::Message>& msg);
 
 	private:
 

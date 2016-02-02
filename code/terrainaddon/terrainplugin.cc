@@ -177,7 +177,7 @@ namespace Terrain
 		Util::Array<VertexComponent> components;
 		components.Append(VertexComponent(VertexComponent::Position, 0, VertexComponent::Float4, 0));
 		components.Append(VertexComponent(VertexComponent::Normal, 0, VertexComponent::Float3, 0));
-		components.Append(VertexComponent(VertexComponent::TexCoord0, 0, VertexComponent::Float2, 0));
+		components.Append(VertexComponent(VertexComponent::TexCoord1, 0, VertexComponent::Float2, 0));
 		Ptr<MemoryVertexBufferLoader> vboLoader = MemoryVertexBufferLoader::Create();
 		int vertCount = vertexData.Size();
 		int sizeofstruct = sizeof(VertexData);

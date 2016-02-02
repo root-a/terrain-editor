@@ -16,7 +16,6 @@
 #include "coregraphics/memoryvertexbufferloader.h"
 #include "coregraphics/memoryindexbufferloader.h"
 
-
 namespace Tools
 {
 using namespace CoreGraphics;
@@ -111,6 +110,12 @@ TerrainViewerApplication::Open()
 		this->terrain = Terrain::TerrainAddon::Create();
 		this->terrain->Setup();
 
+		// setup models        
+		//this->terrainentity = Graphics::TerrainEntity::Create();
+		//transform = matrix44::translation(0, 0, 0);
+		//this->terrainentity->SetTransform(transform);// matrix44::multiply(transform, matrix44::translation(0, n_deg2rad(90), 0)));
+		//this->stage->AttachEntity(terrainentity.cast<GraphicsEntity>());
+
         return true;
     }
     return false;
@@ -129,9 +134,11 @@ TerrainViewerApplication::Close()
 
     this->stage->RemoveEntity(this->globalLight.cast<GraphicsEntity>());
 	this->stage->RemoveEntity(this->ground.cast<GraphicsEntity>());   
+	//this->stage->RemoveEntity(this->terrainentity.cast<GraphicsEntity>());
 	
     this->globalLight = 0;
     this->ground = 0;   
+	//this->terrainentity = 0;
                          
     IndexT i;
     for (i = 0; i < this->pointLights.Size(); i++)
