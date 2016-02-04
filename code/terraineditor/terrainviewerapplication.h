@@ -64,6 +64,7 @@ private:
 
 	Ptr<Terrain::TerrainAddon> terrain;
 	Ptr<Graphics::TerrainEntity> terrainentity;
+	Ptr<Graphics::ModelEntity> terrainModelEnt;
 };
 
 } // namespace Test

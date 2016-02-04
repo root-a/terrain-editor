@@ -15,6 +15,9 @@
 #include "imgui/imgui.h"
 #include "coregraphics/memoryvertexbufferloader.h"
 #include "coregraphics/memoryindexbufferloader.h"
+#include "renderutil/nodelookuputil.h"
+#include "models/nodes/shapenodeinstance.h"
+#include "models/nodes/shapenode.h"
 
 namespace Tools
 {
@@ -112,7 +115,14 @@ TerrainViewerApplication::Open()
         module->Setup();
 
 		
+		this->terrainModelEnt = ModelEntity::Create();
+		this->terrainModelEnt->SetResourceId(ResourceId("mdl:examples/dummyground.n3"));
+		transform = matrix44::translation(2047 / 2.f, 0, 2047 / 2.f);
+		this->terrainModelEnt->SetTransform(transform);
+		this->stage->AttachEntity(terrainModelEnt.cast<GraphicsEntity>());
 
+		
+		//terrainMesh->SetVertexBuffer()
 		// setup models
 		//this->terrainentity = Graphics::TerrainEntity::Create();
 		//this->terrainentity.cast<ModelEntity>()->SetResourceId(ResourceId("mdl:examples/dummyground.n3"));
@@ -198,6 +208,25 @@ TerrainViewerApplication::OnProcessInput()
 void
 TerrainViewerApplication::OnUpdateFrame()
 {	          
+	if (terrainModelEnt->IsActive())
+	{
+		Ptr<ModelEntity> modelEntity = terrainModelEnt.cast<ModelEntity>();
+		// is model entity deleted, and msg out-of-date, return handled = true to remove msg from list
+		if (modelEntity->IsActive())
+		{
+			// check resource state if set to
+			if (modelEntity->GetModelResourceState() == Resources::Resource::Loaded)
+			{
+				if (modelEntity->GetModelInstance().isvalid())
+				{
+					Ptr<Models::ShapeNodeInstance> terrainShapeNodeInstance = RenderUtil::NodeLookupUtil::LookupStateNodeInstance(terrainModelEnt, "pCube").cast<Models::ShapeNodeInstance>();
+					Ptr<Models::ShapeNode> terrainShapeNode = terrainShapeNodeInstance->GetModelNode().cast<Models::ShapeNode>();
+					Ptr<Resources::ManagedMesh> terrainManagedMesh = terrainShapeNode->GetManagedMesh();
+					Ptr<CoreGraphics::Mesh> terrainMesh = terrainManagedMesh->GetMesh();
+				}
+			}
+		}
+	}
     ViewerApplication::OnUpdateFrame();
 }
 
