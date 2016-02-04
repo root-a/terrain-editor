@@ -37,13 +37,13 @@
   
   -->
   <Material name="MyStatic" type="static" desc="Blah">
-   <Pass batch="Unlit" shader="my_simple" variation="MyStatic|Alt1"/>
+   <Pass batch="Unlit" shader="my_simple" variation="MyStatic|Alt0"/>
    <Pass batch="Picking" shader="picking" variation="Static"/>
  
-   <Param name="HeightMap" type="string" defaultValue="tex:system/black"/>
+   <Param name="HeightMap" type="string" defaultValue="tex:examples/heighMap"/>
    
    <!--<Pass batch="Unlit" shader="my_simple" variation="MyStatic|Alt1"/> -->
-   <Param name="MatDiffuse" type="float4" defaultValue="0,0,0,1" edit="color"/>
+   <Param name="MatDiffuse" type="float4" defaultValue="1,0,0,1" edit="color"/>
    <Param name="MatAnotherColor" type="float4" defaultValue="0,0,0,1" edit="color"/>
    <Param name="HeightMultiplier" type="float" defaultValue="10.0f" min="0.0f" max="100.0f" desc="Height multiplier"/>
    

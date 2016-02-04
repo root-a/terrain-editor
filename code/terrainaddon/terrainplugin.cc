@@ -80,7 +80,9 @@ namespace Terrain
 	{
 		LoadShader();
 
-		GenerateTerrainBasedOnResolution(2048, 2048);
+		textureWidth = 2047;
+		textureHeight = 2047;
+		GenerateTerrainBasedOnResolution(textureWidth, textureHeight);
 
 		SetUpVBO();
 	}
@@ -91,9 +93,12 @@ namespace Terrain
 		this->shader = ShaderServer::Instance()->GetShader("shd:my_simple");
 		this->HeightMultiplier = this->shader->GetVariableByName("HeightMultiplier");
 		this->gridTexVar = this->shader->GetVariableByName("HeightMap");
+		this->transform = this->shader->GetVariableByName("ShapeModel");
+
 
 		// load texture
 		this->tex = ResourceManager::Instance()->CreateManagedResource(Texture::RTTI, "tex:examples/heighMap.dds").downcast<ManagedTexture>();
+		 
 	}
 
 	void TerrainRTPlugin::GenerateTerrainBasedOnResolution(int width, int height)
@@ -138,15 +143,13 @@ namespace Terrain
 		//indices are 0 1 4, 5 4 0
 		//let's walk around the square
 		//must traverse triangle vertices in same direction for all triangles f.ex. all face vertices are traversed counter-clockwise
-		int index = 0;
 		for (int col = 0; col < width; col++)
 		{
 			for (int row = 0; row < height; row++)
 			{
 				//since i store the points column wise the next column starts at index = current column * height
 				int currentColumn = height * col;
-				index = (currentColumn)+row; 
-				vertexData.Append(VertexData((float)col, (float)row, (float)(col / height), (float)(row / width)));
+				vertexData.Append(VertexData((float)col, (float)row, ((float)col / (float)height), ((float)row / (float)width)));
 				//we never do the last row nor last column, we don't do that with borders since they are already a part border faces that were build in previous loop
 				if (col == width - 1 || row == height - 1) continue; //this might be more expensive than writing another for loop set just for indices
 
@@ -220,7 +223,8 @@ namespace Terrain
 		// set variables
 		this->shader->BeginUpdate();
 		this->gridTexVar->SetTexture(this->tex->GetTexture());
-		this->HeightMultiplier->SetFloat(10.f);
+		this->HeightMultiplier->SetFloat(200.0f);
+		this->transform->SetMatrix(matrix44::translation(Math::float4(-textureWidth/2.f,0,-textureHeight/2.f,0)));
 		this->shader->EndUpdate();
 		this->shader->Commit();
 	}

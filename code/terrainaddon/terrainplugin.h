@@ -74,6 +74,8 @@ namespace Terrain
 	private:
 		bool visible;
 		float gridSize;
+		int textureHeight;
+		int textureWidth;
 
 		// mesh
 		CoreGraphics::PrimitiveGroup primitive;
@@ -86,6 +88,7 @@ namespace Terrain
 		Ptr<CoreGraphics::Shader> shader;
 		Ptr<CoreGraphics::ShaderVariable> HeightMultiplier;
 		Ptr<CoreGraphics::ShaderVariable> gridTexVar;
+		Ptr<CoreGraphics::ShaderVariable> transform;
 	};
 
 	//------------------------------------------------------------------------------

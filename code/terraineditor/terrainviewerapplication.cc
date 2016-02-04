@@ -64,6 +64,11 @@ TerrainViewerApplication::Open()
     n_assert(!this->IsOpen());
     if (ViewerApplication::Open())
     {
+
+		// setup terrain
+		this->terrain = Terrain::TerrainAddon::Create();
+		this->terrain->Setup();
+
         // setup lights
 		matrix44 lightTransform = matrix44::rotationx(n_deg2rad(-45.0f));
         this->globalLight = GlobalLightEntity::Create();
@@ -77,7 +82,7 @@ TerrainViewerApplication::Open()
         this->stage->AttachEntity(this->globalLight.cast<GraphicsEntity>());
 
 		// setup the camera util object
-		this->mayaCameraUtil.Setup(point(0.0f, 0.0f, 0.0f), point(200.0f, 200.0f, 200.0f), vector(0.0f, 1.0f, 0.0f));
+		this->mayaCameraUtil.Setup(point(0.0f, 0.0f, 0.0f), point(200.0f, 1000.0f, 200.0f), vector(0.0f, 1.0f, 0.0f));
 		this->mayaCameraUtil.Update();
 		this->camera->SetTransform(this->mayaCameraUtil.GetCameraTransform());
 		
@@ -96,22 +101,21 @@ TerrainViewerApplication::Open()
 		this->ground->SetResourceId(ResourceId("mdl:examples/dummyground.n3"));
 		transform = matrix44::translation(0,-15,0);
 		this->ground->SetTransform(transform);// matrix44::multiply(transform, matrix44::translation(0, n_deg2rad(90), 0)));
-		this->stage->AttachEntity(ground.cast<GraphicsEntity>());
+		//this->stage->AttachEntity(ground.cast<GraphicsEntity>());
 
 
         // wait for animated stuff to load
-        GraphicsInterface::Instance()->WaitForPendingResources();		
+        GraphicsInterface::Instance()->WaitForPendingResources();
 
         // setup frame capture render module
         Ptr<FrameCaptureRenderModule> module = FrameCaptureRenderModule::Create();
         module->Setup();
 
-		// setup terrain
-		this->terrain = Terrain::TerrainAddon::Create();
-		this->terrain->Setup();
+		
 
-		// setup models        
+		// setup models
 		//this->terrainentity = Graphics::TerrainEntity::Create();
+		//this->terrainentity.cast<ModelEntity>()->SetResourceId(ResourceId("mdl:examples/dummyground.n3"));
 		//transform = matrix44::translation(0, 0, 0);
 		//this->terrainentity->SetTransform(transform);// matrix44::multiply(transform, matrix44::translation(0, n_deg2rad(90), 0)));
 		//this->stage->AttachEntity(terrainentity.cast<GraphicsEntity>());
@@ -133,12 +137,12 @@ TerrainViewerApplication::Close()
 	this->terrain = 0;
 
     this->stage->RemoveEntity(this->globalLight.cast<GraphicsEntity>());
-	this->stage->RemoveEntity(this->ground.cast<GraphicsEntity>());   
+	//this->stage->RemoveEntity(this->ground.cast<GraphicsEntity>());   
 	//this->stage->RemoveEntity(this->terrainentity.cast<GraphicsEntity>());
 	
     this->globalLight = 0;
     this->ground = 0;   
-	//this->terrainentity = 0;
+	this->terrainentity = 0;
                          
     IndexT i;
     for (i = 0; i < this->pointLights.Size(); i++)

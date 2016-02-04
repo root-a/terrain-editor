@@ -24,9 +24,6 @@ namespace Graphics
 {
 	__ImplementClass(Graphics::TerrainEntity, 'TREN', Graphics::GraphicsEntity);
 
-	Ptr<Models::Model> TerrainEntity::terrainModel = 0;
-	Ptr<Terrain::TerrainNode> TerrainEntity::terrainNode = 0;
-
 	//------------------------------------------------------------------------------
 	/**
 	*/
@@ -72,8 +69,8 @@ namespace Graphics
 			TerrainEntity::terrainModel = Model::Create();
 			TerrainEntity::terrainNode = Terrain::TerrainNode::Create();
 			TerrainEntity::terrainNode->SetBoundingBox(Math::bbox(Math::point(0, 0, 0), Math::vector(1, 1, 1)));
-			TerrainEntity::terrainNode->SetSurfaceName("sur:system/billboard");
-			TerrainEntity::terrainNode->SetName("root");
+			TerrainEntity::terrainNode->SetSurfaceName("sur:examples/my_simple");
+			TerrainEntity::terrainNode->SetName("terrain");
 			TerrainEntity::terrainNode->LoadResources(true);
 			TerrainEntity::terrainModel->AttachNode(TerrainEntity::terrainNode.upcast<ModelNode>());
 		}

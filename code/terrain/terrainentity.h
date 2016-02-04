@@ -74,8 +74,8 @@ namespace Graphics
 		Ptr<Materials::SurfaceConstant> colorVariable;
 		Ptr<Materials::SurfaceConstant> textureVariable;
 
-		static Ptr<Models::Model> terrainModel;
-		static Ptr<Terrain::TerrainNode> terrainNode;
+		Ptr<Models::Model> terrainModel;
+		Ptr<Terrain::TerrainNode> terrainNode;
 	};
 
 	//------------------------------------------------------------------------------

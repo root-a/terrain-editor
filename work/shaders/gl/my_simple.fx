@@ -47,19 +47,18 @@ state DepthDisabledState
 };
 
 
-
 //------------------------------------------------------------------------------
 /**
 */
 shader
 void
-vsMainPrimitives(in vec4 position, in vec3 normal, in vec2 uv, [slot=5] in vec4 color, out vec2 UV, out vec4 Color)  
+vsMainShape(in vec4 position, in vec3 normal, in vec2 uv, out vec2 UV, out float Height)  
 {
-	float height = texture(HeightMap, uv.xy).r;
+	float height = texture(HeightMap, uv).r;
 	vec4 offset = vec4(position.x, position.y + height * HeightMultiplier, position.z, 1.0f);
-	gl_Position = ViewProjection * Model * position;
-	Color = color;
+	gl_Position = ViewProjection * ShapeModel * offset;
 	UV = uv;
+	Height = height;
 }
 	
 //------------------------------------------------------------------------------
@@ -67,47 +66,10 @@ vsMainPrimitives(in vec4 position, in vec3 normal, in vec2 uv, [slot=5] in vec4 
 */
 shader
 void
-psMainPrimitives(in vec2 uv, in vec4 color, [color0] out vec4 Color) 
+psMainShape(in vec2 uv, in float Height, [color0] out vec4 Color) 
 {
-	Color = color;
+	Color = vec4(uv*Height,0,1);
 }
 
-
-
-
-//------------------------------------------------------------------------------
-/**
-*/
-shader
-void
-vsMainShape(in vec4 position, in vec3 normal, in vec2 uv, out vec2 UV)  
-{
-	float height = texture(HeightMap, uv.xy).r;
-	vec4 offset = vec4(position.x, position.y + height * HeightMultiplier, position.z, 1.0f);
-	gl_Position = ViewProjection * Model * offset;
-	UV = uv;
-}
-	
-//------------------------------------------------------------------------------
-/**
-*/
-shader
-void
-psMainShape(in vec2 uv, [color0] out vec4 Color) 
-{
-	Color = MatDiffuse;
-}
-
-
-
-
-//------------------------------------------------------------------------------
-/**
-*/
-SimpleTechnique(DefaultPrim, "Colored", vsMainPrimitives(), psMainPrimitives(), DepthDisabledState);
-SimpleTechnique(DepthPrim, "Colored|Alt0", vsMainPrimitives(), psMainPrimitives(), DepthEnabledState);
-SimpleTechnique(WireframePrim, "Colored|Alt1", vsMainPrimitives(), psMainPrimitives(), WireframeState);
-
-SimpleTechnique(DefaultShape, "MyStatic", vsMainShape(), psMainShape(), DepthDisabledState);
-SimpleTechnique(DepthShape, "MyStatic|Alt0", vsMainShape(), psMainShape(), DepthEnabledState);
-SimpleTechnique(WireframeShape, "MyStatic|Alt1", vsMainShape(), psMainShape(), WireframeState);
+SimpleTechnique(DepthShape, "MyStatic", vsMainShape(), psMainShape(), DepthEnabledState);
+SimpleTechnique(WireframeShape, "MyStatic|Alt0", vsMainShape(), psMainShape(), WireframeState);
