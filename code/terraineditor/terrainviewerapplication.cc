@@ -18,6 +18,7 @@
 #include "renderutil/nodelookuputil.h"
 #include "models/nodes/shapenodeinstance.h"
 #include "models/nodes/shapenode.h"
+#include "coregraphics/memorytextureloader.h"
 
 namespace Tools
 {
@@ -42,7 +43,8 @@ TerrainViewerApplication::TerrainViewerApplication() :
     renderDebug(false),
     rotX(-225),
     capturing(false),
-	fullscreen(false)
+	fullscreen(false),
+	resName("heightMapMemoryTex")
 {
     // empty
 }
@@ -57,6 +59,19 @@ TerrainViewerApplication::~TerrainViewerApplication()
         this->Close();
     }
 }
+//TODO:
+/*
+//model
+load placeholder model entity
+get mesh
+update vertex and index buffer when user changes the resolution
+
+//texture
+create memory texture
+update the buffer on user input
+
+
+*/
 
 //------------------------------------------------------------------------------
 /**
@@ -67,11 +82,6 @@ TerrainViewerApplication::Open()
     n_assert(!this->IsOpen());
     if (ViewerApplication::Open())
     {
-
-		// setup terrain
-		this->terrain = Terrain::TerrainAddon::Create();
-		this->terrain->Setup();
-
         // setup lights
 		matrix44 lightTransform = matrix44::rotationx(n_deg2rad(-45.0f));
         this->globalLight = GlobalLightEntity::Create();
@@ -99,14 +109,6 @@ TerrainViewerApplication::Open()
         this->testSpotLight->SetColor(float4(1,0.7f,1,0.1));
         this->stage->AttachEntity(this->testSpotLight.cast<GraphicsEntity>());
 
-        // setup models        
-		this->ground = ModelEntity::Create();
-		this->ground->SetResourceId(ResourceId("mdl:examples/dummyground.n3"));
-		transform = matrix44::translation(0,-15,0);
-		this->ground->SetTransform(transform);// matrix44::multiply(transform, matrix44::translation(0, n_deg2rad(90), 0)));
-		//this->stage->AttachEntity(ground.cast<GraphicsEntity>());
-
-
         // wait for animated stuff to load
         GraphicsInterface::Instance()->WaitForPendingResources();
 
@@ -122,14 +124,28 @@ TerrainViewerApplication::Open()
 		this->terrainModelEnt->SetLoadSynced(true);
 		this->stage->AttachEntity(terrainModelEnt.cast<GraphicsEntity>());
 
-		
-		//terrainMesh->SetVertexBuffer()
-		// setup models
-		//this->terrainentity = Graphics::TerrainEntity::Create();
-		//this->terrainentity.cast<ModelEntity>()->SetResourceId(ResourceId("mdl:examples/dummyground.n3"));
-		//transform = matrix44::translation(0, 0, 0);
-		//this->terrainentity->SetTransform(transform);// matrix44::multiply(transform, matrix44::translation(0, n_deg2rad(90), 0)));
-		//this->stage->AttachEntity(terrainentity.cast<GraphicsEntity>());
+
+		this->heightMapWidth = 2048;
+		this->heightMapHeight = 2048;
+		SizeT frameSize = this->heightMapWidth * this->heightMapHeight * 4;
+		this->rgbHeightBuffer = (unsigned char*)Memory::Alloc(Memory::DefaultHeap, frameSize);
+		Memory::Clear(this->rgbHeightBuffer, frameSize);
+
+		// create texture
+		this->memoryHeightTexture = CoreGraphics::Texture::Create();
+		Ptr<CoreGraphics::MemoryTextureLoader> loader = CoreGraphics::MemoryTextureLoader::Create();
+		loader->SetImageBuffer(this->rgbHeightBuffer, this->heightMapWidth, this->heightMapHeight, CoreGraphics::PixelFormat::SRGBA8);
+		this->memoryHeightTexture->SetLoader(loader.upcast<Resources::ResourceLoader>());
+		this->memoryHeightTexture->SetAsyncEnabled(false);
+		this->memoryHeightTexture->SetResourceId(resName);
+		this->memoryHeightTexture->Load();
+		n_assert(this->memoryHeightTexture->IsLoaded());
+		this->memoryHeightTexture->SetLoader(0);
+		Resources::ResourceManager::Instance()->RegisterUnmanagedResource(this->memoryHeightTexture.upcast<Resources::Resource>());
+
+		// setup terrain
+		this->terrainAddon = Terrain::TerrainAddon::Create();
+		this->terrainAddon->Setup();
 
         return true;
     }
@@ -142,18 +158,15 @@ TerrainViewerApplication::Open()
 void
 TerrainViewerApplication::Close()
 {
-
 	// close terrain
-	this->terrain->Discard();
-	this->terrain = 0;
+	this->terrainAddon->Discard();
+	this->terrainAddon = 0;
 
     this->stage->RemoveEntity(this->globalLight.cast<GraphicsEntity>());
-	//this->stage->RemoveEntity(this->ground.cast<GraphicsEntity>());   
-	//this->stage->RemoveEntity(this->terrainentity.cast<GraphicsEntity>());
+	this->stage->RemoveEntity(this->terrainModelEnt.cast<GraphicsEntity>());
 	
     this->globalLight = 0;
-    this->ground = 0;   
-	this->terrainentity = 0;
+	this->terrainModelEnt = 0;
                          
     IndexT i;
     for (i = 0; i < this->pointLights.Size(); i++)
@@ -199,7 +212,19 @@ TerrainViewerApplication::OnProcessInput()
     const Ptr<Keyboard>& kbd = InputServer::Instance()->GetDefaultKeyboard();
     const Ptr<GamePad>& gamePad = InputServer::Instance()->GetDefaultGamePad(0);
     
-    
+	if (kbd->KeyDown(Key::F3))
+	{
+		int textureSize = this->heightMapWidth * this->heightMapHeight * 4;
+		for (int i = 0; i < textureSize; i++)
+		{
+			this->rgbHeightBuffer[i++] = (unsigned char)255;
+			this->rgbHeightBuffer[i++] = (unsigned char)0;
+			this->rgbHeightBuffer[i++] = (unsigned char)0;
+			this->rgbHeightBuffer[i] = 255;
+		}
+		this->terrainAddon->UpdateTexture(this->rgbHeightBuffer, this->heightMapWidth * this->heightMapHeight * 4, this->heightMapWidth, this->heightMapHeight, 0, 0, 0);
+		//this->memoryHeightTexture->Update(this->rgbHeightBuffer, this->heightMapWidth * this->heightMapHeight * 3, this->heightMapWidth, this->heightMapHeight, 0, 0, 0);
+	}
     ViewerApplication::OnProcessInput();
 }
 

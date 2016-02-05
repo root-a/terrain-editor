@@ -45,12 +45,11 @@ private:
 	/// append a test model
     virtual void AppendTestModel();
 
-    Ptr<Graphics::ModelEntity> ground;
-    Util::Array<Ptr<Graphics::ModelEntity> > models;
+    Util::Array<Ptr<Graphics::ModelEntity>> models;
     Ptr<Graphics::GlobalLightEntity> globalLight;
-    Util::Array<Ptr<Graphics::PointLightEntity> > pointLights;
+    Util::Array<Ptr<Graphics::PointLightEntity>> pointLights;
     Ptr<Graphics::SpotLightEntity> testSpotLight;
-    Util::Array<Ptr<Graphics::SpotLightEntity> > spotLights;
+    Util::Array<Ptr<Graphics::SpotLightEntity>> spotLights;
     Util::Array<Math::matrix44> lightTransforms; 
     Math::float4 shadowConstants;
     float direction;
@@ -62,9 +61,13 @@ private:
     float rotX;
     bool capturing;
 
-	Ptr<Terrain::TerrainAddon> terrain;
-	Ptr<Graphics::TerrainEntity> terrainentity;
+	Ptr<Terrain::TerrainAddon> terrainAddon;
 	Ptr<Graphics::ModelEntity> terrainModelEnt;
+	Ptr<CoreGraphics::Texture> memoryHeightTexture;
+	unsigned char *rgbHeightBuffer;
+	int heightMapHeight;
+	int heightMapWidth;
+	Util::StringAtom resName;
 };
 
 } // namespace Test

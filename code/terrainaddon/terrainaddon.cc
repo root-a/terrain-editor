@@ -69,4 +69,9 @@ namespace Terrain
 		this->plugin->SetGridSize(size);
 	}
 
+	void TerrainAddon::UpdateTexture(void* data, SizeT size, SizeT width, SizeT height, IndexT left, IndexT top, IndexT mip)
+	{
+		this->plugin->UpdateTexture(data, size, width, height, left, top, mip);
+	}
+
 } // namespace Grid

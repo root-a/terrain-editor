@@ -98,7 +98,6 @@ namespace Terrain
 
 		// load texture
 		this->tex = ResourceManager::Instance()->CreateManagedResource(Texture::RTTI, "tex:examples/heighMap.dds").downcast<ManagedTexture>();
-		 
 	}
 
 	void TerrainRTPlugin::GenerateTerrainBasedOnResolution(int width, int height)
@@ -242,6 +241,11 @@ namespace Terrain
 		EnableShader();
 		EnableTerrain();
 		device->Draw();
+	}
+
+	void TerrainRTPlugin::UpdateTexture(void* data, SizeT size, SizeT width, SizeT height, IndexT left, IndexT top, IndexT mip)
+	{
+		tex->GetTexture()->Update(data, size, width, height, left, top, mip);
 	}
 
 } // namespace Grid

@@ -70,6 +70,7 @@ namespace Terrain
 		void DrawTerrain();
 		void EnableShader();
 		void EnableTerrain();
+		void UpdateTexture(void* data, SizeT size, SizeT width, SizeT height, IndexT left, IndexT top, IndexT mip);
 
 	private:
 		bool visible;

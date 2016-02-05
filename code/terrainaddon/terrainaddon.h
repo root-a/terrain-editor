@@ -33,6 +33,8 @@ namespace Terrain
 		/// set grid size
 		void SetGridSize(float size);
 
+		void UpdateTexture(void* data, SizeT size, SizeT width, SizeT height, IndexT left, IndexT top, IndexT mip);
+
 	private:
 		Ptr<TerrainRTPlugin> plugin;
 	};
