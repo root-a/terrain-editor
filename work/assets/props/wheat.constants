@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<Nebula3 version="4">
-    <Model name="props/wheat" bboxcenter="0.058414,4.987274,-0.146853,1.000000" bboxextents="4.515527,5.020921,4.560460,0.000000">
-        <ShapeNodes>
-            <ShapeNode name="wheat" type="static" path="root/wheat" useLOD="false" primitive="0" position="0.000000,0.000000,0.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:props/wheat.nvx2" bboxcenter="0.058414,4.987274,-0.146853,1.000000" bboxextents="4.515527,5.020921,4.560460,0.000000" />
-        </ShapeNodes>
-    </Model>
-</Nebula3>

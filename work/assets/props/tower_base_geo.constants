@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<Nebula3 version="4">
-    <Model name="props/tower_base_geo" bboxcenter="-77.047752,75.932220,170.001862,1.000000" bboxextents="17.345421,27.351448,17.323174,0.000000">
-        <ShapeNodes>
-            <ShapeNode name="tower_geo" type="static" path="root/tower_geo" useLOD="false" primitive="0" position="77.000000,-48.598965,-170.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:props/tower_base_geo.nvx2" bboxcenter="-77.000000,75.624008,170.000000,1.000000" bboxextents="16.576324,27.043232,16.576324,0.000000" />
-            <ShapeNode name="wood_geo" type="static" path="root/wood_geo" useLOD="false" primitive="1" position="77.000000,-48.598965,-170.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:props/tower_base_geo.nvx2" bboxcenter="-77.047752,78.708733,170.001862,1.000000" bboxextents="17.345421,24.574936,17.323174,0.000000" />
-        </ShapeNodes>
-    </Model>
-</Nebula3>

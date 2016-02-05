@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<Nebula3 version="4">
-    <Model name="examples/dummyground" bboxcenter="0.000000,0.000000,0.000000,1.000000" bboxextents="26.180265,0.474626,26.259954,0.000000">
-        <ShapeNodes>
-            <ShapeNode name="pCube" type="static" path="root/pCube" useLOD="false" primitive="0" position="0.173963,-0.474626,0.072041,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:examples/dummyground.nvx2" bboxcenter="0.000000,0.000000,0.000000,1.000000" bboxextents="26.180265,0.474626,26.259954,0.000000" />
-        </ShapeNodes>
-    </Model>
-</Nebula3>

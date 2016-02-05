@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<Nebula3 version="4">
-    <Model name="props/doorway_geo" bboxcenter="-0.018542,2.751426,0.005086,1.000000" bboxextents="0.497349,3.893096,3.005373,0.000000">
-        <ShapeNodes>
-            <ShapeNode name="doorway_geo" type="static" path="root/doorway_geo" useLOD="false" primitive="0" position="-0.044927,0.000000,0.027245,1.000000" rotation="0.000000,1.000000,0.000000,0.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:props/doorway_geo.nvx2" bboxcenter="-0.018542,2.751426,0.005086,1.000000" bboxextents="0.497349,3.893096,3.005373,0.000000" />
-        </ShapeNodes>
-    </Model>
-</Nebula3>

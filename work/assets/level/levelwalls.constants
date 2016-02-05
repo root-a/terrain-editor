@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<Nebula3 version="4">
-    <Model name="level/levelwalls" bboxcenter="-39.411072,83.687592,-998.955444,1.000000" bboxextents="374.419098,110.987762,900.561035,0.000000">
-        <ShapeNodes>
-            <ShapeNode name="Box005" type="static" path="root/Box005" useLOD="false" primitive="0" position="0.000000,0.000000,0.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:level/levelwalls.nvx2" bboxcenter="-39.411072,83.687592,-998.955444,1.000000" bboxextents="374.419098,110.987762,900.561035,0.000000" />
-        </ShapeNodes>
-    </Model>
-</Nebula3>

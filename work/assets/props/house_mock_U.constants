@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<Nebula3 version="4">
-    <Model name="props/house_mock_U" bboxcenter="-0.622245,0.744100,0.288216,1.000000" bboxextents="1.425292,0.789211,1.005440,0.000000">
-        <ShapeNodes>
-            <ShapeNode name="polySurface22" type="static" path="root/polySurface22" useLOD="false" primitive="0" position="0.000000,0.000000,0.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:props/house_mock_U.nvx2" bboxcenter="-0.622245,0.744100,0.288216,1.000000" bboxextents="1.425292,0.789211,1.005440,0.000000" />
-        </ShapeNodes>
-    </Model>
-</Nebula3>

@@ -119,6 +119,7 @@ TerrainViewerApplication::Open()
 		this->terrainModelEnt->SetResourceId(ResourceId("mdl:examples/dummyground.n3"));
 		transform = matrix44::translation(2047 / 2.f, 0, 2047 / 2.f);
 		this->terrainModelEnt->SetTransform(transform);
+		this->terrainModelEnt->SetLoadSynced(true);
 		this->stage->AttachEntity(terrainModelEnt.cast<GraphicsEntity>());
 
 		
@@ -207,7 +208,8 @@ TerrainViewerApplication::OnProcessInput()
 */
 void
 TerrainViewerApplication::OnUpdateFrame()
-{	          
+{	  
+	/*
 	if (terrainModelEnt->IsActive())
 	{
 		Ptr<ModelEntity> modelEntity = terrainModelEnt.cast<ModelEntity>();
@@ -227,6 +229,7 @@ TerrainViewerApplication::OnUpdateFrame()
 			}
 		}
 	}
+	*/
     ViewerApplication::OnUpdateFrame();
 }
 

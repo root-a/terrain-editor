@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<Nebula3 version="4">
-    <Model name="props/prop_tree_oak" bboxcenter="-3853.851563,45509.039063,3069.511719,1.000000" bboxextents="60256.285156,45530.476563,64402.414063,0.000000">
-        <ShapeNodes>
-            <ShapeNode name="tree_canopy_mesh" type="static" path="root/tree_canopy_mesh" useLOD="false" primitive="1" position="0.000000,0.000000,0.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="0.010000,0.010000,0.010000,0.000000" mesh="msh:props/prop_tree_oak.nvx2" bboxcenter="-3853.851563,49249.199219,3069.511719,1.000000" bboxextents="60256.285156,41790.316406,64402.414063,0.000000" />
-            <ShapeNode name="tree_wood_mesh" type="static" path="root/tree_wood_mesh" useLOD="false" primitive="0" position="0.000000,0.000000,0.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="0.010000,0.010000,0.010000,0.000000" mesh="msh:props/prop_tree_oak.nvx2" bboxcenter="-4231.722656,41868.171875,3419.839844,1.000000" bboxextents="51659.953125,41889.609375,56630.000000,0.000000" />
-        </ShapeNodes>
-    </Model>
-</Nebula3>

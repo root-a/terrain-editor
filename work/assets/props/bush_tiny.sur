@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<NebulaT>
-    <Surface template="Foliage">
-        <Param name="DiffuseMap" value="tex:props/bushTiny.dds" />
-        <Param name="NormalMap" value="tex:system/nobump.dds" />
-        <Param name="WindDirection" value="0.000000,0.100000,0.000000,0.000000" />
-        <Param name="AlphaSensitivity" value="0.500000" />
-    </Surface>
-</NebulaT>

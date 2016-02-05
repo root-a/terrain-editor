@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<NebulaT>
-    <Surface template="Static">
-        <Param name="DiffuseMap" value="tex:props/cliff_01_diff.dds" />
-        <Param name="NormalMap" value="tex:props/cliff_01_normal.dds" />
-    </Surface>
-</NebulaT>

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<Nebula3 version="4">
-    <Model name="props/field_wheat" bboxcenter="2.447969,-0.502021,0.038738,1.000000" bboxextents="17.491016,0.559884,16.225643,0.000000">
-        <ShapeNodes>
-            <ShapeNode name="pCube18" type="static" path="root/pCube18" useLOD="false" primitive="0" position="0.000000,0.000000,0.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:props/field_wheat.nvx2" bboxcenter="2.447969,-0.502021,0.038738,1.000000" bboxextents="17.491016,0.559884,16.225643,0.000000" />
-        </ShapeNodes>
-    </Model>
-</Nebula3>

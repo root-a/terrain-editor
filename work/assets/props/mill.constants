@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<Nebula3 version="4">
-    <Model name="props/mill" bboxcenter="-1.707642,15.897972,0.234039,1.000000" bboxextents="10.802673,19.443825,13.616669,0.000000">
-        <ShapeNodes>
-            <ShapeNode name="polySurface296" type="static" path="root/polySurface296" useLOD="false" primitive="0" position="0.000000,0.000000,0.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:props/mill.nvx2" bboxcenter="-1.707642,15.897972,0.234039,1.000000" bboxextents="10.802673,19.443825,13.616669,0.000000" />
-        </ShapeNodes>
-    </Model>
-</Nebula3>

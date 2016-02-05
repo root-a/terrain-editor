@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<Nebula3 version="4">
-    <Model name="props/stone_02" bboxcenter="-0.002737,-0.002436,0.001559,1.000000" bboxextents="0.484096,0.401729,0.535941,0.000000">
-        <ShapeNodes>
-            <ShapeNode name="stone_02_LP1:stone_02_LP" type="static" path="root/stone_02_LP1:stone_02_LP" useLOD="false" primitive="0" position="0.000000,0.000000,0.000000,1.000000" rotation="0.000000,0.000000,0.000000,1.000000" scale="1.000000,1.000000,1.000000,0.000000" mesh="msh:props/stone_02.nvx2" bboxcenter="-0.002737,-0.002436,0.001559,1.000000" bboxextents="0.484096,0.401729,0.535941,0.000000" />
-        </ShapeNodes>
-    </Model>
-</Nebula3>
