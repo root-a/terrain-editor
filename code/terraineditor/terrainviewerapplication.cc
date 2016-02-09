@@ -13,12 +13,6 @@
 #include "framecapture/framecapturerendermodule.h"
 #include "framecaptureprotocol.h"
 #include "imgui/imgui.h"
-#include "coregraphics/memoryvertexbufferloader.h"
-#include "coregraphics/memoryindexbufferloader.h"
-#include "renderutil/nodelookuputil.h"
-#include "models/nodes/shapenodeinstance.h"
-#include "models/nodes/shapenode.h"
-#include "coregraphics/memorytextureloader.h"
 
 namespace Tools
 {
@@ -43,8 +37,7 @@ TerrainViewerApplication::TerrainViewerApplication() :
     renderDebug(false),
     rotX(-225),
     capturing(false),
-	fullscreen(false),
-	resName("heightMapMemoryTex")
+	fullscreen(false)
 {
     // empty
 }
@@ -59,6 +52,7 @@ TerrainViewerApplication::~TerrainViewerApplication()
         this->Close();
     }
 }
+
 //TODO:
 /*
 //model
@@ -69,6 +63,11 @@ update vertex and index buffer when user changes the resolution
 //texture
 create memory texture
 update the buffer on user input
+
+class with 
+terrain mesh, create update
+terrain height map, create update
+
 
 
 */
@@ -95,7 +94,7 @@ TerrainViewerApplication::Open()
         this->stage->AttachEntity(this->globalLight.cast<GraphicsEntity>());
 
 		// setup the camera util object
-		this->mayaCameraUtil.Setup(point(0.0f, 0.0f, 0.0f), point(200.0f, 1000.0f, 200.0f), vector(0.0f, 1.0f, 0.0f));
+		this->mayaCameraUtil.Setup(point(0.0f, 0.0f, 0.0f), point(200.0f, 100.f, 200.0f), vector(0.0f, 1.0f, 0.0f));
 		this->mayaCameraUtil.Update();
 		this->camera->SetTransform(this->mayaCameraUtil.GetCameraTransform());
 		
@@ -109,6 +108,25 @@ TerrainViewerApplication::Open()
         this->testSpotLight->SetColor(float4(1,0.7f,1,0.1));
         this->stage->AttachEntity(this->testSpotLight.cast<GraphicsEntity>());
 
+
+		this->ground = ModelEntity::Create();
+		this->ground->SetResourceId(ResourceId("mdl:examples/placeholder.n3"));
+		transform = matrix44::translation(0, 0, 0);
+		this->ground->SetTransform(transform);
+		this->stage->AttachEntity(ground.cast<GraphicsEntity>());
+
+		ground2 = ModelEntity::Create();
+		this->ground2->SetResourceId(ResourceId("mdl:examples/placeholder.n3"));
+		transform = matrix44::translation(39, 0, 39);
+		this->ground2->SetTransform(transform);
+		this->stage->AttachEntity(ground2.cast<GraphicsEntity>());
+
+		ground3 = ModelEntity::Create();
+		this->ground3->SetResourceId(ResourceId("mdl:examples/placeholder.n3"));
+		transform = matrix44::translation(19, 0, 19);
+		this->ground3->SetTransform(transform);
+		this->stage->AttachEntity(ground3.cast<GraphicsEntity>());
+
         // wait for animated stuff to load
         GraphicsInterface::Instance()->WaitForPendingResources();
 
@@ -116,36 +134,9 @@ TerrainViewerApplication::Open()
         Ptr<FrameCaptureRenderModule> module = FrameCaptureRenderModule::Create();
         module->Setup();
 
-		
-		this->terrainModelEnt = ModelEntity::Create();
-		this->terrainModelEnt->SetResourceId(ResourceId("mdl:examples/dummyground.n3"));
-		transform = matrix44::translation(2047 / 2.f, 0, 2047 / 2.f);
-		this->terrainModelEnt->SetTransform(transform);
-		this->terrainModelEnt->SetLoadSynced(true);
-		this->stage->AttachEntity(terrainModelEnt.cast<GraphicsEntity>());
-
-
-		this->heightMapWidth = 2048;
-		this->heightMapHeight = 2048;
-		SizeT frameSize = this->heightMapWidth * this->heightMapHeight * 4;
-		this->rgbHeightBuffer = (unsigned char*)Memory::Alloc(Memory::DefaultHeap, frameSize);
-		Memory::Clear(this->rgbHeightBuffer, frameSize);
-
-		// create texture
-		this->memoryHeightTexture = CoreGraphics::Texture::Create();
-		Ptr<CoreGraphics::MemoryTextureLoader> loader = CoreGraphics::MemoryTextureLoader::Create();
-		loader->SetImageBuffer(this->rgbHeightBuffer, this->heightMapWidth, this->heightMapHeight, CoreGraphics::PixelFormat::SRGBA8);
-		this->memoryHeightTexture->SetLoader(loader.upcast<Resources::ResourceLoader>());
-		this->memoryHeightTexture->SetAsyncEnabled(false);
-		this->memoryHeightTexture->SetResourceId(resName);
-		this->memoryHeightTexture->Load();
-		n_assert(this->memoryHeightTexture->IsLoaded());
-		this->memoryHeightTexture->SetLoader(0);
-		Resources::ResourceManager::Instance()->RegisterUnmanagedResource(this->memoryHeightTexture.upcast<Resources::Resource>());
-
 		// setup terrain
 		this->terrainAddon = Terrain::TerrainAddon::Create();
-		this->terrainAddon->Setup();
+		this->terrainAddon->Setup(stage);
 
         return true;
     }
@@ -163,10 +154,9 @@ TerrainViewerApplication::Close()
 	this->terrainAddon = 0;
 
     this->stage->RemoveEntity(this->globalLight.cast<GraphicsEntity>());
-	this->stage->RemoveEntity(this->terrainModelEnt.cast<GraphicsEntity>());
 	
     this->globalLight = 0;
-	this->terrainModelEnt = 0;
+	
                          
     IndexT i;
     for (i = 0; i < this->pointLights.Size(); i++)
@@ -211,9 +201,24 @@ TerrainViewerApplication::OnProcessInput()
 {
     const Ptr<Keyboard>& kbd = InputServer::Instance()->GetDefaultKeyboard();
     const Ptr<GamePad>& gamePad = InputServer::Instance()->GetDefaultGamePad(0);
-    
+	if (kbd->KeyDown(Key::F2))
+	{
+		
+	}
+
+	if (kbd->KeyDown(Key::F4) || gamePad.isvalid() && gamePad->ButtonDown(GamePad::XButton))
+	{
+		// turn on debug rendering        
+		Ptr<Debug::RenderDebugView> renderDebugMsg = Debug::RenderDebugView::Create();
+		renderDebugMsg->SetThreadId(Threading::Thread::GetMyThreadId());
+		renderDebugMsg->SetEnableDebugRendering(!this->renderDebug);
+		Graphics::GraphicsInterface::Instance()->Send(renderDebugMsg.cast<Messaging::Message>());
+		this->renderDebug = !this->renderDebug;
+	}
+
 	if (kbd->KeyDown(Key::F3))
 	{
+		/*
 		int textureSize = this->heightMapWidth * this->heightMapHeight * 4;
 		for (int i = 0; i < textureSize; i++)
 		{
@@ -223,6 +228,7 @@ TerrainViewerApplication::OnProcessInput()
 			this->rgbHeightBuffer[i] = 255;
 		}
 		this->terrainAddon->UpdateTexture(this->rgbHeightBuffer, this->heightMapWidth * this->heightMapHeight * 4, this->heightMapWidth, this->heightMapHeight, 0, 0, 0);
+		*/
 		//this->memoryHeightTexture->Update(this->rgbHeightBuffer, this->heightMapWidth * this->heightMapHeight * 3, this->heightMapWidth, this->heightMapHeight, 0, 0, 0);
 	}
     ViewerApplication::OnProcessInput();
@@ -233,28 +239,7 @@ TerrainViewerApplication::OnProcessInput()
 */
 void
 TerrainViewerApplication::OnUpdateFrame()
-{	  
-	/*
-	if (terrainModelEnt->IsActive())
-	{
-		Ptr<ModelEntity> modelEntity = terrainModelEnt.cast<ModelEntity>();
-		// is model entity deleted, and msg out-of-date, return handled = true to remove msg from list
-		if (modelEntity->IsActive())
-		{
-			// check resource state if set to
-			if (modelEntity->GetModelResourceState() == Resources::Resource::Loaded)
-			{
-				if (modelEntity->GetModelInstance().isvalid())
-				{
-					Ptr<Models::ShapeNodeInstance> terrainShapeNodeInstance = RenderUtil::NodeLookupUtil::LookupStateNodeInstance(terrainModelEnt, "pCube").cast<Models::ShapeNodeInstance>();
-					Ptr<Models::ShapeNode> terrainShapeNode = terrainShapeNodeInstance->GetModelNode().cast<Models::ShapeNode>();
-					Ptr<Resources::ManagedMesh> terrainManagedMesh = terrainShapeNode->GetManagedMesh();
-					Ptr<CoreGraphics::Mesh> terrainMesh = terrainManagedMesh->GetMesh();
-				}
-			}
-		}
-	}
-	*/
+{
     ViewerApplication::OnUpdateFrame();
 }
 

@@ -16,12 +16,12 @@
 #include "graphics/billboardentity.h"
 #include "dynui/imguiaddon.h"
 
-#include "terrain/terrainentity.h"
 #include "terrainaddon/terrainaddon.h"
 
 //------------------------------------------------------------------------------
 namespace Tools
 {
+
 class TerrainViewerApplication : public App::ViewerApplication
 {
 public:
@@ -62,12 +62,9 @@ private:
     bool capturing;
 
 	Ptr<Terrain::TerrainAddon> terrainAddon;
-	Ptr<Graphics::ModelEntity> terrainModelEnt;
-	Ptr<CoreGraphics::Texture> memoryHeightTexture;
-	unsigned char *rgbHeightBuffer;
-	int heightMapHeight;
-	int heightMapWidth;
-	Util::StringAtom resName;
+	Ptr<Graphics::ModelEntity> ground;
+	Ptr<Graphics::ModelEntity> ground2;
+	Ptr<Graphics::ModelEntity> ground3;
 };
 
 } // namespace Test

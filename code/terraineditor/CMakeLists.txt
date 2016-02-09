@@ -19,8 +19,8 @@ ADD_EXECUTABLE(terraineditor ${ALLSRCS})
 SET_TARGET_PROPERTIES(terraineditor PROPERTIES FOLDER "DTerrainTools")
 
 # link to render, will pull in dependencies and includes
-TARGET_LINK_LIBRARIES(terraineditor render imgui dynui framecapture terrainaddon terrain)
-ADD_DEPENDENCIES(terraineditor render imgui dynui framecapture terrainaddon terrain)
+TARGET_LINK_LIBRARIES(terraineditor render imgui dynui framecapture terrainaddon)
+ADD_DEPENDENCIES(terraineditor render imgui dynui framecapture terrainaddon)
 
 # default nebula compiler settings
 N_SET_COMPILER_DEFAULTS()
