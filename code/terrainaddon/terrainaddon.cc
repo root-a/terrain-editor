@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-//  gridaddon.cc
+//  terrainaddon.cc
 //  (C) 2012-2015 Individual contributors, see AUTHORS file
 //------------------------------------------------------------------------------
 #include "stdneb.h"
@@ -303,4 +303,4 @@ namespace Terrain
 		Graphics::GraphicsInterface::Instance()->Send(msg.upcast<Messaging::Message>());
 	}
 
-} // namespace Grid
+} // namespace Terrain
