@@ -53,25 +53,6 @@ TerrainViewerApplication::~TerrainViewerApplication()
     }
 }
 
-//TODO:
-/*
-//model
-load placeholder model entity
-get mesh
-update vertex and index buffer when user changes the resolution
-
-//texture
-create memory texture
-update the buffer on user input
-
-class with 
-terrain mesh, create update
-terrain height map, create update
-
-
-
-*/
-
 //------------------------------------------------------------------------------
 /**
 */
@@ -154,9 +135,13 @@ TerrainViewerApplication::Close()
 	this->terrainAddon = 0;
 
     this->stage->RemoveEntity(this->globalLight.cast<GraphicsEntity>());
-	
+	this->stage->RemoveEntity(this->ground.cast<GraphicsEntity>());
+	this->stage->RemoveEntity(this->ground2.cast<GraphicsEntity>());
+	this->stage->RemoveEntity(this->ground3.cast<GraphicsEntity>());
     this->globalLight = 0;
-	
+	this->ground = 0;
+	this->ground2 = 0;
+	this->ground3 = 0;
                          
     IndexT i;
     for (i = 0; i < this->pointLights.Size(); i++)
@@ -200,13 +185,12 @@ void
 TerrainViewerApplication::OnProcessInput()
 {
     const Ptr<Keyboard>& kbd = InputServer::Instance()->GetDefaultKeyboard();
-    const Ptr<GamePad>& gamePad = InputServer::Instance()->GetDefaultGamePad(0);
 	if (kbd->KeyDown(Key::F2))
 	{
 		
 	}
 
-	if (kbd->KeyDown(Key::F4) || gamePad.isvalid() && gamePad->ButtonDown(GamePad::XButton))
+	if (kbd->KeyDown(Key::F4))
 	{
 		// turn on debug rendering        
 		Ptr<Debug::RenderDebugView> renderDebugMsg = Debug::RenderDebugView::Create();

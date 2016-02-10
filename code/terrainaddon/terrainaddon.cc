@@ -11,6 +11,10 @@
 #include "coregraphics/memorytextureloader.h"
 #include "resources/resourcemanager.h"
 #include "renderutil/nodelookuputil.h"
+#include "visibility/visibilityprotocol.h"
+#include "messaging/message.h"
+#include "graphics/graphicsinterface.h"
+
 
 using namespace CoreGraphics;
 using namespace Resources;
@@ -44,9 +48,9 @@ namespace Terrain
 	void
 		TerrainAddon::Setup(Ptr<Graphics::Stage> stage)
 	{
-		width = 512;
-		height = 512;
-		heightMultiplier = 200;
+		width = 2048;
+		height = 2048;
+		heightMultiplier = 100;
 		this->stage = stage;
 
 		InitializeTexture();
@@ -56,6 +60,8 @@ namespace Terrain
 		LoadShader();
 
 		UpdateTerrainMesh();
+
+		UpdateWorldSize();
 	}
 
 	//------------------------------------------------------------------------------
@@ -85,7 +91,7 @@ namespace Terrain
 
 		for (int i = 0; i < frameSize; i++)
 		{
-			this->rHeightBuffer[i] = 0.f;
+			this->rHeightBuffer[i] = 1.f;
 		}
 
 		//create texture
@@ -105,9 +111,6 @@ namespace Terrain
 	{
 		this->terrainModelEnt = ModelEntity::Create();
 		this->terrainModelEnt->SetResourceId(ResourceId("mdl:system/terrainPlane.n3"));
-		//matrix44 transform = matrix44::translation(0, 0, 0);
-		//matrix44 transform = matrix44::identity();
-		//this->terrainModelEnt->SetTransform(transform);
 		this->terrainModelEnt->SetLoadSynced(true);
 		stage->AttachEntity(terrainModelEnt.cast<GraphicsEntity>());
 
@@ -139,7 +142,7 @@ namespace Terrain
 		vertexData.Reserve(vertexCount);
 		indices.Reserve(indicesCount);
 
-		// Generate indices for specified resolution
+		//Generate indices for specified resolution
 		//we store columns in the array
 		//current column is 0
 		//current row is 0
@@ -197,16 +200,13 @@ namespace Terrain
 				indices.Append(currentColumn + row);
 			}
 		}
-
-
 	}
 
 	void TerrainAddon::SetUpVBO()
 	{
 		// setup VBO
 		Util::Array<VertexComponent> components;
-		components.Append(VertexComponent(VertexComponent::Position, 0, VertexComponent::Float4, 0));
-		components.Append(VertexComponent(VertexComponent::Normal, 0, VertexComponent::Float3, 0));
+		components.Append(VertexComponent(VertexComponent::Position, 0, VertexComponent::Float2, 0));
 		components.Append(VertexComponent(VertexComponent::TexCoord1, 0, VertexComponent::Float2, 0));
 		Ptr<MemoryVertexBufferLoader> vboLoader = MemoryVertexBufferLoader::Create();
 		int vertCount = vertexData.Size();
@@ -263,9 +263,11 @@ namespace Terrain
 
 	void TerrainAddon::UpdateTerrainMesh()
 	{
-		Math::bbox boundingBox = Math::bbox(Math::point((float)width / 2.f, 0.f, (float)height / 2.f), Math::vector((float)width, (float)height*width*height*width, (float)height));
+		Math::bbox boundingBox = Math::bbox(Math::point((float)width / 2.f, (float)height, (float)height / 2.f), Math::vector((float)width / 2.f, (float)height, (float)height / 2.f));
 		terrainShapeNode->SetBoundingBox(boundingBox);
 		terrainModelEnt->GetModelInstance()->GetModel()->SetBoundingBox(boundingBox);
+		matrix44 transform = matrix44::translation(-(width / 2.0f), 0, -(height / 2.0f));
+		this->terrainModelEnt->SetTransform(transform);
 		GenerateTerrainBasedOnResolution();
 		SetUpVBO();
 		terrainMesh->GetVertexBuffer()->Unload();
@@ -285,8 +287,20 @@ namespace Terrain
 		this->width = width;
 		this->height = height;
 		UpdateTerrainMesh();
-		delete rHeightBuffer;
+		Memory::Free(Memory::DefaultHeap, this->rHeightBuffer);
+		this->rHeightBuffer = 0;
 		InitializeTexture();
+		UpdateWorldSize();
+	}
+
+	void TerrainAddon::UpdateWorldSize()
+	{
+		Math::bbox box = Math::bbox(Math::point(0, (float)height, 0), Math::vector((float)width / 2.f, (float)height, (float)height / 2.f));
+
+		Ptr<Visibility::ChangeVisibilityBounds> msg = Visibility::ChangeVisibilityBounds::Create();
+		msg->SetWorldBoundingBox(box);
+		msg->SetStageName("DefaultStage");
+		Graphics::GraphicsInterface::Instance()->Send(msg.upcast<Messaging::Message>());
 	}
 
 } // namespace Grid

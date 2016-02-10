@@ -19,11 +19,10 @@ namespace Terrain
 	#pragma pack(1)
 	struct VertexData
 	{
-		float x, y, z, w;
-		float nx, ny, nz;
+		float x, z;
 		float u, v;
 		VertexData(){}
-		VertexData(float x1, float z1, float u1, float v1) : x(x1), y(0), z(z1), w(1), nx(0), ny(1), nz(0), u(u1), v(v1)
+		VertexData(float x1, float z1, float u1, float v1) : x(x1), z(z1), u(u1), v(v1)
 		{}
 	};
 
@@ -58,6 +57,7 @@ namespace Terrain
 		void SetHeightMultiplier(int multiplier);
 
 		void UpdateTerrainWithNewSize(int width, int height);
+		void UpdateWorldSize();
 	private:
 		Ptr<Graphics::Stage> stage;
 
