@@ -10,9 +10,11 @@
 #include "math/quaternion.h"
 #include "input/keyboard.h"
 #include "input/gamepad.h"
+#include "input/mouse.h"
 #include "framecapture/framecapturerendermodule.h"
 #include "framecaptureprotocol.h"
 #include "imgui/imgui.h"
+#include "picking/pickingserver.h"
 
 namespace Tools
 {
@@ -75,7 +77,7 @@ TerrainViewerApplication::Open()
         this->stage->AttachEntity(this->globalLight.cast<GraphicsEntity>());
 
 		// setup the camera util object
-		this->mayaCameraUtil.Setup(point(0.0f, 0.0f, 0.0f), point(200.0f, 100.f, 200.0f), vector(0.0f, 1.0f, 0.0f));
+		this->mayaCameraUtil.Setup(point(0.0f, 0.0f, 0.0f), point(200.0f, 10.f, 200.0f), vector(0.0f, 1.0f, 0.0f));
 		this->mayaCameraUtil.Update();
 		this->camera->SetTransform(this->mayaCameraUtil.GetCameraTransform());
 		
@@ -118,6 +120,8 @@ TerrainViewerApplication::Open()
 		// setup terrain
 		this->terrainAddon = Terrain::TerrainAddon::Create();
 		this->terrainAddon->Setup(stage);
+
+		Picking::PickingServer::Instance()->SetEnabled(true);
 
         return true;
     }
@@ -163,7 +167,6 @@ TerrainViewerApplication::Close()
         this->stage->RemoveEntity(this->models[i].cast<GraphicsEntity>());    	
     }
     this->models.Clear();
-
     FrameCaptureRenderModule::Instance()->Discard();
     ViewerApplication::Close();
 }
@@ -185,35 +188,21 @@ void
 TerrainViewerApplication::OnProcessInput()
 {
     const Ptr<Keyboard>& kbd = InputServer::Instance()->GetDefaultKeyboard();
-	if (kbd->KeyDown(Key::F2))
-	{
-		
-	}
+	const Ptr<Mouse>& mouse = InputServer::Instance()->GetDefaultMouse();
 
 	if (kbd->KeyDown(Key::F4))
 	{
-		// turn on debug rendering        
+		// turn on debug rendering
 		Ptr<Debug::RenderDebugView> renderDebugMsg = Debug::RenderDebugView::Create();
 		renderDebugMsg->SetThreadId(Threading::Thread::GetMyThreadId());
 		renderDebugMsg->SetEnableDebugRendering(!this->renderDebug);
 		Graphics::GraphicsInterface::Instance()->Send(renderDebugMsg.cast<Messaging::Message>());
 		this->renderDebug = !this->renderDebug;
 	}
-
-	if (kbd->KeyDown(Key::F3))
+	if (mouse->ButtonUp(MouseButton::LeftButton))
 	{
-		/*
-		int textureSize = this->heightMapWidth * this->heightMapHeight * 4;
-		for (int i = 0; i < textureSize; i++)
-		{
-			this->rgbHeightBuffer[i++] = (unsigned char)255;
-			this->rgbHeightBuffer[i++] = (unsigned char)0;
-			this->rgbHeightBuffer[i++] = (unsigned char)0;
-			this->rgbHeightBuffer[i] = 255;
-		}
-		this->terrainAddon->UpdateTexture(this->rgbHeightBuffer, this->heightMapWidth * this->heightMapHeight * 4, this->heightMapWidth, this->heightMapHeight, 0, 0, 0);
-		*/
-		//this->memoryHeightTexture->Update(this->rgbHeightBuffer, this->heightMapWidth * this->heightMapHeight * 3, this->heightMapWidth, this->heightMapHeight, 0, 0, 0);
+		float depth = Picking::PickingServer::Instance()->FetchDepth(mouse->GetScreenPosition());
+		n_printf("\ndepth distance %f\n", depth);
 	}
     ViewerApplication::OnProcessInput();
 }

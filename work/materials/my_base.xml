@@ -37,7 +37,7 @@
   
   -->
   <Material name="MyStatic" type="static" desc="Blah">
-   <Pass batch="Unlit" shader="my_simple" variation="MyStatic|Alt0"/>
+   <Pass batch="Unlit" shader="my_simple" variation="MyStatic"/>
    <Pass batch="Picking" shader="picking" variation="Static"/>
  
    <Param name="HeightMap" type="string" defaultValue="tex:examples/heighMap"/>
