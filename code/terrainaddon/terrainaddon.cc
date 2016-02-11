@@ -48,8 +48,8 @@ namespace Terrain
 	void
 		TerrainAddon::Setup(Ptr<Graphics::Stage> stage)
 	{
-		width = 2048;
-		height = 2048;
+		width = 48;
+		height = 48;
 		heightMultiplier = 100;
 		this->stage = stage;
 

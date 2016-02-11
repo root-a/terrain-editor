@@ -201,8 +201,26 @@ TerrainViewerApplication::OnProcessInput()
 	}
 	if (mouse->ButtonUp(MouseButton::LeftButton))
 	{
-		float depth = Picking::PickingServer::Instance()->FetchDepth(mouse->GetScreenPosition());
+		float depth = Picking::PickingServer::Instance()->FetchDepth(mouse->GetPixelPosition());
 		n_printf("\ndepth distance %f\n", depth);
+		Math::float2 screenPos = mouse->GetScreenPosition();
+
+		float2 focalLength = camera->GetCameraSettings().GetFocalLength();
+		float2 mousePos((screenPos.x()*2.f - 1.f), -(screenPos.y()*2.f - 1.f));
+		n_printf("\nmousePos %f %f\n", mousePos.x(), mousePos.y());
+		float2 viewSpace = float2::multiply(mousePos, focalLength);
+		vector viewSpacePos(viewSpace.x(), viewSpace.y(), -1);
+
+		viewSpacePos = float4::normalize3(viewSpacePos);
+		viewSpacePos = viewSpacePos*depth;
+		float4 worldPos(viewSpacePos.x(), viewSpacePos.y(), viewSpacePos.z(), 1);
+
+		worldPos = matrix44::transform(worldPos, TransformDevice::Instance()->GetInvViewTransform());
+
+		Ptr<Graphics::ModelEntity> newEnt = ModelEntity::Create();
+		newEnt->SetResourceId(ResourceId("mdl:examples/placeholder.n3"));
+		newEnt->SetTransform(matrix44::translation(worldPos));
+		this->stage->AttachEntity(newEnt.cast<GraphicsEntity>());
 	}
     ViewerApplication::OnProcessInput();
 }

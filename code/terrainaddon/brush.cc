@@ -47,6 +47,4 @@ namespace Terrain
 		Resources::ResourceManager::Instance()->DiscardManagedResource(this->texture.upcast<Resources::ManagedResource>());
 	}
 
-
-
 } // namespace Terrain
