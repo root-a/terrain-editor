@@ -48,10 +48,13 @@ namespace Terrain
 	void
 		TerrainAddon::Setup(Ptr<Graphics::Stage> stage)
 	{
-		width = 48;
-		height = 48;
+		width = 1023;
+		height = 1023;
 		heightMultiplier = 100;
 		this->stage = stage;
+		currentBrush = Terrain::Brush::Create();
+		Ptr<Terrain::BrushAttributes> brushAttributes = Terrain::BrushAttributes::Create();
+		currentBrush->SetAttributes(brushAttributes);
 
 		InitializeTexture();
 
@@ -85,19 +88,19 @@ namespace Terrain
 
 	void TerrainAddon::InitializeTexture()
 	{
-		SizeT frameSize = this->width * this->height;
+		SizeT frameSize = (this->width+1) * (this->height+1);
 		this->rHeightBuffer = (float*)Memory::Alloc(Memory::DefaultHeap, frameSize*sizeof(float));
 		Memory::Clear(this->rHeightBuffer, frameSize);
 
 		for (int i = 0; i < frameSize; i++)
 		{
-			this->rHeightBuffer[i] = 1.f;
+			this->rHeightBuffer[i] = 0.f;
 		}
 
 		//create texture
 		this->memoryHeightTexture = CoreGraphics::Texture::Create();
 		Ptr<CoreGraphics::MemoryTextureLoader> loader = CoreGraphics::MemoryTextureLoader::Create();
-		loader->SetImageBuffer(this->rHeightBuffer, this->width, this->height, CoreGraphics::PixelFormat::R32F);
+		loader->SetImageBuffer(this->rHeightBuffer, this->width+1, this->height+1, CoreGraphics::PixelFormat::R32F);
 		this->memoryHeightTexture->SetLoader(loader.upcast<Resources::ResourceLoader>());
 		this->memoryHeightTexture->SetAsyncEnabled(false);
 		this->memoryHeightTexture->SetResourceId("heightMapMemTexture");
@@ -128,7 +131,7 @@ namespace Terrain
 		this->heightMultiplierHandle = surface->GetConstant("HeightMultiplier");
 		this->samplerHeightMapHandle = surface->GetConstant("HeightMap");
 		
-		//this->samplerHeightMapHandle->SetTexture(this->memoryHeightTexture);
+		this->samplerHeightMapHandle->SetTexture(this->memoryHeightTexture);
 		this->heightMultiplierHandle->SetValue((float)this->heightMultiplier);
 	}
 
@@ -266,8 +269,8 @@ namespace Terrain
 		Math::bbox boundingBox = Math::bbox(Math::point((float)width / 2.f, (float)height, (float)height / 2.f), Math::vector((float)width / 2.f, (float)height, (float)height / 2.f));
 		terrainShapeNode->SetBoundingBox(boundingBox);
 		terrainModelEnt->GetModelInstance()->GetModel()->SetBoundingBox(boundingBox);
-		matrix44 transform = matrix44::translation(-(width / 2.0f), 0, -(height / 2.0f));
-		this->terrainModelEnt->SetTransform(transform);
+		//matrix44 transform = matrix44::translation(-(width / 2.0f), 0, -(height / 2.0f));
+		//this->terrainModelEnt->SetTransform(transform);
 		GenerateTerrainBasedOnResolution();
 		SetUpVBO();
 		terrainMesh->GetVertexBuffer()->Unload();
@@ -301,6 +304,16 @@ namespace Terrain
 		msg->SetWorldBoundingBox(box);
 		msg->SetStageName("DefaultStage");
 		Graphics::GraphicsInterface::Instance()->Send(msg.upcast<Messaging::Message>());
+	}
+
+	void TerrainAddon::UpdateTerrainAtPos(const Math::float4& pos)
+	{
+		int posX = (int)Math::n_clamp(pos.x(), 0, width + 1.f - (int)currentBrush->attributes->radius);
+		int posY = (int)Math::n_clamp(pos.z(), 0, height + 1.f - (int)currentBrush->attributes->radius);
+		float4 clampedPos((float)posX, pos.y(), (float)posY, pos.w());
+		currentBrush->ExecuteBrushFunction(clampedPos, rHeightBuffer, float2((float)width + 1.f, (float)height + 1.f));
+		n_printf("\nmousePos %f %f\n", pos.x(), pos.z());
+		memoryHeightTexture->Update(rHeightBuffer, (width + 1)*(height + 1)*sizeof(float), (int)currentBrush->attributes->radius, (int)currentBrush->attributes->radius, posX, posY, 0);
 	}
 
 } // namespace Terrain

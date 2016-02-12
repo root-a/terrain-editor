@@ -10,22 +10,28 @@ Brush
 //------------------------------------------------------------------------------
 #include "core/refcounted.h"
 #include "resources/managedtexture.h"
-#include "brushattributes.h"
 
 namespace Terrain
 {
-	class Brush : public Core::RefCounted
+	class BrushAttributes : public Core::RefCounted
 	{
-		__DeclareClass(Brush);
+		__DeclareClass(BrushAttributes);
 	public:
 		/// constructor
-		Brush();
+		BrushAttributes();
 		/// destructor
-		virtual ~Brush();
-		void SetAttributes(Ptr<Terrain::BrushAttributes> attributes);
-		virtual void ExecuteBrushFunction(const Math::float4& pos, float* textureBuffer, const Math::float2& textureSize);
+		virtual ~BrushAttributes();
 
-		Ptr<Terrain::BrushAttributes> attributes;
+		/// setup
+		void Setup(Resources::ResourceId resourceID);
+		/// discard
+		void Discard();
+
+		float radius;
+		float innerRadius;
+		float strength;
+		float* brushTextureBuffer;
+		Ptr<Resources::ManagedTexture> texture;
 	private:
 		
 	};

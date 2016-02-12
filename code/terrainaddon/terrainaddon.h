@@ -13,6 +13,7 @@ Renders terrain with specified resolution based on height-map
 #include "graphics/modelentity.h"
 #include "models/nodes/shapenodeinstance.h"
 #include "models/nodes/shapenode.h"
+#include "brush.h"
 
 namespace Terrain
 {
@@ -58,6 +59,9 @@ namespace Terrain
 
 		void UpdateTerrainWithNewSize(int width, int height);
 		void UpdateWorldSize();
+
+		void UpdateTerrainAtPos(const Math::float4& pos);
+
 	private:
 		Ptr<Graphics::Stage> stage;
 
@@ -85,5 +89,7 @@ namespace Terrain
 		Ptr<CoreGraphics::Mesh> terrainMesh;
 		Ptr<Models::ShapeNodeInstance> terrainShapeNodeInstance;
 		Ptr<Models::ShapeNode> terrainShapeNode;
+
+		Ptr<Terrain::Brush> currentBrush;
 	};
 } // namespace Grid

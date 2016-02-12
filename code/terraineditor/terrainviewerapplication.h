@@ -44,7 +44,7 @@ private:
 
 	/// append a test model
     virtual void AppendTestModel();
-
+	void OnInputUpdateCamera();
     Util::Array<Ptr<Graphics::ModelEntity>> models;
     Ptr<Graphics::GlobalLightEntity> globalLight;
     Util::Array<Ptr<Graphics::PointLightEntity>> pointLights;
@@ -52,14 +52,9 @@ private:
     Util::Array<Ptr<Graphics::SpotLightEntity>> spotLights;
     Util::Array<Math::matrix44> lightTransforms; 
     Math::float4 shadowConstants;
-    float direction;
     Util::Array<Timing::Time> frameTimes;
     Timing::Time avgFPS;
-    bool benchmarkmode;
-    bool renderDebug;
-	bool fullscreen;
-    float rotX;
-    bool capturing;
+	bool renderDebug;
 
 	Ptr<Terrain::TerrainAddon> terrainAddon;
 	Ptr<Graphics::ModelEntity> ground;

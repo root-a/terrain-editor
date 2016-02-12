@@ -33,13 +33,8 @@ using namespace FrameCapture;
 */
 TerrainViewerApplication::TerrainViewerApplication() :
     shadowConstants(100.0f, 20.0f, 0.003f, 1024.0f),
-    direction(1.0),
     avgFPS(0.0f),
-    benchmarkmode(false),
-    renderDebug(false),
-    rotX(-225),
-    capturing(false),
-	fullscreen(false)
+    renderDebug(false)
 {
     // empty
 }
@@ -187,10 +182,10 @@ TerrainViewerApplication::OnConfigureDisplay()
 void
 TerrainViewerApplication::OnProcessInput()
 {
-    const Ptr<Keyboard>& kbd = InputServer::Instance()->GetDefaultKeyboard();
+	const Ptr<Keyboard>& keyboard = InputServer::Instance()->GetDefaultKeyboard();
 	const Ptr<Mouse>& mouse = InputServer::Instance()->GetDefaultMouse();
 
-	if (kbd->KeyDown(Key::F4))
+	if (keyboard->KeyDown(Key::F4))
 	{
 		// turn on debug rendering
 		Ptr<Debug::RenderDebugView> renderDebugMsg = Debug::RenderDebugView::Create();
@@ -199,30 +194,35 @@ TerrainViewerApplication::OnProcessInput()
 		Graphics::GraphicsInterface::Instance()->Send(renderDebugMsg.cast<Messaging::Message>());
 		this->renderDebug = !this->renderDebug;
 	}
-	if (mouse->ButtonUp(MouseButton::LeftButton))
+	if (mouse->ButtonPressed(MouseButton::LeftButton) && !keyboard->KeyPressed(Key::LeftMenu))
 	{
 		float depth = Picking::PickingServer::Instance()->FetchDepth(mouse->GetPixelPosition());
-		n_printf("\ndepth distance %f\n", depth);
+		
+		//n_printf("\ndepth distance %f\n", depth);
 		Math::float2 screenPos = mouse->GetScreenPosition();
 
 		float2 focalLength = camera->GetCameraSettings().GetFocalLength();
 		float2 mousePos((screenPos.x()*2.f - 1.f), -(screenPos.y()*2.f - 1.f));
-		n_printf("\nmousePos %f %f\n", mousePos.x(), mousePos.y());
+		//n_printf("\nmousePos %f %f\n", mousePos.x(), mousePos.y());
 		float2 viewSpace = float2::multiply(mousePos, focalLength);
 		vector viewSpacePos(viewSpace.x(), viewSpace.y(), -1);
 
 		viewSpacePos = float4::normalize3(viewSpacePos);
-		viewSpacePos = viewSpacePos*depth;
-		float4 worldPos(viewSpacePos.x(), viewSpacePos.y(), viewSpacePos.z(), 1);
+		point surfaceSpacePos = point(viewSpacePos*depth);
 
-		worldPos = matrix44::transform(worldPos, TransformDevice::Instance()->GetInvViewTransform());
+		float4 worldPos = matrix44::transform(surfaceSpacePos, TransformDevice::Instance()->GetInvViewTransform());
 
 		Ptr<Graphics::ModelEntity> newEnt = ModelEntity::Create();
 		newEnt->SetResourceId(ResourceId("mdl:examples/placeholder.n3"));
 		newEnt->SetTransform(matrix44::translation(worldPos));
 		this->stage->AttachEntity(newEnt.cast<GraphicsEntity>());
+		terrainAddon->UpdateTerrainAtPos(worldPos);
+
+		//this->mayaCameraUtil.Setup(point((127 / 2.0f), 0, (127 / 2.0f)), point(200.0f, 10.f, 200.0f), vector(0.0f, 1.0f, 0.0f));
+		//this->mayaCameraUtil.Update();
+		
 	}
-    ViewerApplication::OnProcessInput();
+	OnInputUpdateCamera();
 }
 
 //------------------------------------------------------------------------------
@@ -240,6 +240,93 @@ TerrainViewerApplication::OnUpdateFrame()
 void
 TerrainViewerApplication::AppendTestModel()
 {              
+}
+
+void 
+TerrainViewerApplication::OnInputUpdateCamera()
+{
+	// update the camera from input
+	InputServer* inputServer = InputServer::Instance();
+	const Ptr<Keyboard>& keyboard = inputServer->GetDefaultKeyboard();
+	const Ptr<Mouse>& mouse = inputServer->GetDefaultMouse();
+
+#ifndef FREECAM
+	// standard input handling: manipulate camera
+	bool pan = mouse->ButtonPressed(MouseButton::MiddleButton) && keyboard->KeyPressed(Key::LeftMenu);
+	bool zoom = mouse->ButtonPressed(MouseButton::RightButton) && keyboard->KeyPressed(Key::LeftMenu);
+	
+	this->mayaCameraUtil.SetOrbitButton(mouse->ButtonPressed(MouseButton::LeftButton) && keyboard->KeyPressed(Key::LeftMenu));
+	this->mayaCameraUtil.SetPanButton(pan);
+	this->mayaCameraUtil.SetZoomButton(zoom);
+	this->mayaCameraUtil.SetZoomInButton(mouse->WheelForward());
+	this->mayaCameraUtil.SetZoomOutButton(mouse->WheelBackward());
+	this->mayaCameraUtil.SetMouseMovement(mouse->GetMovement());
+
+	// process gamepad input
+	float zoomIn = 0.0f;
+	float zoomOut = 0.0f;
+	float2 panning(0.0f, 0.0f);
+	//float2 orbiting(0.0f, 0.0f);
+	float zoomSpeed = 50.f;
+	float panSpeed = 50.f;
+
+	float frameTime = (float) this->GetFrameTime();
+	if (zoom)
+	{
+		zoomIn += mouse->GetMovement().y() * frameTime * zoomSpeed;
+		zoomOut += mouse->GetMovement().y() * frameTime * zoomSpeed;
+	}
+	if (pan)
+	{
+		panning.x() -= mouse->GetMovement().x() * frameTime * panSpeed;
+		panning.y() -= mouse->GetMovement().y() * frameTime * panSpeed;
+	}
+	
+	// process keyboard input
+	if (keyboard->KeyDown(Key::Escape))
+	{
+		this->SetQuitRequested(true);
+	}
+	if (keyboard->KeyDown(Key::Space))
+	{
+		this->mayaCameraUtil.Reset();
+	}
+	if (keyboard->KeyPressed(Key::Left))
+	{
+		panning.x() -= 1.1f;
+	}
+	if (keyboard->KeyPressed(Key::Right))
+	{
+		panning.x() += 1.1f;
+	}
+	if (keyboard->KeyPressed(Key::Up))
+	{
+		panning.y() -= 1.1f;
+	}
+	if (keyboard->KeyPressed(Key::Down))
+	{
+		panning.y() += 1.1f;
+	}
+
+	this->mayaCameraUtil.SetPanning(panning);
+	//this->mayaCameraUtil.SetOrbiting(orbiting);
+	this->mayaCameraUtil.SetZoomIn(zoomIn);
+	this->mayaCameraUtil.SetZoomOut(zoomOut);
+	this->mayaCameraUtil.Update();
+	this->camera->SetTransform(this->mayaCameraUtil.GetCameraTransform());
+#else
+	this->freeCameraUtil.SetRotateButton(mouse->ButtonPressed(MouseButton::LeftButton));
+	this->freeCameraUtil.SetAccelerateButton(keyboard->KeyPressed(Key::Shift));
+	this->freeCameraUtil.SetForwardsKey(keyboard->KeyPressed(Key::W));
+	this->freeCameraUtil.SetBackwardsKey(keyboard->KeyPressed(Key::S));
+	this->freeCameraUtil.SetLeftStrafeKey(keyboard->KeyPressed(Key::A));
+	this->freeCameraUtil.SetRightStrafeKey(keyboard->KeyPressed(Key::D));
+	this->freeCameraUtil.SetUpKey(keyboard->KeyPressed(Key::Space));
+	this->freeCameraUtil.SetDownKey(keyboard->KeyPressed(Key::C));
+	this->freeCameraUtil.SetMouseMovement(mouse->GetMovement());
+	this->freeCameraUtil.Update();
+	this->camera->SetTransform(this->freeCameraUtil.GetTransform());
+#endif
 }
 
 } // namespace Tools
