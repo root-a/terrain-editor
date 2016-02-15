@@ -194,34 +194,34 @@ TerrainViewerApplication::OnProcessInput()
 		Graphics::GraphicsInterface::Instance()->Send(renderDebugMsg.cast<Messaging::Message>());
 		this->renderDebug = !this->renderDebug;
 	}
-	if (mouse->ButtonPressed(MouseButton::LeftButton) && !keyboard->KeyPressed(Key::LeftMenu))
+	if (mouse->ButtonDown(MouseButton::LeftButton) && !keyboard->KeyPressed(Key::LeftMenu))
 	{
-		float depth = Picking::PickingServer::Instance()->FetchDepth(mouse->GetPixelPosition());
-		
-		//n_printf("\ndepth distance %f\n", depth);
-		Math::float2 screenPos = mouse->GetScreenPosition();
-
-		float2 focalLength = camera->GetCameraSettings().GetFocalLength();
-		float2 mousePos((screenPos.x()*2.f - 1.f), -(screenPos.y()*2.f - 1.f));
-		//n_printf("\nmousePos %f %f\n", mousePos.x(), mousePos.y());
-		float2 viewSpace = float2::multiply(mousePos, focalLength);
-		vector viewSpacePos(viewSpace.x(), viewSpace.y(), -1);
-
-		viewSpacePos = float4::normalize3(viewSpacePos);
-		point surfaceSpacePos = point(viewSpacePos*depth);
-
-		float4 worldPos = matrix44::transform(surfaceSpacePos, TransformDevice::Instance()->GetInvViewTransform());
+		float4 worldPos = CalculateWorldPosFromMouseAndDepth(mouse);
+		terrainAddon->UpdateTerrainAtPos(worldPos);
 
 		Ptr<Graphics::ModelEntity> newEnt = ModelEntity::Create();
 		newEnt->SetResourceId(ResourceId("mdl:examples/placeholder.n3"));
 		newEnt->SetTransform(matrix44::translation(worldPos));
 		this->stage->AttachEntity(newEnt.cast<GraphicsEntity>());
-		terrainAddon->UpdateTerrainAtPos(worldPos);
 
-		//this->mayaCameraUtil.Setup(point((127 / 2.0f), 0, (127 / 2.0f)), point(200.0f, 10.f, 200.0f), vector(0.0f, 1.0f, 0.0f));
-		//this->mayaCameraUtil.Update();
-		
 	}
+	else if (mouse->ButtonPressed(MouseButton::LeftButton) && !keyboard->KeyPressed(Key::LeftMenu))
+	{
+		if (mouse->GetMovement().length() > 1.f)
+		{
+			float4 worldPos = CalculateWorldPosFromMouseAndDepth(mouse);
+			terrainAddon->UpdateTerrainAtPos(worldPos);
+
+			Ptr<Graphics::ModelEntity> newEnt = ModelEntity::Create();
+			newEnt->SetResourceId(ResourceId("mdl:examples/placeholder.n3"));
+			newEnt->SetTransform(matrix44::translation(worldPos));
+			this->stage->AttachEntity(newEnt.cast<GraphicsEntity>());
+
+			//this->mayaCameraUtil.Setup(point((127 / 2.0f), 0, (127 / 2.0f)), point(200.0f, 10.f, 200.0f), vector(0.0f, 1.0f, 0.0f));
+			//this->mayaCameraUtil.Update();
+		}		
+	}
+	
 	OnInputUpdateCamera();
 }
 
@@ -328,5 +328,27 @@ TerrainViewerApplication::OnInputUpdateCamera()
 	this->camera->SetTransform(this->freeCameraUtil.GetTransform());
 #endif
 }
+
+Math::float4 TerrainViewerApplication::CalculateWorldPosFromMouseAndDepth(const Ptr<Mouse> mouse)
+{
+	float depth = Picking::PickingServer::Instance()->FetchDepth(mouse->GetPixelPosition());
+
+	//n_printf("\ndepth distance %f\n", depth);
+	Math::float2 screenPos = mouse->GetScreenPosition();
+
+	float2 focalLength = camera->GetCameraSettings().GetFocalLength();
+	float2 mousePos((screenPos.x()*2.f - 1.f), -(screenPos.y()*2.f - 1.f));
+	//n_printf("\nmousePos %f %f\n", mousePos.x(), mousePos.y());
+	float2 viewSpace = float2::multiply(mousePos, focalLength);
+	vector viewSpacePos(viewSpace.x(), viewSpace.y(), -1);
+
+	viewSpacePos = float4::normalize3(viewSpacePos);
+	point surfaceSpacePos = point(viewSpacePos*depth);
+
+	float4 worldPos = matrix44::transform(surfaceSpacePos, TransformDevice::Instance()->GetInvViewTransform());
+
+	return worldPos;
+}
+
 
 } // namespace Tools

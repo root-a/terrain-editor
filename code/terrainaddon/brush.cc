@@ -41,7 +41,6 @@ namespace Terrain
 		//we update it with using position and radius
 		//then we send the data to the memory texture and update only the region of it
 
-
 		//at pos x radius by 2
 		//range of x values
 		//x - (radius/2)
@@ -61,11 +60,27 @@ namespace Terrain
 		//x - (radius/2) //it's current y * x - (radius/2)
 		//to
 		//x + (radius/2) //it's current y * x + (radius/2)
+		int height = (int)textureSize.y();
+		int width = (int)textureSize.x();
+		int size = height*width;
 
-		for (int i = 0; i < (int)textureSize.x()*(int)textureSize.y(); i++)
+		//int y_start = (y - (diameter / 2));
+		//n_printf("\ny: %d\n", y);
+		int y_end = y + radius;
+		//int x_start = x - (diameter / 2);
+		int x_end = x + radius;
+		//int currentColBufferIndex = y*height + x;
+		//textureBuffer[currentColBufferIndex] = attributes->strength;
+		
+		for (int y_start = y - radius; y_start < y_end; y_start++)
 		{
-			textureBuffer[i] = attributes->strength; //
-		}
+			int currentColBufferIndex = height*y_start;
+			for (int x_start = x - radius; x_start < x_end; x_start++)
+			{
+				int currentBufferIndex = currentColBufferIndex+x_start;
+				textureBuffer[currentBufferIndex] = attributes->strength;
+			}
+		}		
 	}
 
 	void Brush::SetAttributes(Ptr<Terrain::BrushAttributes> attributes)

@@ -14,7 +14,7 @@ namespace Terrain
 	//------------------------------------------------------------------------------
 	/**
 	*/
-	BrushAttributes::BrushAttributes() : radius(10.f), innerRadius(1.f), strength(1.f)
+	BrushAttributes::BrushAttributes() : radius(5.f), innerRadius(1.f), strength(1.f)
 	{
 		
 	}

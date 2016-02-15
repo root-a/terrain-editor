@@ -37,7 +37,10 @@ public:
 private:
     /// process input (called before rendering)
     virtual void OnProcessInput();
-    /// render current frame
+
+	Math::float4 CalculateWorldPosFromMouseAndDepth(const Ptr<Input::Mouse> mouse);
+
+	/// render current frame
     virtual void OnUpdateFrame();
     /// called to configure display
     virtual void OnConfigureDisplay();
