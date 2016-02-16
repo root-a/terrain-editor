@@ -10,6 +10,10 @@ Brush
 //------------------------------------------------------------------------------
 #include "core/refcounted.h"
 #include "resources/managedtexture.h"
+#include <IL/il.h>
+#include <IL/ilu.h>
+#include "coregraphics/ogl4/ogl4types.h"
+#include "coregraphics/base/texturebase.h"
 
 namespace Terrain
 {
@@ -27,10 +31,12 @@ namespace Terrain
 		/// discard
 		void Discard();
 
+		void ConvertTexture(const Ptr<CoreGraphics::Texture>& tex, ILenum imageFileType);
+
 		float radius;
 		float innerRadius;
 		float strength;
-		float* brushTextureBuffer;
+		unsigned char* brushTextureBuffer;
 		Ptr<Resources::ManagedTexture> texture;
 	private:
 		

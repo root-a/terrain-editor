@@ -50,10 +50,11 @@ namespace Terrain
 	{
 		width = 1027;
 		height = 1027;
-		heightMultiplier = 100;
+		heightMultiplier = 1;
 		this->stage = stage;
 		currentBrush = Terrain::Brush::Create();
 		Ptr<Terrain::BrushAttributes> brushAttributes = Terrain::BrushAttributes::Create();
+		brushAttributes->Setup("tex:system/lightcones.dds");
 		currentBrush->SetAttributes(brushAttributes);
 
 		InitializeTexture();
@@ -88,8 +89,8 @@ namespace Terrain
 
 	void TerrainAddon::InitializeTexture()
 	{
-		SizeT frameSize = (this->width+1) * (this->height+1);
-		this->rHeightBuffer = (float*)Memory::Alloc(Memory::DefaultHeap, frameSize*sizeof(float));
+		SizeT frameSize = (this->width + 1) * (this->height + 1)*sizeof(float);
+		this->rHeightBuffer = (float*)Memory::Alloc(Memory::DefaultHeap, frameSize);
 		Memory::Clear(this->rHeightBuffer, frameSize);
 
 		//create texture
@@ -301,7 +302,7 @@ namespace Terrain
 		Graphics::GraphicsInterface::Instance()->Send(msg.upcast<Messaging::Message>());
 	}
 
-	void TerrainAddon::UpdateTerrainAtPos(const Math::float4& pos)
+	void TerrainAddon::UpdateTerrainAtPos(const Math::float4& pos, const KeyMod modifier)
 	{
 		n_printf("\nmousePos %f %f\n", pos.x(), pos.z());
 		if (IsMouseOnTerrain(pos))
@@ -310,12 +311,7 @@ namespace Terrain
 			int posX = (int)Math::n_clamp(pos.x(), radius, (width + 1.f) - radius);
 			int posY = (int)Math::n_clamp(pos.z(), radius, (height + 1.f) - radius);
 			float4 clampedPos((float)posX, pos.y(), (float)posY, pos.w());
-			currentBrush->ExecuteBrushFunction(clampedPos, rHeightBuffer, float2((float)width + 1.f, (float)height + 1.f));
-			//int posX_memT = (int)pos.x() - (int)currentBrush->attributes->diameter / 2;
-			//int posY_memT = (int)pos.z() - (int)currentBrush->attributes->diameter / 2;
-			//int diameter = (int)currentBrush->attributes->diameter;
-
-			//memoryHeightTexture->Update(rHeightBuffer, (width + 1)*(height + 1)*sizeof(float), diameter, diameter, posX_memT, posY_memT, 0);
+			currentBrush->ExecuteBrushFunction(clampedPos, rHeightBuffer, float2((float)width + 1.f, (float)height + 1.f), modifier, maxHeight);
 			memoryHeightTexture->Update(rHeightBuffer, (width + 1)*(height + 1)*sizeof(float), width + 1, height + 1, 0, 0, 0);
 		}
 	}

@@ -31,12 +31,21 @@ namespace Terrain
 	/**
 	*/
 	void
-		Brush::ExecuteBrushFunction(const Math::float4& pos, float* textureBuffer, const Math::float2& textureSize)
+		Brush::ExecuteBrushFunction(const Math::float4& pos, float* textureBuffer, const Math::float2& textureSize, const KeyMod modifier, float maxHeight)
 	{
 		//using the attributes update the cpu buffer of texture
 		int x = (int)pos.x();
 		int y = (int)pos.z();
 		int radius = (int)attributes->radius;
+		float mod = 0.f;
+		switch (modifier)
+		{
+		case KeyMod::Ctrl :
+			mod = -1.f;
+			break;
+		default:
+			mod = 1.f;
+		}
 		//we got texture buffer
 		//we update it with using position and radius
 		//then we send the data to the memory texture and update only the region of it
@@ -71,14 +80,19 @@ namespace Terrain
 		int x_end = x + radius;
 		//int currentColBufferIndex = y*height + x;
 		//textureBuffer[currentColBufferIndex] = attributes->strength;
-		
+		int textureBufferIndex = 0;
 		for (int y_start = y - radius; y_start < y_end; y_start++)
 		{
 			int currentColBufferIndex = height*y_start;
 			for (int x_start = x - radius; x_start < x_end; x_start++)
 			{
 				int currentBufferIndex = currentColBufferIndex+x_start;
-				textureBuffer[currentBufferIndex] = attributes->strength;
+				float brushValue = attributes->brushTextureBuffer[textureBufferIndex];
+				float textureValue = textureBuffer[currentBufferIndex];
+				textureValue += (attributes->strength*brushValue*mod);
+				textureValue = Math::n_clamp(textureValue, 0.f, maxHeight);
+				textureBuffer[currentBufferIndex] = textureValue;
+				textureBufferIndex += 4;
 			}
 		}		
 	}

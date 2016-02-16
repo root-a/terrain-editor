@@ -60,13 +60,14 @@ namespace Terrain
 		void UpdateTerrainWithNewSize(int width, int height);
 		void UpdateWorldSize();
 
-		void UpdateTerrainAtPos(const Math::float4& pos);
+		void UpdateTerrainAtPos(const Math::float4& pos, const KeyMod modifier);
 		bool IsMouseOnTerrain(const Math::float4& pos);
 	private:
 		Ptr<Graphics::Stage> stage;
 
 		int width, height;
 		int heightMultiplier;
+		float maxHeight = 1024;
 
 		// mesh
 		Util::Array<int> indices;

@@ -15,6 +15,7 @@
 #include "framecaptureprotocol.h"
 #include "imgui/imgui.h"
 #include "picking/pickingserver.h"
+#include "brush.h"
 
 namespace Tools
 {
@@ -194,33 +195,43 @@ TerrainViewerApplication::OnProcessInput()
 		Graphics::GraphicsInterface::Instance()->Send(renderDebugMsg.cast<Messaging::Message>());
 		this->renderDebug = !this->renderDebug;
 	}
-	if (mouse->ButtonDown(MouseButton::LeftButton) && !keyboard->KeyPressed(Key::LeftMenu))
+	
+	if (!keyboard->KeyPressed(Key::LeftMenu))
 	{
-		float4 worldPos = CalculateWorldPosFromMouseAndDepth(mouse);
-		terrainAddon->UpdateTerrainAtPos(worldPos);
+		
 
-		Ptr<Graphics::ModelEntity> newEnt = ModelEntity::Create();
-		newEnt->SetResourceId(ResourceId("mdl:examples/placeholder.n3"));
-		newEnt->SetTransform(matrix44::translation(worldPos));
-		this->stage->AttachEntity(newEnt.cast<GraphicsEntity>());
-
-	}
-	else if (mouse->ButtonPressed(MouseButton::LeftButton) && !keyboard->KeyPressed(Key::LeftMenu))
-	{
-		if (mouse->GetMovement().length() > 1.f)
+		if (mouse->ButtonDown(MouseButton::LeftButton))
 		{
+			Terrain::KeyMod mod = Terrain::KeyMod::None;
+			if (keyboard->KeyPressed(Key::LeftControl)) mod = Terrain::KeyMod::Ctrl;
 			float4 worldPos = CalculateWorldPosFromMouseAndDepth(mouse);
-			terrainAddon->UpdateTerrainAtPos(worldPos);
+			terrainAddon->UpdateTerrainAtPos(worldPos, mod);
 
 			Ptr<Graphics::ModelEntity> newEnt = ModelEntity::Create();
 			newEnt->SetResourceId(ResourceId("mdl:examples/placeholder.n3"));
 			newEnt->SetTransform(matrix44::translation(worldPos));
 			this->stage->AttachEntity(newEnt.cast<GraphicsEntity>());
+		}
+		else if (mouse->ButtonPressed(MouseButton::LeftButton))
+		{
+			Terrain::KeyMod mod = Terrain::KeyMod::None;
+			if (keyboard->KeyPressed(Key::LeftControl)) mod = Terrain::KeyMod::Ctrl;
+			if (mouse->GetMovement().length() > 1.f)
+			{
+				float4 worldPos = CalculateWorldPosFromMouseAndDepth(mouse);
+				terrainAddon->UpdateTerrainAtPos(worldPos, mod);
 
-			//this->mayaCameraUtil.Setup(point((127 / 2.0f), 0, (127 / 2.0f)), point(200.0f, 10.f, 200.0f), vector(0.0f, 1.0f, 0.0f));
-			//this->mayaCameraUtil.Update();
-		}		
+				Ptr<Graphics::ModelEntity> newEnt = ModelEntity::Create();
+				newEnt->SetResourceId(ResourceId("mdl:examples/placeholder.n3"));
+				newEnt->SetTransform(matrix44::translation(worldPos));
+				this->stage->AttachEntity(newEnt.cast<GraphicsEntity>());
+
+				//this->mayaCameraUtil.Setup(point((127 / 2.0f), 0, (127 / 2.0f)), point(200.0f, 10.f, 200.0f), vector(0.0f, 1.0f, 0.0f));
+				//this->mayaCameraUtil.Update();
+			}
+		}
 	}
+	
 	
 	OnInputUpdateCamera();
 }
