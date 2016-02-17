@@ -8,6 +8,7 @@
 #include "resources\resourcemanager.h"
 #include "coregraphics\pixelformat.h"
 
+
 namespace Terrain
 {
 	__ImplementClass(Terrain::BrushAttributes, 'TBAT', Core::RefCounted);
@@ -37,6 +38,7 @@ namespace Terrain
 		ILenum imageFormat;
 		imageFormat = IL_DDS;
 		ConvertTexture(texture->GetTexture(), imageFormat);
+		ResampleTexture();
 	}
 
 	//------------------------------------------------------------------------------
@@ -76,6 +78,9 @@ namespace Terrain
 
 		CoreGraphics::Texture::MapInfo mapInfo;
 		tex->Map(mipLevelToSave, Base::ResourceBase::MapRead, mapInfo);
+		
+		width = mapInfo.mipWidth;
+		height = mapInfo.mipHeight;
 
 		// create image
 		ILboolean result = ilTexImage(mapInfo.mipWidth, mapInfo.mipHeight, 1, channels, format, type, (ILubyte*)mapInfo.data);
@@ -91,15 +96,32 @@ namespace Terrain
 		ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
 		ILubyte* uncompressedData = ilGetData();
 
-		int framesize = mapInfo.mipWidth*mapInfo.mipHeight*4;
+		int framesize = mapInfo.mipWidth*mapInfo.mipHeight;
 		brushTextureBuffer = (unsigned char*)Memory::Alloc(Memory::DefaultHeap, framesize);
 				
-		std::memcpy(brushTextureBuffer, uncompressedData, framesize);
+		int j = 0;
+		for (int i = 0; i < framesize; i++)
+		{
+			brushTextureBuffer[i] = (unsigned char)uncompressedData[j];
+			j += 4;
+		}
 
 		tex->Unmap(mipLevelToSave);
 
 
 		ilDeleteImage(image);
+	}
+
+	void BrushAttributes::ResampleTexture()
+	{
+		/*
+		iluScale(ILimage *Image, ILimage *Scaled, ILuint Width, ILuint Height)
+		brushTextureBuffer;
+		radius;
+		sampledTextureBuffer;
+		width;
+		height;
+		*/
 	}
 
 } // namespace Terrain

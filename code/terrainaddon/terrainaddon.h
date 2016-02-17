@@ -61,7 +61,6 @@ namespace Terrain
 		void UpdateWorldSize();
 
 		void UpdateTerrainAtPos(const Math::float4& pos, const KeyMod modifier);
-		bool IsMouseOnTerrain(const Math::float4& pos);
 	private:
 		Ptr<Graphics::Stage> stage;
 

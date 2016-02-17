@@ -305,31 +305,9 @@ namespace Terrain
 	void TerrainAddon::UpdateTerrainAtPos(const Math::float4& pos, const KeyMod modifier)
 	{
 		n_printf("\nmousePos %f %f\n", pos.x(), pos.z());
-		if (IsMouseOnTerrain(pos))
-		{
-			float radius = currentBrush->attributes->radius;
-			int posX = (int)Math::n_clamp(pos.x(), radius, (width + 1.f) - radius);
-			int posY = (int)Math::n_clamp(pos.z(), radius, (height + 1.f) - radius);
-			float4 clampedPos((float)posX, pos.y(), (float)posY, pos.w());
-			currentBrush->ExecuteBrushFunction(clampedPos, rHeightBuffer, float2((float)width + 1.f, (float)height + 1.f), modifier, maxHeight);
-			memoryHeightTexture->Update(rHeightBuffer, (width + 1)*(height + 1)*sizeof(float), width + 1, height + 1, 0, 0, 0);
-		}
-	}
 
-	bool TerrainAddon::IsMouseOnTerrain(const Math::float4& pos)
-	{
-		bool isOnTerrain = true;
-		int x = (int)pos.x();
-		int y = (int)pos.z();
-		if (x > (width + 1) || x < 0)
-		{
-			isOnTerrain = false;
-		}
-		if (y >(height + 1) || y < 0)
-		{
-			isOnTerrain = false;
-		}
-		return isOnTerrain;
+		currentBrush->ExecuteBrushFunction(pos, rHeightBuffer, float2((float)width + 1.f, (float)height + 1.f), modifier, maxHeight);
+		memoryHeightTexture->Update(rHeightBuffer, (width + 1)*(height + 1)*sizeof(float), width + 1, height + 1, 0, 0, 0);
 	}
 
 } // namespace Terrain
