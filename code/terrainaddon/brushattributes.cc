@@ -16,7 +16,7 @@ namespace Terrain
 	//------------------------------------------------------------------------------
 	/**
 	*/
-	BrushAttributes::BrushAttributes() : radius(128.f), innerRadius(1.f), strength(0.1f)
+	BrushAttributes::BrushAttributes() : radius(32), strength(0.1f), sampledBrushBuffer(nullptr), brushTextureBuffer(nullptr)
 	{
 		
 	}
@@ -49,7 +49,9 @@ namespace Terrain
 	{
 		Resources::ResourceManager::Instance()->DiscardManagedResource(this->texture.upcast<Resources::ManagedResource>());
 		Memory::Free(Memory::DefaultHeap, this->brushTextureBuffer);
+		Memory::Free(Memory::DefaultHeap, this->sampledBrushBuffer);
 		this->brushTextureBuffer = 0;
+		this->sampledBrushBuffer = 0;
 	}
 
 	void BrushAttributes::ConvertTexture(const Ptr<CoreGraphics::Texture>& tex, ILenum imageFileType)
@@ -79,8 +81,7 @@ namespace Terrain
 		CoreGraphics::Texture::MapInfo mapInfo;
 		tex->Map(mipLevelToSave, Base::ResourceBase::MapRead, mapInfo);
 		
-		width = mapInfo.mipWidth;
-		height = mapInfo.mipHeight;
+		orgSize = mapInfo.mipWidth;
 
 		// create image
 		ILboolean result = ilTexImage(mapInfo.mipWidth, mapInfo.mipHeight, 1, channels, format, type, (ILubyte*)mapInfo.data);
@@ -114,14 +115,33 @@ namespace Terrain
 
 	void BrushAttributes::ResampleTexture()
 	{
-		/*
-		iluScale(ILimage *Image, ILimage *Scaled, ILuint Width, ILuint Height)
-		brushTextureBuffer;
-		radius;
-		sampledTextureBuffer;
-		width;
-		height;
-		*/
+		//create il image
+		ILint image = ilGenImage();
+		ilBindImage(image);
+		// create image
+		ILboolean result = ilTexImage(orgSize, orgSize, 1, 1, IL_RED, IL_UNSIGNED_BYTE, (ILubyte*)this->brushTextureBuffer);
+		n_assert(result == IL_TRUE);
+
+		size = radius * 2;
+		iluScale(size, size, 0);
+		ILubyte* uncompressedData = ilGetData();
+		if (this->sampledBrushBuffer != nullptr) Memory::Free(Memory::DefaultHeap, this->sampledBrushBuffer);		
+		int framesize = size*size;
+		this->sampledBrushBuffer = (unsigned char*)Memory::Alloc(Memory::DefaultHeap, framesize);
+		memcpy(this->sampledBrushBuffer, uncompressedData, framesize);
+
+		ilDeleteImage(image);
+	}
+
+	void BrushAttributes::SetRadius(int newRadius)
+	{
+		radius = newRadius;
+		ResampleTexture();
+	}
+
+	int BrushAttributes::GetRadius()
+	{
+		return radius;
 	}
 
 } // namespace Terrain

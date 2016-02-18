@@ -14,6 +14,7 @@ Renders terrain with specified resolution based on height-map
 #include "models/nodes/shapenodeinstance.h"
 #include "models/nodes/shapenode.h"
 #include "brush.h"
+#include "brushSmooth.h"
 
 namespace Terrain
 {
@@ -91,5 +92,6 @@ namespace Terrain
 		Ptr<Models::ShapeNode> terrainShapeNode;
 
 		Ptr<Terrain::Brush> currentBrush;
+		Ptr<Terrain::BrushSmooth> brushSmooth;
 	};
 } // namespace Grid

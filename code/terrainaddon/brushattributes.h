@@ -12,7 +12,6 @@ Brush
 #include "resources/managedtexture.h"
 #include <IL/il.h>
 #include <IL/ilu.h>
-//#include "IL/ilu_Scale.h"
 #include "coregraphics/ogl4/ogl4types.h"
 #include "coregraphics/base/texturebase.h"
 
@@ -31,18 +30,19 @@ namespace Terrain
 		void Setup(Resources::ResourceId resourceID);
 		/// discard
 		void Discard();
-
-		void ConvertTexture(const Ptr<CoreGraphics::Texture>& tex, ILenum imageFileType);
-		void ResampleTexture();
-		float radius;
-		float innerRadius;
-		float strength;
-		int height;
-		int width;
-		unsigned char* brushTextureBuffer;
-		unsigned char* sampledTextureBuffer;
-		Ptr<Resources::ManagedTexture> texture;
-	private:
 		
+		void SetRadius(int newRadius);
+		int GetRadius();
+		float strength;
+		int size;
+		unsigned char* sampledBrushBuffer;
+		
+	private:
+		void ResampleTexture();
+		void ConvertTexture(const Ptr<CoreGraphics::Texture>& tex, ILenum imageFileType);
+		unsigned char* brushTextureBuffer;
+		Ptr<Resources::ManagedTexture> texture;
+		int radius;
+		int orgSize;
 	};
 } // namespace Grid

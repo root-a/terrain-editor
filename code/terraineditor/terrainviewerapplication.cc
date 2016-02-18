@@ -198,40 +198,29 @@ TerrainViewerApplication::OnProcessInput()
 	
 	if (!keyboard->KeyPressed(Key::LeftMenu))
 	{
-		
-
 		if (mouse->ButtonDown(MouseButton::LeftButton))
 		{
 			Terrain::KeyMod mod = Terrain::KeyMod::None;
 			if (keyboard->KeyPressed(Key::LeftControl)) mod = Terrain::KeyMod::Ctrl;
+			if (keyboard->KeyPressed(Key::LeftShift)) mod = Terrain::KeyMod::Shift;
 			float4 worldPos = CalculateWorldPosFromMouseAndDepth(mouse);
 			terrainAddon->UpdateTerrainAtPos(worldPos, mod);
-
-			Ptr<Graphics::ModelEntity> newEnt = ModelEntity::Create();
-			newEnt->SetResourceId(ResourceId("mdl:examples/placeholder.n3"));
-			newEnt->SetTransform(matrix44::translation(worldPos));
-			this->stage->AttachEntity(newEnt.cast<GraphicsEntity>());
 		}
 		else if (mouse->ButtonPressed(MouseButton::LeftButton))
 		{
-			Terrain::KeyMod mod = Terrain::KeyMod::None;
-			if (keyboard->KeyPressed(Key::LeftControl)) mod = Terrain::KeyMod::Ctrl;
-			if (mouse->GetMovement().length() > 1.f)
+			if (mouse->GetMovement().length() > 1.f) // don't paint when mouse is stationary
 			{
+				Terrain::KeyMod mod = Terrain::KeyMod::None;
+				if (keyboard->KeyPressed(Key::LeftControl)) mod = Terrain::KeyMod::Ctrl;
+				if (keyboard->KeyPressed(Key::LeftShift)) mod = Terrain::KeyMod::Shift;
 				float4 worldPos = CalculateWorldPosFromMouseAndDepth(mouse);
 				terrainAddon->UpdateTerrainAtPos(worldPos, mod);
-
-				Ptr<Graphics::ModelEntity> newEnt = ModelEntity::Create();
-				newEnt->SetResourceId(ResourceId("mdl:examples/placeholder.n3"));
-				newEnt->SetTransform(matrix44::translation(worldPos));
-				this->stage->AttachEntity(newEnt.cast<GraphicsEntity>());
-
-				//this->mayaCameraUtil.Setup(point((127 / 2.0f), 0, (127 / 2.0f)), point(200.0f, 10.f, 200.0f), vector(0.0f, 1.0f, 0.0f));
-				//this->mayaCameraUtil.Update();
 			}
 		}
 	}
-	
+	//if we change the height-map res, let's recenter camera?
+	//this->mayaCameraUtil.Setup(point((127 / 2.0f), 0, (127 / 2.0f)), point(200.0f, 10.f, 200.0f), vector(0.0f, 1.0f, 0.0f));
+	//this->mayaCameraUtil.Update();
 	
 	OnInputUpdateCamera();
 }
