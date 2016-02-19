@@ -4,19 +4,19 @@
 //------------------------------------------------------------------------------
 #include "stdneb.h"
 #include "core\rttimacros.h"
-#include "brushattributes.h"
+#include "brushtexture.h"
 #include "resources\resourcemanager.h"
 #include "coregraphics\pixelformat.h"
 
 
 namespace Terrain
 {
-	__ImplementClass(Terrain::BrushAttributes, 'TBAT', Core::RefCounted);
+	__ImplementClass(Terrain::BrushTexture, 'TBTX', Core::RefCounted);
 
 	//------------------------------------------------------------------------------
 	/**
 	*/
-	BrushAttributes::BrushAttributes() : radius(32), strength(0.1f), sampledBrushBuffer(nullptr), brushTextureBuffer(nullptr)
+	BrushTexture::BrushTexture() : sampledBrushBuffer(nullptr), brushTextureBuffer(nullptr)
 	{
 		
 	}
@@ -24,7 +24,7 @@ namespace Terrain
 	//------------------------------------------------------------------------------
 	/**
 	*/
-	BrushAttributes::~BrushAttributes()
+	BrushTexture::~BrushTexture()
 	{
 	}
 
@@ -32,20 +32,20 @@ namespace Terrain
 	/**
 	*/
 	void
-		BrushAttributes::Setup(Resources::ResourceId resourceID)
+		BrushTexture::Setup(Resources::ResourceId resourceID)
 	{
 		texture = Resources::ResourceManager::Instance()->CreateManagedResource(CoreGraphics::Texture::RTTI, resourceID, NULL, true).downcast<Resources::ManagedTexture>();
 		ILenum imageFormat;
 		imageFormat = IL_DDS;
 		ConvertTexture(texture->GetTexture(), imageFormat);
-		ResampleTexture();
+		ResampleTexture(size);
 	}
 
 	//------------------------------------------------------------------------------
 	/**
 	*/
 	void
-		BrushAttributes::Discard()
+		BrushTexture::Discard()
 	{
 		Resources::ResourceManager::Instance()->DiscardManagedResource(this->texture.upcast<Resources::ManagedResource>());
 		Memory::Free(Memory::DefaultHeap, this->brushTextureBuffer);
@@ -54,7 +54,7 @@ namespace Terrain
 		this->sampledBrushBuffer = 0;
 	}
 
-	void BrushAttributes::ConvertTexture(const Ptr<CoreGraphics::Texture>& tex, ILenum imageFileType)
+	void BrushTexture::ConvertTexture(const Ptr<CoreGraphics::Texture>& tex, ILenum imageFileType)
 	{
 		n_assert(tex->GetType() == CoreGraphics::Texture::Texture2D);
 		bool retval = false;
@@ -82,7 +82,7 @@ namespace Terrain
 		tex->Map(mipLevelToSave, Base::ResourceBase::MapRead, mapInfo);
 		
 		orgSize = mapInfo.mipWidth;
-
+		size = orgSize;
 		// create image
 		ILboolean result = ilTexImage(mapInfo.mipWidth, mapInfo.mipHeight, 1, channels, format, type, (ILubyte*)mapInfo.data);
 		n_assert(result == IL_TRUE);
@@ -113,7 +113,7 @@ namespace Terrain
 		ilDeleteImage(image);
 	}
 
-	void BrushAttributes::ResampleTexture()
+	void BrushTexture::ResampleTexture(const int newSize)
 	{
 		//create il image
 		ILint image = ilGenImage();
@@ -122,8 +122,7 @@ namespace Terrain
 		ILboolean result = ilTexImage(orgSize, orgSize, 1, 1, IL_RED, IL_UNSIGNED_BYTE, (ILubyte*)this->brushTextureBuffer);
 		n_assert(result == IL_TRUE);
 
-		size = radius * 2;
-		iluScale(size, size, 0);
+		iluScale(newSize, newSize, 0);
 		ILubyte* uncompressedData = ilGetData();
 		if (this->sampledBrushBuffer != nullptr) Memory::Free(Memory::DefaultHeap, this->sampledBrushBuffer);		
 		int framesize = size*size;
@@ -131,17 +130,8 @@ namespace Terrain
 		memcpy(this->sampledBrushBuffer, uncompressedData, framesize);
 
 		ilDeleteImage(image);
-	}
 
-	void BrushAttributes::SetRadius(int newRadius)
-	{
-		radius = newRadius;
-		ResampleTexture();
-	}
-
-	int BrushAttributes::GetRadius()
-	{
-		return radius;
+		size = newSize;
 	}
 
 } // namespace Terrain

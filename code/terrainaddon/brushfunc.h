@@ -10,28 +10,21 @@ Brush
 //------------------------------------------------------------------------------
 #include "core/refcounted.h"
 #include "resources/managedtexture.h"
-#include "brushattributes.h"
+#include "brushtexture.h"
 
 namespace Terrain
 { 
-	enum KeyMod
+	class BrushFunction : public Core::RefCounted
 	{
-		Shift,
-		Ctrl,
-		None
-	};
-	class Brush : public Core::RefCounted
-	{
-		__DeclareClass(Brush);
+		__DeclareClass(BrushFunction);
 	public:
 		/// constructor
-		Brush();
+		BrushFunction();
 		/// destructor
-		virtual ~Brush();
-		void SetAttributes(Ptr<Terrain::BrushAttributes> attributes);
-		virtual void ExecuteBrushFunction(const Math::float4& pos, float* textureBuffer, const Math::float2& textureSize, const KeyMod modifier, float maxHeight);
+		virtual ~BrushFunction();
+		virtual void ExecuteBrushFunction(int radius, float strength, const Ptr<Terrain::BrushTexture> brushtexture, const Math::float4& pos, float* textureBuffer, const Math::float2& textureSize, const float modifier, float maxHeight);
 
-		Ptr<Terrain::BrushAttributes> attributes;
+		
 	private:
 		
 	};

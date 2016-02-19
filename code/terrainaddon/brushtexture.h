@@ -17,32 +17,29 @@ Brush
 
 namespace Terrain
 {
-	class BrushAttributes : public Core::RefCounted
+	class BrushTexture : public Core::RefCounted
 	{
-		__DeclareClass(BrushAttributes);
+		__DeclareClass(BrushTexture);
 	public:
 		/// constructor
-		BrushAttributes();
+		BrushTexture();
 		/// destructor
-		virtual ~BrushAttributes();
+		virtual ~BrushTexture();
 
 		/// setup
 		void Setup(Resources::ResourceId resourceID);
 		/// discard
 		void Discard();
 		
-		void SetRadius(int newRadius);
-		int GetRadius();
-		float strength;
-		int size;
 		unsigned char* sampledBrushBuffer;
-		
+		void ResampleTexture(const int newSize);
+		int size;
 	private:
-		void ResampleTexture();
+		
 		void ConvertTexture(const Ptr<CoreGraphics::Texture>& tex, ILenum imageFileType);
 		unsigned char* brushTextureBuffer;
 		Ptr<Resources::ManagedTexture> texture;
-		int radius;
+		
 		int orgSize;
 	};
 } // namespace Grid

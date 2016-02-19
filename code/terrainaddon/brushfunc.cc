@@ -4,18 +4,18 @@
 //------------------------------------------------------------------------------
 #include "stdneb.h"
 #include "core\rttimacros.h"
-#include "brush.h"
+#include "brushfunc.h"
 #include "resources\resourcemanager.h"
 using namespace Math;
 
 namespace Terrain
 {
-	__ImplementClass(Terrain::Brush, 'TBTL', Core::RefCounted);
+	__ImplementClass(Terrain::BrushFunction, 'TBFN', Core::RefCounted);
 
 	//------------------------------------------------------------------------------
 	/**
 	*/
-	Brush::Brush()
+	BrushFunction::BrushFunction()
 	{
 		
 	}
@@ -23,7 +23,7 @@ namespace Terrain
 	//------------------------------------------------------------------------------
 	/**
 	*/
-	Brush::~Brush()
+	BrushFunction::~BrushFunction()
 	{
 	}
 
@@ -31,21 +31,11 @@ namespace Terrain
 	/**
 	*/
 	void
-		Brush::ExecuteBrushFunction(const Math::float4& pos, float* textureBuffer, const Math::float2& textureSize, const KeyMod modifier, float maxHeight)
+		BrushFunction::ExecuteBrushFunction(int radius, float strength, const Ptr<Terrain::BrushTexture> brushtexture, const Math::float4& pos, float* textureBuffer, const Math::float2& textureSize, const float modifier, float maxHeight)
 	{
 		//using the attributes update the cpu buffer of texture
 		int x = (int)pos.x();
 		int y = (int)pos.z();
-		int radius = attributes->GetRadius();
-		float mod = 0.f;
-		switch (modifier)
-		{
-		case KeyMod::Ctrl :
-			mod = -1.f;
-			break;
-		default:
-			mod = 1.f;
-		}
 		
 		int height = (int)textureSize.y();
 		int width = (int)textureSize.x();
@@ -81,17 +71,17 @@ namespace Terrain
 		for (int y_start = y_startInit; y_start < y_end; y_start++)
 		{
 			int currentColBufferIndex = height*y_start;
-			int currentColBrushIndex = attributes->size*y_brush_start;
+			int currentColBrushIndex = brushtexture->size*y_brush_start;
 			int x_brush_start = x_brush_startInit;
 			for (int x_start = x_startInit; x_start < x_end; x_start++)
 			{
 				int currentBufferIndex = currentColBufferIndex + x_start;
 				currentBrushIndex = currentColBrushIndex + x_brush_start;
 
-				float brushValue = attributes->sampledBrushBuffer[currentBrushIndex];
+				float brushValue = brushtexture->sampledBrushBuffer[currentBrushIndex];
 				float textureValue = textureBuffer[currentBufferIndex];
 
-				textureValue += (attributes->strength*brushValue*mod);
+				textureValue += (strength*brushValue*modifier);
 				textureValue = Math::n_clamp(textureValue, 0.f, maxHeight);
 				textureBuffer[currentBufferIndex] = textureValue;
 
@@ -99,11 +89,6 @@ namespace Terrain
 			}
 			y_brush_start++;
 		}
-	}
-
-	void Brush::SetAttributes(Ptr<Terrain::BrushAttributes> attributes)
-	{
-		this->attributes = attributes;
 	}
 
 } // namespace Terrain

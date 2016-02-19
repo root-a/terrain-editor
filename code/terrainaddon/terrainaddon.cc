@@ -52,12 +52,8 @@ namespace Terrain
 		height = 1027;
 		heightMultiplier = 1;
 		this->stage = stage;
-		currentBrush = Terrain::Brush::Create();
-		brushSmooth = Terrain::BrushSmooth::Create();
-		Ptr<Terrain::BrushAttributes> brushAttributes = Terrain::BrushAttributes::Create();
-		brushAttributes->Setup("tex:system/lightcones.dds");
-		currentBrush->SetAttributes(brushAttributes);
-		brushSmooth->SetAttributes(brushAttributes);
+		brushTool = Terrain::BrushTool::Create();
+		brushTool->Setup();
 
 		InitializeTexture();
 
@@ -304,17 +300,16 @@ namespace Terrain
 		Graphics::GraphicsInterface::Instance()->Send(msg.upcast<Messaging::Message>());
 	}
 
-	void TerrainAddon::UpdateTerrainAtPos(const Math::float4& pos, const KeyMod modifier)
+	void TerrainAddon::UpdateTerrainAtPos(const Math::float4& pos, const float modifier)
 	{
-		n_printf("\nmousePos %f %f\n", pos.x(), pos.z());
-		if (modifier == KeyMod::Shift)
-		{
-			brushSmooth->ExecuteBrushFunction(pos, rHeightBuffer, float2((float)width + 1.f, (float)height + 1.f), modifier, maxHeight);
-		} 
-		else {
-			currentBrush->ExecuteBrushFunction(pos, rHeightBuffer, float2((float)width + 1.f, (float)height + 1.f), modifier, maxHeight);
-		}
+		//n_printf("\nmousePos %f %f\n", pos.x(), pos.z());
+		brushTool->Paint(pos, rHeightBuffer, float2((float)width + 1.f, (float)height + 1.f), modifier);
 		memoryHeightTexture->Update(rHeightBuffer, (width + 1)*(height + 1)*sizeof(float), width + 1, height + 1, 0, 0, 0);
+	}
+
+	Ptr<Terrain::BrushTool> TerrainAddon::GetBrushTool()
+	{
+		return brushTool;
 	}
 
 } // namespace Terrain

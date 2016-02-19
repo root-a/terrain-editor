@@ -4,7 +4,7 @@
 //------------------------------------------------------------------------------
 #include "stdneb.h"
 #include "core\rttimacros.h"
-#include "brushsmooth.h"
+#include "brushfuncsmooth.h"
 #include "resources\resourcemanager.h"
 using namespace Math;
 
@@ -31,21 +31,11 @@ namespace Terrain
 	/**
 	*/
 	void
-		BrushSmooth::ExecuteBrushFunction(const Math::float4& pos, float* textureBuffer, const Math::float2& textureSize, const KeyMod modifier, float maxHeight)
+		BrushSmooth::ExecuteBrushFunction(int radius, float strength, const Ptr<Terrain::BrushTexture> brushtexture, const Math::float4& pos, float* textureBuffer, const Math::float2& textureSize, const float modifier, float maxHeight)
 	{
 		//using the attributes update the cpu buffer of texture
 		int x = (int)pos.x();
 		int y = (int)pos.z();
-		int radius = attributes->GetRadius();
-		float mod = 0.f;
-		switch (modifier)
-		{
-		case KeyMod::Ctrl :
-			mod = -1.f;
-			break;
-		default:
-			mod = 1.f;
-		}
 		
 		int height = (int)textureSize.y();
 		int width = (int)textureSize.x();
@@ -103,7 +93,7 @@ namespace Terrain
 			}
 		}
 
-		GaussianBlur(regionToBlur, blurredRegion, blurRegionWidth, blurRegionHeight, 5);
+		GaussianBlur(regionToBlur, blurredRegion, blurRegionWidth, blurRegionHeight, strength);
 		Memory::Free(Memory::DefaultHeap, regionToBlur);
 		
 		//apply the blurred data
@@ -113,14 +103,14 @@ namespace Terrain
 		for (int y_start = y_startInit; y_start < y_end; y_start++)
 		{
 			int currentColBufferIndex = height*y_start;
-			int currentColBrushIndex = attributes->size*y_brush_start;
+			int currentColBrushIndex = brushtexture->size*y_brush_start;
 			int x_brush_start = x_brush_startInit;
 			for (int x_start = x_startInit; x_start < x_end; x_start++)
 			{
 				int currentBufferIndex = currentColBufferIndex + x_start;
 				currentBrushIndex = currentColBrushIndex + x_brush_start;
 
-				float brushValue = attributes->sampledBrushBuffer[currentBrushIndex] / 255.f; //normalize to use as mask, brush values are from 0 - 255
+				float brushValue = brushtexture->sampledBrushBuffer[currentBrushIndex] / 255.f; //normalize to use as mask, brush values are from 0 - 255
 				float bluredValue = blurredRegion[regionIndex];
 				float textureValue = textureBuffer[currentBufferIndex];
 				float interpolatedValue = Math::n_lerp(textureValue, bluredValue, brushValue);
@@ -133,7 +123,7 @@ namespace Terrain
 		Memory::Free(Memory::DefaultHeap, blurredRegion);
 	}
 
-	float* BrushSmooth::BoxesForGauss(float radius, int n)  // standard deviation, number of boxes
+	float* BrushSmooth::BoxesForGauss(float radius, int n)  
 	{
 		float wIdeal = Math::n_sqrt((12.f * radius*radius / (float)n) + 1.f);  // Ideal averaging filter width 
 		float wl = Math::n_floor(wIdeal);  if ((int)wl % 2 == 0) wl--;
@@ -141,7 +131,6 @@ namespace Terrain
 
 		float mIdeal = (12.f * radius*radius - (float)n*wl*wl - 4.f * (float)n*wl - 3.f * (float)n) / (-4.f * wl - 4.f);
 		int m = (int)Math::n_floor(mIdeal+0.5f);
-		// var sigmaActual = Math.sqrt( (m*wl*wl + (n-m)*wu*wu - n)/12 );
 
 		float* sizes = new float[n];  for (int i = 0; i < n; i++) sizes[i] = (i < m ? wl : wu);
 		return sizes;
