@@ -39,7 +39,6 @@ namespace Terrain
 		brushDefaultAddRemove = Terrain::BrushFunction::Create();
 		SetTexture(brushTextures.Front());
 		SetFunction(brushDefaultAddRemove);
-		
 	}
 
 	//------------------------------------------------------------------------------

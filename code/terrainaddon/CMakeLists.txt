@@ -8,7 +8,7 @@ FILE(GLOB HEAD "*.h")
 LIST(APPEND SRCS ${SRC} ${HEAD})
 SOURCE_GROUP("terrainaddon" FILES ${SRCS})
 
-set(PCH_files	
+SET(PCH_files	
     ../stdneb.cc
 )
 SOURCE_GROUP("Precompiled" FILES ${PCH_files})
@@ -20,8 +20,8 @@ SET_TARGET_PROPERTIES(terrainaddon PROPERTIES FOLDER "DTerrainTools")
 TARGET_INCLUDE_DIRECTORIES(terrainaddon PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 # link to render, will pull in dependencies and includes
-TARGET_LINK_LIBRARIES(terrainaddon render imgui dynui framecapture)
-ADD_DEPENDENCIES(terrainaddon render imgui dynui framecapture)
+TARGET_LINK_LIBRARIES(terrainaddon render)
+ADD_DEPENDENCIES(terrainaddon render)
 
 # default nebula compiler settings
 N_SET_COMPILER_DEFAULTS()

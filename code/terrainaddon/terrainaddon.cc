@@ -48,8 +48,10 @@ namespace Terrain
 	void
 		TerrainAddon::Setup(Ptr<Graphics::Stage> stage)
 	{
-		width = 1027;
-		height = 1027;
+		width = 1024;
+		height = 1024;
+		heightMapHeight = height + 1;
+		heightMapWidth = width + 1;
 		heightMultiplier = 1;
 		this->stage = stage;
 		brushTool = Terrain::BrushTool::Create();
@@ -87,7 +89,7 @@ namespace Terrain
 
 	void TerrainAddon::InitializeTexture()
 	{
-		SizeT frameSize = (this->width + 1) * (this->height + 1)*sizeof(float);
+		SizeT frameSize = (this->heightMapWidth) * (this->heightMapHeight)*sizeof(float);
 		this->rHeightBuffer = (float*)Memory::Alloc(Memory::DefaultHeap, frameSize);
 		Memory::Clear(this->rHeightBuffer, frameSize);
 
@@ -244,7 +246,7 @@ namespace Terrain
 
 	void TerrainAddon::UpdateTexture(void* data, SizeT size, SizeT width, SizeT height, IndexT left, IndexT top, IndexT mip)
 	{
-		this->memoryHeightTexture->Update(data, size, width, height, left, top, mip);
+		this->memoryHeightTexture->Update(data, size, heightMapWidth, heightMapHeight, left, top, mip);
 	}
 	
 
@@ -283,6 +285,8 @@ namespace Terrain
 	{
 		this->width = width;
 		this->height = height;
+		this->heightMapWidth = width + 1;
+		this->heightMapHeight = height + 1;
 		UpdateTerrainMesh();
 		Memory::Free(Memory::DefaultHeap, this->rHeightBuffer);
 		this->rHeightBuffer = 0;
@@ -303,8 +307,8 @@ namespace Terrain
 	void TerrainAddon::UpdateTerrainAtPos(const Math::float4& pos, const float modifier)
 	{
 		//n_printf("\nmousePos %f %f\n", pos.x(), pos.z());
-		brushTool->Paint(pos, rHeightBuffer, float2((float)width + 1.f, (float)height + 1.f), modifier);
-		memoryHeightTexture->Update(rHeightBuffer, (width + 1)*(height + 1)*sizeof(float), width + 1, height + 1, 0, 0, 0);
+		brushTool->Paint(pos, rHeightBuffer, float2((float)heightMapWidth, (float)heightMapHeight), modifier);
+		memoryHeightTexture->Update(rHeightBuffer, (heightMapWidth)*(heightMapHeight)*sizeof(float), heightMapWidth, heightMapHeight, 0, 0, 0);
 	}
 
 	Ptr<Terrain::BrushTool> TerrainAddon::GetBrushTool()

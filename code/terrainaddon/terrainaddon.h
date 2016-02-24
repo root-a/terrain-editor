@@ -66,6 +66,7 @@ namespace Terrain
 		Ptr<Graphics::Stage> stage;
 
 		int width, height;
+		int heightMapWidth, heightMapHeight;
 		int heightMultiplier;
 
 		// mesh

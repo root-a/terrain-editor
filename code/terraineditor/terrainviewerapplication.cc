@@ -15,7 +15,6 @@
 #include "framecaptureprotocol.h"
 #include "imgui/imgui.h"
 #include "picking/pickingserver.h"
-#include "brush.h"
 
 namespace Tools
 {
@@ -195,25 +194,33 @@ TerrainViewerApplication::OnProcessInput()
 		Graphics::GraphicsInterface::Instance()->Send(renderDebugMsg.cast<Messaging::Message>());
 		this->renderDebug = !this->renderDebug;
 	}
-	
+
+	//n_printf("\nframeTime: %f\n", frameTime);
+	if (keyboard->KeyDown(Key::LeftShift))
+	{
+		terrainAddon->GetBrushTool()->ActivateSmoothBrush();
+	}
+	if (keyboard->KeyUp(Key::LeftShift))
+	{
+		terrainAddon->GetBrushTool()->ActivateDefaultBrush();
+	}
 	if (!keyboard->KeyPressed(Key::LeftMenu))
 	{
 		if (mouse->ButtonDown(MouseButton::LeftButton))
 		{
-			Terrain::KeyMod mod = Terrain::KeyMod::None;
-			if (keyboard->KeyPressed(Key::LeftControl)) mod = Terrain::KeyMod::Ctrl;
-			if (keyboard->KeyPressed(Key::LeftShift)) mod = Terrain::KeyMod::Shift;
+			float mod = 1;
+			if (keyboard->KeyPressed(Key::LeftControl)) mod = -1.f;
 			float4 worldPos = CalculateWorldPosFromMouseAndDepth(mouse);
 			terrainAddon->UpdateTerrainAtPos(worldPos, mod);
 		}
 		else if (mouse->ButtonPressed(MouseButton::LeftButton))
 		{
-			if (mouse->GetMovement().length() > 1.f) // don't paint when mouse is stationary
+			if (mouse->GetMovement().length() > 0.2f) // don't paint when mouse is stationary
 			{
-				Terrain::KeyMod mod = Terrain::KeyMod::None;
-				if (keyboard->KeyPressed(Key::LeftControl)) mod = Terrain::KeyMod::Ctrl;
-				if (keyboard->KeyPressed(Key::LeftShift)) mod = Terrain::KeyMod::Shift;
+				float mod = 1;
+				if (keyboard->KeyPressed(Key::LeftControl)) mod = -1.f;
 				float4 worldPos = CalculateWorldPosFromMouseAndDepth(mouse);
+				//float amount = mouse->GetMovement().length()*frameTime;
 				terrainAddon->UpdateTerrainAtPos(worldPos, mod);
 			}
 		}

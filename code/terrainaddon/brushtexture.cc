@@ -57,14 +57,6 @@ namespace Terrain
 	void BrushTexture::ConvertTexture(const Ptr<CoreGraphics::Texture>& tex, ILenum imageFileType)
 	{
 		n_assert(tex->GetType() == CoreGraphics::Texture::Texture2D);
-		bool retval = false;
-
-		SizeT maxLevels = tex->GetNumMipLevels();
-		SizeT mipLevelToSave = 0;//this->mipLevel;
-		if (mipLevelToSave >= maxLevels)
-		{
-			mipLevelToSave = maxLevels - 1;
-		}
 
 		// create il image
 		ILint image = ilGenImage();
@@ -79,7 +71,7 @@ namespace Terrain
 		type = CoreGraphics::PixelFormat::ToILType(tex->GetPixelFormat());
 
 		CoreGraphics::Texture::MapInfo mapInfo;
-		tex->Map(mipLevelToSave, Base::ResourceBase::MapRead, mapInfo);
+		tex->Map(0, Base::ResourceBase::MapRead, mapInfo);
 		
 		orgSize = mapInfo.mipWidth;
 		size = orgSize;
@@ -107,7 +99,7 @@ namespace Terrain
 			j += 4;
 		}
 
-		tex->Unmap(mipLevelToSave);
+		tex->Unmap(0);
 
 
 		ilDeleteImage(image);
@@ -125,7 +117,7 @@ namespace Terrain
 		iluScale(newSize, newSize, 0);
 		ILubyte* uncompressedData = ilGetData();
 		if (this->sampledBrushBuffer != nullptr) Memory::Free(Memory::DefaultHeap, this->sampledBrushBuffer);		
-		int framesize = size*size;
+		int framesize = newSize*newSize;
 		this->sampledBrushBuffer = (unsigned char*)Memory::Alloc(Memory::DefaultHeap, framesize);
 		memcpy(this->sampledBrushBuffer, uncompressedData, framesize);
 
