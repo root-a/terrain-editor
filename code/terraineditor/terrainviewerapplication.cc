@@ -31,10 +31,7 @@ using namespace FrameCapture;
 //------------------------------------------------------------------------------
 /**
 */
-TerrainViewerApplication::TerrainViewerApplication() :
-    shadowConstants(100.0f, 20.0f, 0.003f, 1024.0f),
-    avgFPS(0.0f),
-    renderDebug(false)
+TerrainViewerApplication::TerrainViewerApplication()
 {
     // empty
 }
@@ -86,25 +83,6 @@ TerrainViewerApplication::Open()
         this->testSpotLight->SetColor(float4(1,0.7f,1,0.1));
         this->stage->AttachEntity(this->testSpotLight.cast<GraphicsEntity>());
 
-
-		this->ground = ModelEntity::Create();
-		this->ground->SetResourceId(ResourceId("mdl:examples/placeholder.n3"));
-		transform = matrix44::translation(0, 0, 0);
-		this->ground->SetTransform(transform);
-		this->stage->AttachEntity(ground.cast<GraphicsEntity>());
-
-		ground2 = ModelEntity::Create();
-		this->ground2->SetResourceId(ResourceId("mdl:examples/placeholder.n3"));
-		transform = matrix44::translation(39, 0, 39);
-		this->ground2->SetTransform(transform);
-		this->stage->AttachEntity(ground2.cast<GraphicsEntity>());
-
-		ground3 = ModelEntity::Create();
-		this->ground3->SetResourceId(ResourceId("mdl:examples/placeholder.n3"));
-		transform = matrix44::translation(19, 0, 19);
-		this->ground3->SetTransform(transform);
-		this->stage->AttachEntity(ground3.cast<GraphicsEntity>());
-
         // wait for animated stuff to load
         GraphicsInterface::Instance()->WaitForPendingResources();
 
@@ -138,13 +116,7 @@ TerrainViewerApplication::Close()
 	this->terrainAddon = 0;
 
     this->stage->RemoveEntity(this->globalLight.cast<GraphicsEntity>());
-	this->stage->RemoveEntity(this->ground.cast<GraphicsEntity>());
-	this->stage->RemoveEntity(this->ground2.cast<GraphicsEntity>());
-	this->stage->RemoveEntity(this->ground3.cast<GraphicsEntity>());
     this->globalLight = 0;
-	this->ground = 0;
-	this->ground2 = 0;
-	this->ground3 = 0;
                          
     IndexT i;
     for (i = 0; i < this->pointLights.Size(); i++)

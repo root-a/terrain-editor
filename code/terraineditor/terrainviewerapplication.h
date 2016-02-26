@@ -53,16 +53,9 @@ private:
     Util::Array<Ptr<Graphics::PointLightEntity>> pointLights;
     Ptr<Graphics::SpotLightEntity> testSpotLight;
     Util::Array<Ptr<Graphics::SpotLightEntity>> spotLights;
-    Util::Array<Math::matrix44> lightTransforms; 
-    Math::float4 shadowConstants;
-    Util::Array<Timing::Time> frameTimes;
-    Timing::Time avgFPS;
 	bool renderDebug;
 
 	Ptr<Terrain::TerrainAddon> terrainAddon;
-	Ptr<Graphics::ModelEntity> ground;
-	Ptr<Graphics::ModelEntity> ground2;
-	Ptr<Graphics::ModelEntity> ground3;
 
 	Ptr<Picking::PickingServer> pickingServer;
 };
