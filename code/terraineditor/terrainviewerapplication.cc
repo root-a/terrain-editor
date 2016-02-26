@@ -116,7 +116,8 @@ TerrainViewerApplication::Open()
 		this->terrainAddon = Terrain::TerrainAddon::Create();
 		this->terrainAddon->Setup(stage);
 
-		Picking::PickingServer::Instance()->SetEnabled(true);
+		this->pickingServer = Picking::PickingServer::Create();
+		this->pickingServer->Open();
 
         return true;
     }
@@ -129,6 +130,9 @@ TerrainViewerApplication::Open()
 void
 TerrainViewerApplication::Close()
 {
+	this->pickingServer->Close();
+	this->pickingServer = 0;
+
 	// close terrain
 	this->terrainAddon->Discard();
 	this->terrainAddon = 0;

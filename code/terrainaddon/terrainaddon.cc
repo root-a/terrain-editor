@@ -232,7 +232,6 @@ namespace Terrain
 
 		// setup ibo
 		this->vertexLayout = this->vbo->GetVertexLayout();
-		this->vertexLayout->SetIndexBuffer(this->ibo);
 
 		primitiveGroups.Clear();
 		CoreGraphics::PrimitiveGroup primitive;

@@ -63,6 +63,8 @@ private:
 	Ptr<Graphics::ModelEntity> ground;
 	Ptr<Graphics::ModelEntity> ground2;
 	Ptr<Graphics::ModelEntity> ground3;
+
+	Ptr<Picking::PickingServer> pickingServer;
 };
 
 } // namespace Test
