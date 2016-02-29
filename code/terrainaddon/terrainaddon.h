@@ -55,20 +55,18 @@ namespace Terrain
 		Ptr<Graphics::ModelEntity> GetTerrainEntity();
 		Ptr<CoreGraphics::Mesh> GetTerrainMesh();
 
-		void SetHeightMultiplier(int multiplier);
-
 		void UpdateTerrainWithNewSize(int width, int height);
 		void UpdateWorldSize();
 
 		void UpdateTerrainAtPos(const Math::float4& pos, const float modifier);
-		void UpdateHeightMultiplier(double multiplier);
+		void UpdateHeightMultiplier(float multiplier);
 		Ptr<Terrain::BrushTool> GetBrushTool();
 	private:
 		Ptr<Graphics::Stage> stage;
 
 		int width, height;
 		int heightMapWidth, heightMapHeight;
-		int heightMultiplier;
+		float heightMultiplier;
 
 		// mesh
 		Util::Array<int> indices;

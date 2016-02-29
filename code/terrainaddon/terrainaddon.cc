@@ -52,7 +52,7 @@ namespace Terrain
 		height = 1024;
 		heightMapHeight = height + 1;
 		heightMapWidth = width + 1;
-		heightMultiplier = 1;
+		heightMultiplier = 1.f;
 		this->stage = stage;
 		brushTool = Terrain::BrushTool::Create();
 		brushTool->Setup();
@@ -275,11 +275,6 @@ namespace Terrain
 		terrainMesh->SetPrimitiveGroups(primitiveGroups);
 	}
 
-	void TerrainAddon::SetHeightMultiplier(int multiplier)
-	{
-		heightMultiplier = multiplier;
-	}
-
 	void TerrainAddon::UpdateTerrainWithNewSize(int width, int height)
 	{
 		this->width = width;
@@ -315,10 +310,10 @@ namespace Terrain
 		return brushTool;
 	}
 
-	void TerrainAddon::UpdateHeightMultiplier(double multiplier)
+	void TerrainAddon::UpdateHeightMultiplier(float multiplier)
 	{
 		heightMultiplier = multiplier;
-		this->heightMultiplierHandle->SetValue((float)this->heightMultiplier);
+		this->heightMultiplierHandle->SetValue(this->heightMultiplier);
 	}
 
 } // namespace Terrain
