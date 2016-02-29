@@ -315,4 +315,10 @@ namespace Terrain
 		return brushTool;
 	}
 
+	void TerrainAddon::UpdateHeightMultiplier(double multiplier)
+	{
+		heightMultiplier = multiplier;
+		this->heightMultiplierHandle->SetValue((float)this->heightMultiplier);
+	}
+
 } // namespace Terrain

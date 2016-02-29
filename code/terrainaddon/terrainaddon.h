@@ -61,6 +61,7 @@ namespace Terrain
 		void UpdateWorldSize();
 
 		void UpdateTerrainAtPos(const Math::float4& pos, const float modifier);
+		void UpdateHeightMultiplier(double multiplier);
 		Ptr<Terrain::BrushTool> GetBrushTool();
 	private:
 		Ptr<Graphics::Stage> stage;
