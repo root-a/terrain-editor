@@ -92,7 +92,7 @@ TerrainViewerApplication::Open()
 
 		// setup terrain
 		this->terrainAddon = Terrain::TerrainAddon::Create();
-		this->terrainAddon->Setup();
+		this->terrainAddon->Setup(true);
 
 		this->pickingServer = Picking::PickingServer::Create();
 		this->pickingServer->Open();
