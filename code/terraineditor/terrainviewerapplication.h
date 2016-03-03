@@ -56,7 +56,7 @@ private:
 	bool renderDebug;
 
 	Ptr<Terrain::TerrainAddon> terrainAddon;
-
+	Ptr<Graphics::ModelEntity> terrainEnt;
 	Ptr<Picking::PickingServer> pickingServer;
 };
 

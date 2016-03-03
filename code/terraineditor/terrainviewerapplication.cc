@@ -92,7 +92,9 @@ TerrainViewerApplication::Open()
 
 		// setup terrain
 		this->terrainAddon = Terrain::TerrainAddon::Create();
-		this->terrainAddon->Setup(this->terrainAddon->AttachTerrainEntity());
+		terrainEnt = this->terrainAddon->CreateTerrainEntity();
+		stage->AttachEntity(terrainEnt.cast<Graphics::GraphicsEntity>());
+		this->terrainAddon->Setup(terrainEnt);
 
 		this->pickingServer = Picking::PickingServer::Create();
 		this->pickingServer->Open();
@@ -114,6 +116,9 @@ TerrainViewerApplication::Close()
 	// close terrain
 	this->terrainAddon->Discard();
 	this->terrainAddon = 0;
+
+	this->stage->RemoveEntity(this->terrainEnt.cast<GraphicsEntity>());
+	this->terrainEnt = 0;
 
     this->stage->RemoveEntity(this->globalLight.cast<GraphicsEntity>());
     this->globalLight = 0;
