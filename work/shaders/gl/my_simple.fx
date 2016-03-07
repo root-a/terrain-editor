@@ -91,19 +91,19 @@ shader
 void
 psMainShape(in vec2 UV, in vec3 Normal, in float Height, in vec3 ViewSpacePos, [color0] out vec4 Color, [color1] out vec4 Normals, [color2] out float Depth) 
 {	
-	float alphas = texture(TextureMask_1, UV).r;
+	float4 alphas = texture(TextureMask_1, UV).rgba;
 	
 	vec3 color1 = texture(Texture_1, UV).rgb;
 	vec3 color2 = texture(Texture_2, UV).rgb;
 	vec3 color3 = texture(Texture_3, UV).rgb;
 	vec3 color4 = texture(Texture_4, UV).rgb;
-	//color1 = color1*alphas.r;
-	//color2 = color2*alphas.g;
-	//color3 = color3*alphas.b;
-	//color4 = color4*alphas.a;
+	color1 = color1*alphas.r;
+	color2 = color2*alphas.g;
+	color3 = color3*alphas.b;
+	color4 = color4*alphas.a;
 	
-	//Color = float4(color1+color2+color3+color4,1);
-	Color = vec4(UV*alphas,0,1);
+	Color = float4(color1+color2+color3+color4,1);
+	//Color = vec4(UV*alphas,0,1);
 	Normals = vec4(Normal,1);
 	Depth = length(ViewSpacePos.xyz);
 }
