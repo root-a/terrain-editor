@@ -42,7 +42,11 @@
    <Pass batch="FlatGeometryLit" shader="my_simple" variation="MyStatic"/>
  
    <Param name="HeightMap" type="string" defaultValue="tex:examples/heighMap"/>
-   
+   <Param name="TextureMask_1" type="string" defaultValue="tex:examples/heighMap"/>
+   <Param name="Texture_1" type="string" defaultValue="tex:examples/heighMap"/>
+   <Param name="Texture_2" type="string" defaultValue="tex:examples/heighMap"/>
+   <Param name="Texture_3" type="string" defaultValue="tex:examples/heighMap"/>
+   <Param name="Texture_4" type="string" defaultValue="tex:examples/heighMap"/>
    <!--<Pass batch="Unlit" shader="my_simple" variation="MyStatic|Alt1"/> -->
    <!--<Param name="MatDiffuse" type="float4" defaultValue="1,0,0,1" edit="color"/>-->
    <!--<Param name="MatAnotherColor" type="float4" defaultValue="0,0,0,1" edit="color"/>-->
