@@ -23,6 +23,16 @@ float Tile_2_Scale;
 float Tile_3_Scale;
 float Tile_4_Scale;
 
+samplerstate TileSampler
+{
+	Samplers = { Texture_1, Texture_2, Texture_3, Texture_4, HeightMap};
+	//Filter = Point;
+	//Filter = MinMagMipLinear;
+	AddressU = Wrap;
+	AddressV = Wrap;
+};
+
+
 state WireframeState
 {
 	CullMode = None;	
