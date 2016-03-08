@@ -10,5 +10,9 @@
 		<Param name="Texture_4" value="tex:examples/heighMap" />
         <Param name="MatAnotherColor" value="0.000000,0.000000,0.000000,1.000000" />
         <Param name="HeightMultiplier" value="10.000000" />
+        <Param name="Tile_1_Scale" value="10.000000" />
+        <Param name="Tile_2_Scale" value="10.000000" />
+        <Param name="Tile_3_Scale" value="10.000000" />
+        <Param name="Tile_4_Scale" value="10.000000" />
     </Surface>
 </NebulaT>

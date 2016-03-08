@@ -18,6 +18,10 @@ sampler2D Texture_1;
 sampler2D Texture_2;
 sampler2D Texture_3;
 sampler2D Texture_4;
+float Tile_1_Scale;
+float Tile_2_Scale;
+float Tile_3_Scale;
+float Tile_4_Scale;
 
 state WireframeState
 {
@@ -93,10 +97,10 @@ psMainShape(in vec2 UV, in vec3 Normal, in float Height, in vec3 ViewSpacePos, [
 {	
 	float4 alphas = texture(TextureMask_1, UV).rgba;
 	
-	vec3 color1 = texture(Texture_1, UV).rgb;
-	vec3 color2 = texture(Texture_2, UV).rgb;
-	vec3 color3 = texture(Texture_3, UV).rgb;
-	vec3 color4 = texture(Texture_4, UV).rgb;
+	vec3 color1 = texture(Texture_1, UV*Tile_1_Scale).rgb;
+	vec3 color2 = texture(Texture_2, UV*Tile_2_Scale).rgb;
+	vec3 color3 = texture(Texture_3, UV*Tile_3_Scale).rgb;
+	vec3 color4 = texture(Texture_4, UV*Tile_4_Scale).rgb;
 	color1 = color1*alphas.r;
 	color2 = color2*alphas.g;
 	color3 = color3*alphas.b;
