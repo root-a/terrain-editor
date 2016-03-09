@@ -58,6 +58,7 @@
    <Param name="Tile_2_Scale" type="float" defaultValue="10.0f" min="0.0f" max="100.0f" desc="Scale for tiling of Texture_2"/>
    <Param name="Tile_3_Scale" type="float" defaultValue="10.0f" min="0.0f" max="100.0f" desc="Scale for tiling of Texture_3"/>
    <Param name="Tile_4_Scale" type="float" defaultValue="10.0f" min="0.0f" max="100.0f" desc="Scale for tiling of Texture_4"/>
+   <Param name="TerrainSize" type="float" defaultValue="1023.0f" min="0.0f" max="4095.0f" desc="Terrain size"/>
    <!--<Param name="ShapeModel" type="matrix44" system="true" defaultValue="1.0f, 0.0f, 0.0f, 0.0f, 
 																			  0.0f, 1.0f, 0.0f, 0.0f, 
 																			  0.0f, 0.0f, 1.0f, 0.0f,

@@ -22,6 +22,7 @@ float Tile_1_Scale;
 float Tile_2_Scale;
 float Tile_3_Scale;
 float Tile_4_Scale;
+float TerrainSize;
 
 samplerstate TileSampler
 {
@@ -32,6 +33,14 @@ samplerstate TileSampler
 	AddressV = Wrap;
 };
 
+samplerstate HeightSampler
+{
+	Samplers = {HeightMap};
+	//Filter = Point;
+	//Filter = MinMagMipLinear;
+	AddressU = Mirror;
+	AddressV = Mirror;
+};
 
 state WireframeState
 {
@@ -71,12 +80,13 @@ state DepthDisabledState
 */
 shader
 void
-vsMainShape(in vec2 position, [slot=2] in vec2 uv, out vec2 UV, out vec3 Normal, out float Height, out vec3 ViewSpacePos)  
+vsMainShape(in vec2 position, out vec2 UV, out vec4 normals, out float Height, out vec3 ViewSpacePos)  
 {
-	float height = texture(HeightMap, uv).r;
+	UV = position / TerrainSize;
+	float height = texture(HeightMap, UV).r;
 	vec4 offset = vec4(position.x, height * HeightMultiplier, position.y, 1.0f);
 	gl_Position = ViewProjection * Model * offset;
-	UV = uv;
+	
 	Height = height;
 	
 	mat4 modelView = View * Model;
@@ -86,16 +96,19 @@ vsMainShape(in vec2 position, [slot=2] in vec2 uv, out vec2 UV, out vec3 Normal,
 
 	// read neightbor heights using an arbitrary small offset
 	vec3 off = vec3(1.0, 1.0, 0.0);
-	float hL = texture(HeightMap, offset.xy - off.xz).r;
-	float hR = texture(HeightMap, offset.xy + off.xz).r;
-	float hD = texture(HeightMap, offset.xy - off.zy).r;
-	float hU = texture(HeightMap, offset.xy + off.zy).r;
+	float hL = texture(HeightMap, (offset.xz - off.xz)/TerrainSize).r;
+	float hR = texture(HeightMap, (offset.xz + off.xz)/TerrainSize).r;
+	float hD = texture(HeightMap, (offset.xz - off.zy)/TerrainSize).r;
+	float hU = texture(HeightMap, (offset.xz + off.zy)/TerrainSize).r;
 
 	// deduce terrain normal
+	vec3 Normal;
 	Normal.x = hL - hR;
 	Normal.y = hD - hU;
 	Normal.z = 2.0;
 	Normal = normalize(Normal);
+	
+	normals = PackViewSpaceNormal(Normal);
 }
 	
 //------------------------------------------------------------------------------
@@ -103,7 +116,7 @@ vsMainShape(in vec2 position, [slot=2] in vec2 uv, out vec2 UV, out vec3 Normal,
 */
 shader
 void
-psMainShape(in vec2 UV, in vec3 Normal, in float Height, in vec3 ViewSpacePos, [color0] out vec4 Color, [color1] out vec4 Normals, [color2] out float Depth) 
+psMainShape(in vec2 UV, in vec4 normals, in float Height, in vec3 ViewSpacePos, [color0] out vec4 Color, [color1] out vec4 Normals, [color2] out float Depth) 
 {	
 	float4 alphas = texture(TextureMask_1, UV).rgba;
 	
@@ -118,8 +131,8 @@ psMainShape(in vec2 UV, in vec3 Normal, in float Height, in vec3 ViewSpacePos, [
 	
 	Color = float4(color1+color2+color3+color4,1);
 	//Color = vec4(UV*alphas,0,1);
-	Normals = vec4(Normal,1);
-	Depth = length(ViewSpacePos.xyz);
+	Normals = normals;
+	Depth = length(ViewSpacePos);
 }
 
 SimpleTechnique(DepthShape, "MyStatic", vsMainShape(), psMainShape(), DepthEnabledState);

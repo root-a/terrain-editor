@@ -14,5 +14,6 @@
         <Param name="Tile_2_Scale" value="10.000000" />
         <Param name="Tile_3_Scale" value="10.000000" />
         <Param name="Tile_4_Scale" value="10.000000" />
+        <Param name="TerrainSize" value="1024.000000" />
     </Surface>
 </NebulaT>
